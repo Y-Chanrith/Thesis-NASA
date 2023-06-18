@@ -41,8 +41,8 @@
 
 		<div id="sidebar">
 			<div class="sidebar-header">
-				<h3><img src="img/logo.png" class="img-fluid" />
-					<span​ style="font-family: Khmer OS Muol Light;">ណាស្សា កុំព្យូទ័រ</span>
+				<h3><img src="../image/NASA-Computer.png" class="img-fluid" />
+					<span​ style="font-family: Khmer OS Muol Light;"><span style="color:red;">NASA</span> <span style="color:blue;">COMPUTER</span>
 				</h3>
 			</div>
 			<ul class="list-unstyled component m-0">

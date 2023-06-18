@@ -53,7 +53,7 @@
 
               <li class="dropdown nav-item">
                 <a class="nav-link" href="#" data-toggle="dropdown">
-                  <img src="img/user.jpg" style="width:40px; border-radius:50%;" />
+                  <img src="../image/Nsc.jpg" style="width:40px; border-radius:50%;" />
                   <span class="xp-user-live"></span>
                 </a>
                 <ul class="dropdown-menu small-menu">

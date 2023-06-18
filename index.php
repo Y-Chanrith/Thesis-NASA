@@ -16,6 +16,10 @@
     background-image: url("image/bg.jpg");
     background-size: cover;
   }
+  .logo{
+    width: 150px;
+    margin-left: 30px;
+  }
 </style>
 
 <body>
@@ -26,7 +30,8 @@
         <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
           <form method="post" action="" class="p-5 bg-white rounded">
             <div class="mb-2">
-              <h4 class=" d-flex align-items-center justify-content-center text-black">NASA | LOGIN</h4>
+              <!-- <h4 class=" d-flex align-items-center justify-content-center text-black">NASA | LOGIN</h4> -->
+              <h3><img src="image/NASA-Computer.png" class="logo" /></h3>
               <?php if (isset($_GET['error'])){ ?>
                 <p class ="error"><?php echo $_GET['error']; ?> </p>
               <?php }?>
