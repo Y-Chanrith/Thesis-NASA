@@ -87,8 +87,9 @@ include '../include/header.php';
                                 <th>
                                     <a href="inv_searchfrm.php?id=<?php echo $row['id']; ?>" class="edit">
                                         <!-- <i class="material-icons" data-toggle="tooltip">&#xE254;</i> -->
-                                        <button class="btn btn-primary btn-sm">View</button>
+                                        <i class="fas fa-eye" style="color: #005eff;"></i>
                                     </a>
+                                    <a href=""><i class="fas fa-print" style="color: #ff0000;"></i></a>
                                 </th>
                             </tr>
 
