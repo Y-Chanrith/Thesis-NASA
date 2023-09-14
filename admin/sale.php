@@ -86,20 +86,20 @@ include '../include/header.php';
                         <?php
                         $page=!isset($_GET['page'])||$_GET['page'] ==1 ? 1:$_GET['page'];
 
-                        $offset=0;  
+                        $offset=0;
                         if(!isset($_GET['page']) || $_GET['page']==1){
                             $offset=0;
                         }else{
                             $page=$page-1;
                             $offset=$page*10;
                         }
-                        $sql = "SELECT * FROM transaction "; 
+                        $sql = "SELECT * FROM transaction ";
                         $result = mysqli_query($con, $sql);
                         $counter=count($result->fetch_all());
-                    
-                
-                        $sql = "SELECT * FROM transaction limit 10 offset ".$offset; 
-                        //  inner join transaction_detail  on transaction.id=transaction_detail.transac_id 
+
+
+                        $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        //  inner join transaction_detail  on transaction.id=transaction_detail.transac_id
                         //  inner join customer on transaction.cust_id=customer.cus_id ;
                         $result = mysqli_query($con, $sql);
                         $count = 1;
@@ -108,7 +108,7 @@ include '../include/header.php';
                             $customer_sql="select firstname,lastname,cus_id from customer where cus_id=".$row['cust_id'];
                             $cus_re = mysqli_query($con, $customer_sql);
                             $customer=$cus_re->fetch_assoc();
-                        
+
                         ?>
                             <tr>
                                 <td><?php echo$count; ?></td>
@@ -136,11 +136,11 @@ include '../include/header.php';
                     <div class="hint-text">showing <b>5</b> out of <b>10</b></div>
                     <ul class="pagination">
                         <!-- <li class="page-item disabled"><a href="#">Previous</a></li> -->
-                        <?php 
+                        <?php
                         $i=0;
                         for($i;$i<$counter/10;$i++):
                         ?>
-                        <li class="page-item <?php  echo (!isset($_GET['page'])&& $i=0) || $_GET['page']==$i+1?'active': '';?> " ><a href="sale.php?page=<?=$i+1 ?>" class="page-link"><?=$i+1 ?></a></li>
+                        <li class="page-item <?php  echo (!isset($_GET['page'] ))|| $_GET['page']==$i+1?'active': '';?> " ><a href="sale.php?page=<?=$i+1 ?>" class="page-link"><?=$i+1 ?></a></li>
                         <!-- <li class="page-item "><a href="sale.php?page=2" class="page-link">2</a></li>
                         <li class="page-item "><a href="sale.php?page=3" class="page-link">3</a></li>
                         <li class="page-item "><a href="sale.php?page=4" class="page-link">4</a></li>
