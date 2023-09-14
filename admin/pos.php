@@ -222,7 +222,7 @@ include '../connection.php';
 
           <div class="form-group row text-left mb-2">
             <div class="col-sm-5 text-primary">
-              <input type="submit" class="btn bg-danger rounded border-0 p-2 text-white" value="submit">
+              <input type="submit" class="btn bg-danger rounded border-0 p-2 text-white" value="submit" onclick="alert('Added to Sale')">
             </div>
           </div>
           <?php // endif; 
@@ -343,9 +343,5 @@ include '../connection.php';
     });
   </script>
 
-  <?php // include "../include/footer.php"; 
-  ?>
-
 </body>
-
 </html>

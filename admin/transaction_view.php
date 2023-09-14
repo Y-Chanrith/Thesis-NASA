@@ -1,9 +1,9 @@
-<?php
-include "../connection.php";
-//include "../include/header.php";
-  
-?> 
-<?php
+<?php 
+	session_start();
+	include("../check-login.php");
+	include("../connection.php");
+ ?>
+ <?php
 if($_GET['customer_id']){
     $customer_sql="select firstname,lastname,cus_id,phone from customer where cus_id=".$_GET['customer_id'];
     $cus_re = mysqli_query($con, $customer_sql);
@@ -12,8 +12,19 @@ if($_GET['customer_id']){
           
  
 ?>
-            
-          <div class="card shadow mb-4">
+
+<?php 
+include '../include/navigation.php';
+
+include '../include/header.php';
+?>
+
+
+<!------main-content-start----------->
+
+<div class="container mt-3">
+	<form method="post" action="" class="myform" class="form-group">
+  <div class="card shadow mb-4">
             <div class="card-body">
               <div class="form-group row text-left mb-0">
                 <div class="col-sm-9">
@@ -23,7 +34,7 @@ if($_GET['customer_id']){
                 </div>
                 <div class="col-sm-3 py-1">
                   <h6>
-                    Date: <?=date('Y-m-d') ?>
+                    Date: <?=date('Y-m-d H:i:sa') ?>
                   </h6>
                 </div>
               </div>
@@ -31,7 +42,7 @@ if($_GET['customer_id']){
               <div class="form-group row text-left mb-0 py-2">
                 <div class="col-sm-4 py-1">
                   <h6 class="font-weight-bold">
-                    <?php  ?>
+                    Name: <?=$customer['firstname'].' '.$customer['lastname']  ?>
                   </h6>
                   <h6>
                     Phone: <?=$customer['phone'] ?>
@@ -60,7 +71,7 @@ if($_GET['customer_id']){
               </tr>
             </thead>
             <tbody>
-        <?php  
+            <?php  
           if($_GET['transac_id']){
             $query = 'SELECT * from transaction_detail 
             inner join product on transaction_detail.product_id=product.id
@@ -76,9 +87,9 @@ if($_GET['customer_id']){
         ?>
         <tr>
             <td><?= $row['pro_name'] ?></td>
-            <td><?= $row['qty'] ?></td>
-            <td><?= $row['price'] ?></td>
-            <td><?= $row['price'] * $row['qty']?></td>
+            <td><?= $row['qty'] ?> Pcs</td>
+            <td>$ <?= $row['price'] ?></td>
+            <td>$ <?= $row['price']*$row['qty']?></td>
         </tr>
         <?php endwhile; ?>
             </tbody>
@@ -93,16 +104,16 @@ if($_GET['customer_id']){
                   <table width="100%">
                     <tr>
                       <td class="font-weight-bold">Subtotal</td>
-                      <td class="text-right"> <?=$subtotal  ?></td>
+                      <td class="text-right">$ <?=$subtotal  ?></td>
                     </tr>
                     <tr>
                       <td class="font-weight-bold">Qty</td>
-                      <td class="text-right"><?=$qty ?></td>
+                      <td class="text-right"><?=$qty ?> Pcs</td>
                     </tr>
                     
                     <tr>
                       <td class="font-weight-bold">Total</td>
-                      <td class="text-right"> <?=$subtotal  ?></td>
+                      <td class="text-right"><b>$ <?=$subtotal  ?></b></td>
                     </tr>
                   </table>
                 </div>
@@ -110,8 +121,49 @@ if($_GET['customer_id']){
               </div>
             </div>
           </div>
+		
+	</form>
 
+</div>
 
+</div>
+</div>
+
+<!------main-content-end----------->
 <?php
-include '../include /footer.php';
+// include '../include/footer.php';
 ?>
+
+</div>
+
+</div>
+
+<!-------complete html----------->
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".xp-menubar").on('click', function() {
+			$("#sidebar").toggleClass('active');
+			$("#content").toggleClass('active');
+		});
+
+		$('.xp-menubar,.body-overlay').on('click', function() {
+			$("#sidebar,.body-overlay").toggleClass('show-nav');
+		});
+
+	});
+</script>
+
+</body>
+
+</html>
+

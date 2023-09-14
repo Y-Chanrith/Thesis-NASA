@@ -142,7 +142,7 @@ include '../include/header.php';
                         $i=0;
                         for($i;$i<$counter/10;$i++):
                         ?>
-                        <li class="page-item <?php  echo $_GET['page']==$i+1?'active': '';?> " ><a href="sale.php?page=<?=$i+1 ?>" class="page-link"><?=$i+1 ?></a></li>
+                        <li class="page-item <?php echo $_GET['page']==$i+1?'active':'';?> "><a href="sale.php?page=<?=$i+1 ?>" class="page-link"><?=$i+1 ?></a></li>
                         <!-- <li class="page-item "><a href="sale.php?page=2" class="page-link">2</a></li>
                         <li class="page-item "><a href="sale.php?page=3" class="page-link">3</a></li>
                         <li class="page-item "><a href="sale.php?page=4" class="page-link">4</a></li>
