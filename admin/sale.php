@@ -84,7 +84,7 @@ include '../include/header.php';
 
                             ?>
                         <?php
-                        $page=$_GET['page'] ==1 || !isset($_GET['page'])? 1:$_GET['page'];
+                        $page=!isset($_GET['page'])||$_GET['page'] ==1 ? 1:$_GET['page'];
 
                         $offset=0;  
                         if(!isset($_GET['page']) || $_GET['page']==1){
