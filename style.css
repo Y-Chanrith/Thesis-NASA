@@ -1,8 +1,13 @@
 .error{
-    background-color: rgb(242, 189, 189);
+    background-color: rgb(246, 219, 219);
     color: #e18281;
     padding: 10px;
     width: 100%;
     border-radius: 5px;
     margin: 15px auto;
+}
+
+.bgColor{
+    background-color: azure;
+
 }

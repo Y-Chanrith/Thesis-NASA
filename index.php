@@ -1,3 +1,10 @@
+<?php require('admin/session.php');?>
+<?php if(logged_in()){ ?>
+          <script type="text/javascript">
+            window.location = "dashboard.php";
+          </script>
+    <?php
+    } ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +30,8 @@
 </style>
 
 <body>
+
+
 
   <div class="container">
     <div class="row align-items-center">
@@ -55,6 +64,7 @@
       </div>
     </div>
   </div>
+
 </body>
 
 </html>
@@ -75,7 +85,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
   $username = validate($_POST['user']);
   $password = validate($_POST['pass']);
 
-  $select = "SELECT * FROM tbl_user WHERE username='$username'";
+  $select = "SELECT * FROM users WHERE username='$username'";
   $result = mysqli_query($con, $select);
   if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
@@ -93,7 +103,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         </script>
         <!-- =========== -->
       <?php
-        header("refresh:2,url=weblab/dashboard.php");
+        header("refresh:2,url=admin/dashboard.php");
       } 
       else if (empty($username)) {
         header("Location: index.php?error=Username is required");
