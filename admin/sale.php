@@ -84,7 +84,8 @@ include '../include/header.php';
 
                             ?>
                         <?php
-                        $page=$_GET['page'] ==1 || !isset($_GET['page'])? 1:$_GET['page'];
+                        // $page=$_GET['page'] ==1 || !isset($_GET['page'])? 1:$_GET['page'];
+                        $page=!isset($_GET['page'])||$_GET['page'] ==1 ? 1:$_GET['page'];
 
                         $offset=0;  
                         if(!isset($_GET['page']) || $_GET['page']==1){
@@ -122,6 +123,7 @@ include '../include/header.php';
                                     <!-- <a href="#" class="edit"><i class="material-icons" data-toggle="tooltip">&#xE254;</i></a>
                                     <a href="#" class="delete"><i class="material-icons">&#xE872;</i></a> -->
                                     <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
+                                    <a href=""><i class="fas fa-print" style="color: #ff0000;"></i></a>
                                 </th>
                             </tr>
 
