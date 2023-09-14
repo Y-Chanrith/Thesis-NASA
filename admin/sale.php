@@ -114,14 +114,14 @@ include '../include/header.php';
                                 <td><?php echo$count; ?></td>
                                 <td><?php echo $row['payment_method']; ?></td>
                                 <td><?php echo $customer['firstname']; ?> <?php echo $customer['lastname']; ?></td>
-                                <td><?php echo $row['quantity']; ?></td>
+                                <td><?php echo $row['quantity']; ?> Pcs</td>
                                 <td>$ <?php echo $row['grandtotal']; ?></td>
                                 <!-- <td><?php //echo $row['paid_amount']; ?></td>
                                 <td><?php //echo $row['due_amount']; ?></td> -->
                                 <th>
                                     <!-- <a href="#" class="edit"><i class="material-icons" data-toggle="tooltip">&#xE254;</i></a>
                                     <a href="#" class="delete"><i class="material-icons">&#xE872;</i></a> -->
-                                    <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class="btn btn-sm btn-success">View</a>
+                                    <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
                                 </th>
                             </tr>
 

@@ -171,6 +171,9 @@ include '../connection.php';
                   <span class="input-group-text">Pcs</span>
                 </div> -->
                 <input type="text" name='total_qty'class="form-control text-right "id="total_qty" value="" readonly name="lessvat">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Items</span>
+                </div>
               </div>
             </div>
 
