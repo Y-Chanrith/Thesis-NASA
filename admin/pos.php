@@ -214,6 +214,7 @@ include '../connection.php';
                 <option value="">Select Payment</option>
                   <option value="cash">Cash</option>
                   <option value="bank transfer">Bank Transfer</option>
+                  <option value="Credit Card">Credit Card</option>
                 </select>
               </div>
             </div>
