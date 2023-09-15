@@ -20,9 +20,11 @@ if ($_POST) {
         $id=$_POST['id'][$i];
         $price=$_POST['price'][$i];
         $qty=$_POST['qty'][$i];
+        $created_at =  date("Y-m-d H:i:s", time());
+        $updated_at= date("Y-m-d H:i:s", time());
 
-        $sql = "INSERT INTO transaction_detail(transac_id, product_id, qty, price)
-             VALUES($transac_id,$id, $qty,$price)";
+        $sql = "INSERT INTO transaction_detail(transac_id, product_id, qty, price,created_at,updated_at)
+             VALUES($transac_id,$id, $qty,$price,'$created_at','$updated_at')";
             $result = mysqli_query($con, $sql);
 
         // if ($result) {
