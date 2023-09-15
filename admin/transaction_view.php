@@ -101,6 +101,7 @@ include '../include/header.php';
                   <h4>
                         <?php ?>
                   </h4>
+                  <hr>
                   <table width="100%">
                     <tr>
                       <td class="font-weight-bold">Subtotal</td>
@@ -110,12 +111,12 @@ include '../include/header.php';
                       <td class="font-weight-bold">Qty</td>
                       <td class="text-right"><?=$qty ?> Pcs</td>
                     </tr>
-                    
                     <tr>
                       <td class="font-weight-bold">Total</td>
                       <td class="text-right"><b>$ <?=$subtotal  ?></b></td>
                     </tr>
                   </table>
+                  <hr>
                 </div>
                 <div class="col-sm-1 py-1"></div>
               </div>
