@@ -20,7 +20,7 @@ include '../include/header.php';
                 <div class="form-row">
                     <div class="form-row">
                         <div class="form-group col-md-12 text-right mt-3">
-                            <button class="btn btn-primary btn-md p-5" onclick="alert('Backup Data Successfully!')">
+                            <button class="btn btn-primary btn-md p-5" >
                                 <a href="backup.php" style="color: #F8F8F6;">Backup Data</a>
                             </button>
                         </div>
