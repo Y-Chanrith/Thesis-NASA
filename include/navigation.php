@@ -24,7 +24,6 @@
 
 	<!--google material icon-->
 	<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-	
 
 </head>
 
