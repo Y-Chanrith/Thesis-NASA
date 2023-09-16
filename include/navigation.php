@@ -98,7 +98,7 @@
 
 
 				<li class="">
-					<a href="#" class=""><i class="fa-solid fa-gear" style="font-size: 22px;"></i>Setting 
+					<a href="../admin/backup_data.php" class=""><i class="fa-solid fa-gear" style="font-size: 22px;"></i>Setting 
 					</a>
 				</li>
 
