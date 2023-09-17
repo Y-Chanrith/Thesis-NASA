@@ -58,8 +58,8 @@ include '../include/header.php';
                             <th>Customer</th>
                             <th># of Items</th>
                             <th>Total amount</th>
-                            <!-- <th>Paid</th>
-                            <th>Due</th> -->
+                            <th>Date Post</th>
+                            <!-- <th>Due</th> -->
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -116,8 +116,8 @@ include '../include/header.php';
                                 <td><?php echo $customer['firstname']; ?> <?php echo $customer['lastname']; ?></td>
                                 <td><?php echo $row['quantity']; ?> Pcs</td>
                                 <td>$ <?php echo $row['grandtotal']; ?></td>
-                                <!-- <td><?php //echo $row['paid_amount']; ?></td>
-                                <td><?php //echo $row['due_amount']; ?></td> -->
+                                <td><?php echo $row['created_at']; ?></td>
+                                <!-- <td><?php //echo $row['due_amount']; ?></td> -->
                                 <th>
                                     <!-- <a href="#" class="edit"><i class="material-icons" data-toggle="tooltip">&#xE254;</i></a>
                                     <a href="#" class="delete"><i class="material-icons">&#xE872;</i></a> -->

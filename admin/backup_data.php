@@ -6,7 +6,6 @@ include("../connection.php");
 
 <?php
 include '../include/navigation.php';
-
 include '../include/header.php';
 ?>
 
@@ -14,19 +13,23 @@ include '../include/header.php';
 <!------main-content-start----------->
 
 <div class="container mt-3">
-    <center>
         <form method="post" action="" class="myform" class="form-group">
-            <div class="jumbotron" style="background-color: #F8F8F6 ;">
+            <div class="jumbotron bg bg-white">
                 <div class="form-row">
                     <div class="form-row">
-                        <div class="form-group col-md-12 text-right mt-3">
-                            <button class="btn btn-primary btn-md p-5" >
+                        <div class="form-group col-md-6 text-right mt-3">
+                            <!-- <h3>Click button below to backup your database</h3> -->
+                            <span><button class="btn btn-primary btn-md p-5" >
                                 <a href="backup.php" style="color: #F8F8F6;">Backup Data</a>
+                            </button></span>
+                        </div>
+                        <div class="form-group col-md-6 text-right mt-3">
+                            <button class="btn btn-info btn-md p-5" >
+                                <a href="restore_database.php" style="color: #F8F8F6;">Restore Data</a>
                             </button>
                         </div>
                     </div>
         </form>
-    </center>
 </div>
 
 </div>
@@ -34,7 +37,7 @@ include '../include/header.php';
 
 <!------main-content-end----------->
 <?php
-// include '../include/footer.php';
+ include '../include/footer.php';
 ?>
 
 </div>

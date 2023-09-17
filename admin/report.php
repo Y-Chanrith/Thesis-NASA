@@ -17,7 +17,7 @@ include '../include/header.php';
 
 <div class="container">
   <div class="mt-3">
-    <h4>Report</h4>
+    <h4>SALE Report</h4>
   </div>
   
   <form action="" method="post" class="">
@@ -35,7 +35,6 @@ include '../include/header.php';
   <table class="table table-bordered">
                     <tr style="background-color: #DAF5FF">
                         <th scope="col">No</th>
-                        <th scope="col">Customer Name</th>
                         <th scope="col">Product Name</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Prices</th>
@@ -67,8 +66,7 @@ include '../include/header.php';
 
                         $report = "SELECT * FROM transaction_detail 
                         join product on transaction_detail.product_id=product.id
-                        join transaction on transaction_detail.transac_id=transaction.id
-                        join customer on transaction.cust_id=customer.cus_id";
+                        join transaction on transaction_detail.transac_id=transaction.id";
                         $result = mysqli_query($con, $report);
 
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -81,7 +79,6 @@ include '../include/header.php';
 
                                 <tr>
                                     <td><?php echo $no; ?></td>
-                                    <td><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?></td>
                                     <td><?php echo $row['pro_name']; ?></td>
                                     <td><?php echo $row['qty']; ?> Pcs</td>
                                     <td><?php echo $row['price']; ?> ដុល្លា</td>
@@ -97,12 +94,12 @@ include '../include/header.php';
                         //echo $sum;
                         ?>
                         <tr>
-                            <td colspan="6" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
+                            <td colspan="5" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
                             <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " គ្រឿង"; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="6" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
-                            <td style="font-size: 16px;" class="text text-primary"><?php echo $sum_total_price . " ដុល្លា"; ?></td>
+                            <td colspan="5" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
+                            <td style="font-size: 16px;" class="text text-primary"><?= $sum_total_price . " ដុល្លា"; ?></td>
                         </tr>
 
                     <?php

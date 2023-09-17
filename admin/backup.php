@@ -9,6 +9,7 @@ session_start();
 
     define('DIR', 'C:/xampp/htdocs/Thesis/admin/backupDB/');
 
+    date_default_timezone_set("Asia/Bangkok");
     $date = date('Y-m-d_H-i-s');
     $backup_file = DB_NAME . '-' . $date . '.sql';
 
