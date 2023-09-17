@@ -3,7 +3,7 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-$sql = 'SELECT * FROM transaction';
+$sql = 'SELECT * FROM product';
 $result = mysqli_query($con, $sql);
 
 
@@ -17,7 +17,7 @@ include '../include/header.php';
 
 <div class="container">
   <div class="mt-3">
-    <h4>SALE Report</h4>
+    <h4>STOCK Report</h4>
   </div>
   
   <form action="" method="post" class="">
@@ -36,9 +36,8 @@ include '../include/header.php';
                     <tr style="background-color: #DAF5FF">
                         <th scope="col">No</th>
                         <th scope="col">Product Name</th>
-                        <th scope="col">Quantity</th>
+                        <th scope="col">In Stock</th>
                         <th scope="col">Prices</th>
-                        <th scope="col">Total Prices</th>
                         <th scope="col">Date Post</th>
                     </tr>
 
@@ -64,25 +63,22 @@ include '../include/header.php';
                         $sum_total_price = 0;
 
 
-                        $report = "SELECT * FROM transaction_detail 
-                        join product on transaction_detail.product_id=product.id
-                        join transaction on transaction_detail.transac_id=transaction.id";
+                        $report = "SELECT * FROM product";
                         $result = mysqli_query($con, $report);
 
                         while ($row = mysqli_fetch_assoc($result)) {
 
 
                             if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
-                                $sum_qty += $row['qty'];
+                                $sum_qty += $row['stock'];
                                 $sum_total_price += $row['price'];
                         ?>
 
                                 <tr>
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $row['pro_name']; ?></td>
-                                    <td><?php echo $row['qty']; ?> Pcs</td>
+                                    <td><?php echo $row['stock']; ?> Pcs</td>
                                     <td><?php echo $row['price']; ?> ដុល្លា</td>
-                                    <td><?php echo $row['price'] * $row['qty']; ?> ដុល្លា</td>
                                     <td width=20% style="font-size: 15px;"><?php echo $row['created_at']; ?></td>
                                 </tr>
 
@@ -94,11 +90,11 @@ include '../include/header.php';
                         //echo $sum;
                         ?>
                         <tr>
-                            <td colspan="5" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
+                            <td colspan="4" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
                             <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " គ្រឿង"; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="5" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
+                            <td colspan="4" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
                             <td style="font-size: 16px;" class="text text-primary"><?= $sum_total_price . " ដុល្លា"; ?></td>
                         </tr>
 
