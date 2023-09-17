@@ -14,17 +14,18 @@ include '../include/header.php';
 
 <div class="container mt-3">
         <form method="post" action="" class="myform" class="form-group">
-            <div class="jumbotron bg bg-white">
+            <div class="jumbotron bg ">
+            <h5>Please choose your report below:</h5>
                 <div class="form-row">
                     <div class="form-row">
-                        <div class="form-group col-md-6 text-right mt-3">
+                        <div class="form-group col-md-6  mt-3">
                             <!-- <h3>Click button below to backup your database</h3> -->
-                            <span><button class="btn btn-primary btn-md p-5" >
+                            <span><button class="btn btn-primary btn-sm p-5" >
                                 <a href="stock_report.php" style="color: #F8F8F6;">Stock Report</a>
                             </button></span>
                         </div>
                         <div class="form-group col-md-6 text-right mt-3">
-                            <button class="btn btn-info btn-md p-5" >
+                            <button class="btn btn-info btn-sm p-5" >
                                 <a href="sale_report.php" style="color: #F8F8F6;">Sale Report</a>
                             </button>
                         </div>
