@@ -301,12 +301,7 @@ include '../connection.php';
             let price = product.find('.price').val();
             let name = product.find('.p_name').val();
             let id=product.find('.id').val();
-            let table = $('#table');
 
-          //console.log(total);
-          $('#subtotal').val(total.toFixed(2));
-          $('#total_qty').val(total_qty);
-          $('#grand_total').val(total.toFixed(2));
           $.ajax({
             url:'check_stock.php',
             type:'GET',
@@ -316,24 +311,31 @@ include '../connection.php';
             },
             success:function(data){
                if(data=='success'){
-                    let row = "<tr><td><input type='hidden' name='id[]'value='"+id+"'>" + name + "</td><td><input type='hidden' class='qty'name='qty[]'value='"+qty+"'>" + qty +
-                        "</td><td><input type='hidden' name='price[]'value='"+price+"'>$ " + price + "</td><td><input class='total_price'type='hidden' name='total_price[]'value='"+(qty*price).toFixed(2)
-                        +"'>$ " + (qty * price).toFixed(2) + "</td><td><a href='#delete'><i class='fas fa-trash delete' style='color: #f00000';></'i></a></td>";
-                        table.append(row);
-                    //  console.log( $('#table').find('tr').find('.total_price'));
-                    let tr=$('#table').find('tr').find('.total_price');
-                    let qty_element=$('#table').find('tr').find('.qty');
-                    let total_qty=0;
-                    qty_element.each(function (index,element){
-                        total_qty+=Number($(element).val());
-                    });
-                    let total=0;
-                    tr.each(function (index,element){
-                        total+=Number($(element).val());
-                    });
-                }
-                }
-             });
+                let table = $('#table');
+                let row = "<tr><td><input type='hidden' name='id[]'value='"+id+"'>" + name + "</td><td><input type='hidden' class='qty'name='qty[]'value='"+qty+"'>" + qty +
+                "</td><td><input type='hidden' name='price[]'value='"+price+"'>$ " + price + "</td><td><input class='total_price'type='hidden' name='total_price[]'value='"+(qty*price).toFixed(2)
+                +"'>$ " + (qty * price).toFixed(2) + "</td><td><a href='#delete'><i class='fas fa-trash delete' style='color: #f00000';></'i></a></td>";
+                table.append(row);
+            //  console.log( $('#table').find('tr').find('.total_price'));
+                let tr=$('#table').find('tr').find('.total_price');
+                let qty_element=$('#table').find('tr').find('.qty');
+                let total_qty=0;
+                qty_element.each(function (index,element){
+                    total_qty+=Number($(element).val());
+                });
+                let total=0;
+                tr.each(function (index,element){
+                    total+=Number($(element).val());
+                });
+                //console.log(total);
+                $('#subtotal').val(total.toFixed(2));
+                $('#total_qty').val(total_qty);
+                $('#grand_total').val(total.toFixed(2));
+               }else{
+                alert(data);
+               }
+            }
+          });
       });
       $('#table').delegate('.delete','click',function(e){
             e.preventDefault();

@@ -2,7 +2,7 @@
 
 <?php
 if ($_POST) {
-    // var_dump(var_export($_POST['id'][0]));
+    // var_dump(var_export($_POST['id'][0]));/
     $id = $_POST['customer'];
     $subtotal = $_POST['subtotal'];
     $qty = $_POST['total_qty'];
@@ -17,6 +17,16 @@ if ($_POST) {
     $transac_id=$con->insert_id;
     $i = 0;
     for ($i; $i < count($_POST['id']); $i++) {
+        $sql="select * from  product where id=".$_POST['id'][$i];
+        $result = mysqli_query($con, $sql);
+        $product=$result->fetch_assoc();
+        // $stock=;
+        $qty=(int)$product['stock']-(int)$_POST['qty'][$i];
+    // var_dump(is_numeric());
+
+        $sql_update="update product set stock=$qty where id=".$_POST['id'][$i];
+        // var_dump(mysqli_query($con, $sql_update));
+        $con->query($sql_update);
         $id=$_POST['id'][$i];
         $price=$_POST['price'][$i];
         $qty=$_POST['qty'][$i];
