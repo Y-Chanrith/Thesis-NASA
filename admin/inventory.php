@@ -85,11 +85,11 @@ include '../include/header.php';
                                 <td><?php echo $row['c_name']; ?></td>
                                 <td><?php echo $row['date_in_stock']; ?></td>
                                 <th>
-                                    <a href="inv_searchfrm.php?id=<?php echo $row['id']; ?>" class="edit">
+                                    <a href="inv_searchfrm.php?id=<?php echo $row['id']; ?>" class="edit btn btn-sm btn-outline-success" style="color: #005eff;">
                                         <!-- <i class="material-icons" data-toggle="tooltip">&#xE254;</i> -->
                                         <i class="fas fa-eye" style="color: #005eff;"></i>
                                     </a>
-                                    <a href=""><i class="fas fa-print" style="color: #ff0000;"></i></a>
+                                    <!-- <a href=""><i class="fas fa-print" style="color: #ff0000;"></i></a> -->
                                 </th>
                             </tr>
 
