@@ -15,7 +15,12 @@ include '../include/header.php';
       <div class="card-header py-3">
         <h4 class="m-2 font-weight-bold text-primary">Inventory for : <?php while ($row = mysqli_fetch_assoc($result2)) {
                                                                         echo $row['PRO_NAME'];
-                                                                      } ?></h4>
+                                                                      } ?>
+            <span><a href="inventory.php" class="btn btn-primary" style="float: right;">
+            <i class="fas fa-fw fa-flip-horizontal fa-share"></i> Back</a></span>
+        </h4>
+
+        
       </div>
       <div class="card-body">
         <div class="table-responsive">

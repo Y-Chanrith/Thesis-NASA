@@ -125,7 +125,6 @@ include '../include/header.php';
 					</div>
 					<div>
 						<a href="product.php" style="font-size: 10px; color: blue; float: right; text-decoration: underline;">view Product</a><br>
-						<a href="insert_pro.php" style="font-size: 10px; color: blue; float: right; text-decoration: underline;">Insert Product</a>
 					</div>
 				</div>
 			</div>
