@@ -84,7 +84,7 @@ include '../include/header.php';
             $subtotal = 0;
             $qty = 0;
             while ($row = mysqli_fetch_assoc($result)) :
-              $subtotal += $row['price'];
+              $subtotal +=$row['price'] * $row['qty'];
               $qty += $row['qty'];
             ?>
               <tr>
@@ -126,7 +126,7 @@ include '../include/header.php';
     </div>
     <a href="#" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-print" style="color: white; font-size: small;"> Print</i></a>
     <a href="sale.php" class="btn btn-danger btn-sm float-right"><i class="fas fa-chevron-circle-left" style="color: white; font-size: small;"> Back</i></a>
-
+    <br><br>
 
   </form>
 

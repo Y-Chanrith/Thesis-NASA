@@ -3,7 +3,7 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-$sql = 'SELECT product.*, count(*) as count FROM product join category on product.category_id=category.category_id GROUP BY id LIMIT 5';
+$sql = 'SELECT * FROM product join category on product.category_id=category.category_id';
 $result = mysqli_query($con, $sql);
 
 

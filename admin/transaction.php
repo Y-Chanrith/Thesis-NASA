@@ -7,6 +7,7 @@ if ($_POST) {
     $subtotal = $_POST['subtotal'];
     $qty = $_POST['total_qty'];
     $grandtotal = $_POST['grand_total'];
+    date_default_timezone_set("Asia/Bangkok");
     $created_at =  date("Y-m-d H:i:s", time());
     $updated_at= date("Y-m-d H:i:s", time());
     $payment_method=$_POST['payment_method'];
@@ -20,6 +21,7 @@ if ($_POST) {
         $id=$_POST['id'][$i];
         $price=$_POST['price'][$i];
         $qty=$_POST['qty'][$i];
+        date_default_timezone_set("Asia/Bangkok");
         $created_at =  date("Y-m-d H:i:s", time());
         $updated_at= date("Y-m-d H:i:s", time());
 

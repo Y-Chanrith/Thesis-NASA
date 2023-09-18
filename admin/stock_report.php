@@ -16,7 +16,8 @@ include '../include/header.php';
 <!------main-content-start----------->
 
 <div class="container">
-  <div class="mt-3">
+  <div class="mt-5">
+  <a href="report.php" class="btn btn-danger btn-sm float-right"><i class="fas fa-chevron-circle-left" style="color: white; font-size: small;"> Back</i></a>
     <h4>STOCK Report</h4>
   </div>
   
@@ -37,7 +38,8 @@ include '../include/header.php';
                         <th scope="col">No</th>
                         <th scope="col">Product Name</th>
                         <th scope="col">In Stock</th>
-                        <th scope="col">Prices</th>
+                        <th scope="col">Price Per Unit</th>
+                        <th scope="col">Total Price</th>
                         <th scope="col">Date Post</th>
                     </tr>
 
@@ -71,14 +73,17 @@ include '../include/header.php';
 
                             if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
                                 $sum_qty += $row['stock'];
-                                $sum_total_price += $row['price'];
+                               
+                                $total = $row['stock'] * $row['price'];
+                                $sum_total_price += $total;
                         ?>
 
                                 <tr>
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $row['pro_name']; ?></td>
                                     <td><?php echo $row['stock']; ?> Pcs</td>
-                                    <td><?php echo $row['price']; ?> ដុល្លា</td>
+                                    <td><?php echo number_format($row['price'],2); ?> ដុល្លា</td>
+                                    <td><?php echo number_format($total, 2); ?> ដុល្លា</td>
                                     <td width=20% style="font-size: 15px;"><?php echo $row['created_at']; ?></td>
                                 </tr>
 
@@ -90,12 +95,12 @@ include '../include/header.php';
                         //echo $sum;
                         ?>
                         <tr>
-                            <td colspan="4" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
+                            <td colspan="5" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
                             <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " គ្រឿង"; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
-                            <td style="font-size: 16px;" class="text text-primary"><?= $sum_total_price . " ដុល្លា"; ?></td>
+                            <td colspan="5" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
+                            <td style="font-size: 16px;" class="text text-primary"><?php echo number_format($sum_total_price,2) . " ដុល្លា"; ?></td>
                         </tr>
 
                     <?php

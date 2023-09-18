@@ -11,7 +11,7 @@ include '../include/header.php';
 <div class="main-content" style="background-color: #F8F8F6 ;">
 	<div class="form-row">
 		<!-- Customer record -->
-		<div class="form-group col-md-3">
+		<div class="form-group col-md-4">
 			<div class="card border-left-primary shadow h-100 py-2">
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
@@ -40,7 +40,7 @@ include '../include/header.php';
 		</div>
 
 		<!-- Supplier record -->
-		<div class="form-group col-md-3">
+		<div class="form-group col-md-4">
 			<div class="card border-left-warning shadow h-100 py-2">
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
@@ -68,7 +68,7 @@ include '../include/header.php';
 		</div>
 
 		<!-- Employee record -->
-		<div class="form-group col-md-6">
+		<div class="form-group col-md-4">
 			<div class="card border-left-success shadow h-100 py-2">
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
@@ -97,7 +97,7 @@ include '../include/header.php';
 		<!-- User record -->
 
 		<!-- Product record -->
-		<div class="col-md-6 mb-3">
+		<div class="col-md-4 mb-3">
 			<div class="card border-left-info shadow h-100 py-2">
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
@@ -124,31 +124,32 @@ include '../include/header.php';
 						</div>
 					</div>
 					<div>
-						<a href="product.php" style="font-size: 10px; color: blue; float: right; text-decoration: underline;">view Product</a>
+						<a href="product.php" style="font-size: 10px; color: blue; float: right; text-decoration: underline;">view Product</a><br>
+						<a href="insert_pro.php" style="font-size: 10px; color: blue; float: right; text-decoration: underline;">Insert Product</a>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- Sale record -->
-		<div class="form-group col-md-6">
+		<div class="form-group col-md-4">
 			<div class="card border-left-success shadow h-100 py-2">
 				<div class="card-body">
 					<div class="row no-gutters align-items-center">
 						<div class="col mr-0">
-							<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Sale</div>
+							<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Sale</div>
 							<div class="h6 mb-0 font-weight-bold text-gray-800">
 								<?php
 								$query = "SELECT COUNT(*) FROM transaction";
 								$result = mysqli_query($con, $query) or die(mysqli_error($con));
 								while ($row = mysqli_fetch_array($result)) { ?>
-									<span class="text-success"><?php echo "$row[0]"; ?></span>
+									<span class="text-info"><?php echo "$row[0]"; ?></span>
 								<?php }
 								?> Record(s)
 							</div>
 						</div>
 						<div class="col-auto" style="color: #D3D3D3;">
-							<i class="fas fa-users fa-2x text-gray-300"></i>
+							<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
 						</div>
 					</div>
 					<div>
