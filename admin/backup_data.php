@@ -19,7 +19,7 @@ include '../include/header.php';
                     <div class="form-row">
                         <div class="form-group col-md-6 text-right mt-3">
                             <!-- <h3>Click button below to backup your database</h3> -->
-                            <span><button class="btn btn-primary btn-md p-5" >
+                            <span><button class="btn btn-primary btn-md p-5" onclick="alert('Your Database backuped!')" >
                                 <a href="backup.php" style="color: #F8F8F6;">Backup Data</a>
                             </button></span>
                         </div>

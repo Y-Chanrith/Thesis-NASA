@@ -50,7 +50,7 @@ include '../include/header.php';
                     ?>
                         <!-- ========Print report================= -->
                         <div class="input-group mb-3">
-                            <form method="post" action="print-report.php" class="form-control" style="border:none;">
+                            <form method="post" action="print_sale_report.php" class="form-control" style="border:none;">
                               <div class="input-group-append">
                                   <input type="submit" value="Print Report" class="btn btn-outline-primary rounded">
                               </div>
@@ -76,8 +76,6 @@ include '../include/header.php';
                         $result = mysqli_query($con, $report);
 
                         while ($row = mysqli_fetch_assoc($result)) {
-
-
                             if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
                                 $sum_qty += $row['qty'];
                                 $grandTotal = ($row['qty'] * $row['price']);

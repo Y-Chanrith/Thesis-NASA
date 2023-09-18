@@ -49,7 +49,7 @@ include '../include/header.php';
                     ?>
                         <!-- ========Print report================= -->
                         <div class="input-group mb-3">
-                            <form method="post" action="print-report.php" class="form-control" style="border:none;">
+                            <form method="post" action="print_stock_report.php" class="form-control" style="border:none;">
                                 <input type="hidden" name="fromdate" value="<?php echo $dateFrom; ?>">
                                 <input type="hidden" name="todate" value="<?php echo $dateTo; ?>">
                                 <div class="input-group-append">
@@ -96,7 +96,7 @@ include '../include/header.php';
                         ?>
                         <tr>
                             <td colspan="5" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
-                            <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " គ្រឿង"; ?></td>
+                            <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " ទំនិញ"; ?></td>
                         </tr>
                         <tr>
                             <td colspan="5" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
