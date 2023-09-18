@@ -89,10 +89,10 @@ include '../include/header.php';
                                 <td><?php echo $row['address']; ?></td>
                                 <th>
                                     <a href="cust_update.php?cus_id=<?php echo $row['cus_id']; ?>" class="edit">
-                                        <i class="material-icons" data-toggle="tooltip">&#xE254;</i>
+                                    <i class="fas fa-edit" style="color: #0049c7;"></i>
                                     </a>
                                     <a href="cust_delete.php?cus_id=<?php echo $row['cus_id']; ?>" class="delete">
-                                        <i class="material-icons" onclick="return confirm('Are you sure want to delete this customer?');">&#xE872;</i>
+                                    <i class="fas fa-trash" style="color: #d10000;" onclick="return confirm('Are you sure want to delete Customer?');"></i>
                                     </a>
                                 </th>
                             </tr>

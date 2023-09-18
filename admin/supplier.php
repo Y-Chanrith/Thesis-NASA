@@ -84,10 +84,10 @@ include '../include/header.php';
                                 <td><?php echo $row['phone']; ?></td>
                                 <th>
                                     <a href="update_sup.php?supplier_id=<?php echo $row['supplier_id']; ?>" class="edit">
-                                        <i class="material-icons" data-toggle="tooltip">&#xE254;</i>
+                                    <i class="fas fa-edit" style="color: #0049c7;"></i>
                                     </a>
                                     <a href="delete_sup.php?supplier_id=<?php echo $row['supplier_id']; ?>" class="delete">
-                                        <i class="material-icons" onclick="return confirm('Are you sure want to delete this Supplier?');">&#xE872;</i>
+                                    <i class="fas fa-trash" style="color: #d10000;" onclick="return confirm('Are you sure want to delete this supplier?');"></i>
                                     </a>
                                 </th>
                             </tr>
