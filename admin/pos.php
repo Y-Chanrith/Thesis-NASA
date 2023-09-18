@@ -68,7 +68,7 @@ include '../connection.php';
           </div>
         </div>
       </div>
-      <?php 
+      <?php
         if($_POST){
           //var_dump($_POST);
         }
@@ -178,7 +178,7 @@ include '../connection.php';
             </div>
 
           </div>
-          
+
           <div class="form-group row text-left mb-0">
 
             <div class="col-sm-5 text-primary">
@@ -225,7 +225,7 @@ include '../connection.php';
               <input type="submit" class="btn bg-danger rounded border-0 p-2 text-white" value="submit" onclick="alert('Added to Sale')">
             </div>
           </div>
-          <?php // endif; 
+          <?php // endif;
           ?>
           <!-- closr -->
 
@@ -251,7 +251,7 @@ include '../connection.php';
       //   console.log(qty);
       // });
 
-      
+
     });
   </script>
   <script>
@@ -290,7 +290,7 @@ include '../connection.php';
                   "</div>");
               }
             }
-            
+
           }
         });
       });
@@ -302,26 +302,39 @@ include '../connection.php';
             let name = product.find('.p_name').val();
             let id=product.find('.id').val();
             let table = $('#table');
-            let row = "<tr><td><input type='hidden' name='id[]'value='"+id+"'>" + name + "</td><td><input type='hidden' class='qty'name='qty[]'value='"+qty+"'>" + qty + 
-            "</td><td><input type='hidden' name='price[]'value='"+price+"'>$ " + price + "</td><td><input class='total_price'type='hidden' name='total_price[]'value='"+(qty*price).toFixed(2)
-            +"'>$ " + (qty * price).toFixed(2) + "</td><td><a href='#delete'><i class='fas fa-trash delete' style='color: #f00000';></'i></a></td>";
-            table.append(row);
-          //  console.log( $('#table').find('tr').find('.total_price'));
-          let tr=$('#table').find('tr').find('.total_price');
-          let qty_element=$('#table').find('tr').find('.qty');
-          let total_qty=0;
-          qty_element.each(function (index,element){
-            total_qty+=Number($(element).val());
-          });
-          let total=0;
-          tr.each(function (index,element){
-            total+=Number($(element).val());
-          });
+
           //console.log(total);
           $('#subtotal').val(total.toFixed(2));
           $('#total_qty').val(total_qty);
           $('#grand_total').val(total.toFixed(2));
-      });  
+          $.ajax({
+            url:'check_stock.php',
+            type:'GET',
+            data:{
+                id:id,
+                qty:qty
+            },
+            success:function(data){
+               if(data=='success'){
+                    let row = "<tr><td><input type='hidden' name='id[]'value='"+id+"'>" + name + "</td><td><input type='hidden' class='qty'name='qty[]'value='"+qty+"'>" + qty +
+                        "</td><td><input type='hidden' name='price[]'value='"+price+"'>$ " + price + "</td><td><input class='total_price'type='hidden' name='total_price[]'value='"+(qty*price).toFixed(2)
+                        +"'>$ " + (qty * price).toFixed(2) + "</td><td><a href='#delete'><i class='fas fa-trash delete' style='color: #f00000';></'i></a></td>";
+                        table.append(row);
+                    //  console.log( $('#table').find('tr').find('.total_price'));
+                    let tr=$('#table').find('tr').find('.total_price');
+                    let qty_element=$('#table').find('tr').find('.qty');
+                    let total_qty=0;
+                    qty_element.each(function (index,element){
+                        total_qty+=Number($(element).val());
+                    });
+                    let total=0;
+                    tr.each(function (index,element){
+                        total+=Number($(element).val());
+                    });
+                }
+                }
+             });
+      });
       $('#table').delegate('.delete','click',function(e){
             e.preventDefault();
             $(this).closest('tr').remove();
@@ -339,7 +352,7 @@ include '../connection.php';
           $('#subtotal').val(total.toFixed(2));
           $('#total_qty').val(total_qty);
           $('#grand_total').val(total.toFixed(2));
-      }); 
+      });
     });
   </script>
 
