@@ -3,7 +3,7 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-$sql = 'SELECT product.*, count(*) as count FROM product join category on product.category_id=category.category_id GROUP BY id LIMIT 5';
+$sql = 'SELECT * FROM product join category on product.category_id=category.category_id';
 $result = mysqli_query($con, $sql);
 
 
@@ -55,8 +55,8 @@ include '../include/header.php';
                             <th width="25%">Product Name</th>
                             <th>Brand</th>
                             <th>Category</th>
-                            <th>Price</th>
                             <th>Stock</th>
+                            <th>Price</th>
                             <th>Date Stock In</th>
                             <th>Actions</th>
                         </tr>
@@ -91,15 +91,16 @@ include '../include/header.php';
                                 <td><?php echo $row['pro_name']; ?></td>
                                 <td><?php echo $row['brand']; ?></td>
                                 <td><?php echo $row['c_name']; ?></td>
-                                <td><?php echo $row['price']; ?></td>
                                 <td><?php echo $row['stock']; ?></td>
+                                <td><?php echo $row['price']; ?></td>
                                 <td><?php echo $row['date_in_stock']; ?></td>
                                 <th>
                                     <a href="update_pro.php?id=<?php echo $row['id']; ?>" class="edit">
-                                        <i class="material-icons" data-toggle="tooltip">&#xE254;</i>
+                                    <i class="fas fa-edit" style="color: #0049c7;"></i>
                                     </a>
                                     <a href="delete_pro.php?id=<?php echo $row['id'];?>" class="delete">
-                                        <i class="material-icons" onclick="return confirm('Are you sure want to delete this item?');">&#xE872;</i>
+                                    <i class="fas fa-trash" style="color: #d10000;" onclick="return confirm('Are you sure want to delete this item?');"></i>
+                                        <!-- <i class="material-icons" onclick="return confirm('Are you sure want to delete this item?');">&#xE872;</i> -->
                                         <script>
                                     </script>
                                     </a>

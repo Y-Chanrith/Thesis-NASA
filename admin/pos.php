@@ -170,7 +170,7 @@ include '../connection.php';
                 <!-- <div class="input-group-prepend">
                   <span class="input-group-text">Pcs</span>
                 </div> -->
-                <input type="text" name='total_qty'class="form-control text-right "id="total_qty" value="" readonly name="lessvat">
+                <input type="text" name='total_qty'class="form-control text-right "id="total_qty" value="" readonly name="item">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Items</span>
                 </div>
@@ -214,15 +214,16 @@ include '../connection.php';
                 <option value="">Select Payment</option>
                   <option value="cash">Cash</option>
                   <option value="bank transfer">Bank Transfer</option>
+                  <option value="Credit Card">Credit Card</option>
                 </select>
               </div>
             </div>
 
           </div>
 
-          <div class="form-group row text-left mb-2">
-            <div class="col-sm-5 text-primary">
-              <input type="submit" class="btn bg-danger rounded border-0 p-2 text-white" value="submit" onclick="alert('Added to Sale')">
+          <div class="form-group row mb-2">
+            <div class="input-group mb-2">
+              <input type="submit" class="btn btn-primary btn-md float-right rounded p-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
             </div>
           </div>
           <?php // endif;

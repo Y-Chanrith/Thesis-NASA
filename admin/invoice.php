@@ -1,8 +1,10 @@
 <?php 
   require ("../fpdf/fpdf.php");
   //include ("../check-login.php");
- // include ("../connection.php");
-
+  include ("../connection.php");
+ 
+?>
+<?php
   //customer and invoice details
   $info=[
     "customer"=>"Ram Kumar",

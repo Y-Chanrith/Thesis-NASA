@@ -24,7 +24,6 @@
 
 	<!--google material icon-->
 	<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-	
 
 </head>
 
@@ -99,7 +98,7 @@
 
 
 				<li class="">
-					<a href="#" class=""><i class="fa-solid fa-gear" style="font-size: 22px;"></i>Setting 
+					<a href="../admin/backup_data.php" class=""><i class="fa-solid fa-gear" style="font-size: 22px;"></i>Setting 
 					</a>
 				</li>
 
