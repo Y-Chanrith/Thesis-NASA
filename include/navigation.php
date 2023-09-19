@@ -5,6 +5,7 @@
 
 <!doctype html>
 <html lang="en">
+
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -36,72 +37,88 @@
 
 		<div id="sidebar">
 			<div class="sidebar-header">
-				<h3><img src="../image/NASA-Computer.png" class="img-fluid" style="border: 1px solid #47A3FF; border-radius: 50%;"/>
+				<h3><img src="../image/NASA-Computer.png" class="img-fluid" style="border: 1px solid #47A3FF; border-radius: 50%;" />
 					<span​ style="font-family: Khmer OS Muol Light;"><span style="color:red;">NASA</span> <span style="color:blue;">COMPUTER</span>
 				</h3>
 			</div>
 			<ul class="list-unstyled component m-0">
 				<li class="active">
 					<a href="../admin/dashboard.php"><i class="fa-solid fa-gauge" style="font-size: 22px; "></i>
-					Dashboard </a>
+						Dashboard </a>
 				</li>
 
 				<li class="">
 					<a href="../admin/product.php">
-					<i class="fa-solid fa-shop" style="font-size: 22px; "></i>Products
+						<i class="fa-solid fa-shop" style="font-size: 22px; "></i>Products
 					</a>
 				</li>
 
 
 				<li class="dropdown">
 					<a href="../admin/customer.php">
-					<i class="fas fa-user-check" style="font-size: 22px; "></i>Customers
+						<i class="fas fa-user-check" style="font-size: 22px; "></i>Customers
 					</a>
 				</li>
 
 				<li class="dropdown">
 					<a href="../admin/inventory.php">
-					<i class="fa-solid fa-warehouse" style="font-size: 22px; "></i>Inventory
+						<i class="fa-solid fa-warehouse" style="font-size: 22px; "></i>Inventory
 					</a>
 				</li>
 
 				<li class="dropdown">
 					<a href="../admin/supplier.php">
-					<i class="fa-solid fa-truck-field" style="font-size: 22px; "></i>Supplier
+						<i class="fa-solid fa-truck-field" style="font-size: 22px; "></i>Supplier
 					</a>
 				</li>
 
 				<li class="dropdown">
 					<a href="../admin/employee.php">
-					<i class="fa-solid fa-users-gear" style="font-size: 22px;"></i>Employee
+						<i class="fa-solid fa-users-gear" style="font-size: 22px;"></i>Employee
 					</a>
 				</li>
 
 				<li class="">
 					<a href="../admin/sale.php" class="">
-					<i class="fa-solid fa-cart-arrow-down" style="font-size: 22px;"></i>Sales
+						<i class="fa-solid fa-cart-arrow-down" style="font-size: 22px;"></i>Sales
 					</a>
 				</li>
 
-				<li class="dropdown">
+				<!-- <li class="dropdown">
 					<a href="../admin/store_data_shop.php">
-					<i class="fas fa-window-maximize" style="font-size: 22px;"></i>NASA Info
+						<i class="fas fa-window-maximize" style="font-size: 22px;"></i>NASA Info
 					</a>
+				</li> -->
+
+
+				<li class="dropdown">
+					<a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+						<i class="fa-solid fa-chart-line" style="font-size: 22px;"></i>Reports
+					</a>
+					<ul class="collapse list-unstyled menu pl-4" id="homeSubmenu1">
+						<li><a href="../admin/stock_report.php">
+								<i class="far fa-file-alt" style="color: #ffffff; font-size: 22px;"></i>Stock Report</a>
+						</li>
+						<li><a href="../admin/sale_report.php">
+								<i class="far fa-file" style="color: #ffffff; font-size: 22px;"></i>Sale Report</a>
+						</li>
+					</ul>
 				</li>
 
 
 				<li class="dropdown">
-					<a href="../admin/report.php">
-					<i class="fa-solid fa-chart-line" style="font-size: 22px;"></i>Reports	
+					<a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+						<i class="fa-solid fa-gear" style="font-size: 22px;"></i>Setting
 					</a>
+					<ul class="collapse list-unstyled menu pl-4" id="homeSubmenu2">
+						<li><a href="../admin/backup_data.php">
+								<i class="fas fa-hdd" style="color: #ffffff; font-size: 22px;"></i>Back Up</a></li>
+						<li><a href="../admin/store_data_shop.php">
+								<i class="far fa-file" style="color: #ffffff; font-size: 22px;"></i>NASA Info</a></li>
+						<!-- <li><a href="#">layout 3</a></li> -->
+					</ul>
 				</li>
-
-
-				<li class="">
-					<a href="../admin/backup_data.php" class=""><i class="fa-solid fa-gear" style="font-size: 22px;"></i>Setting 
-					</a>
-				</li>
-
+				<i class="fas fa-hdd" style="color: #ffffff;"></i>
 			</ul>
 		</div>
 

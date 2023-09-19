@@ -17,7 +17,7 @@ include '../include/header.php';
 
 <div class="container">
   <div class="mt-5">
-  <a href="report.php" class="btn btn-danger btn-sm float-right"><i class="fas fa-chevron-circle-left" style="color: white; font-size: small;"> Back</i></a>
+  <!-- <a href="report.php" class="btn btn-danger btn-sm float-right"><i class="fas fa-chevron-circle-left" style="color: white; font-size: small;"> Back</i></a> -->
     <h4>SALE Report</h4>
     
   </div>
