@@ -1,3 +1,6 @@
+<?php
+include '../connection.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +34,7 @@
 			</div>
 			<div class="bill_total_wrap">
 				<div class="bill_sec">
-					<p>Bill To</p> 
+					<p>Bill To</p>
 	          		<p class="bold name">Alex Deo</p>
 			        <span>
 			           123 walls street, Townhall<br/>
@@ -56,25 +59,35 @@
 					</div>
 				</div>
 				<div class="table_body">
+                    <?php
+                        $sql="select * from transaction_detail
+                        inner join product on transaction_detail.product_id=product.id
+                        where transac_id =".$_GET['id'];
+                        $result=mysqli_query($con, $sql);
+                        // var_dump($result);
+                        $i=1;
+                          while ($row = mysqli_fetch_assoc($result)) :
+                    ?>
 					<div class="row">
 						<div class="col col_no">
-							<p>01</p>
+							<p><?=$i ?></p>
 						</div>
 						<div class="col col_des">
-							<p class="bold">Web Design</p>
-							<p>Lorem ipsum dolor sit.</p>
+							<p class="bold"><?=$row['pro_name'] ?></p>
+
 						</div>
 						<div class="col col_price">
-							<p>$350</p>
+							<p><?=$row['price'] ?></p>
 						</div>
 						<div class="col col_qty">
-							<p>2</p>
+							<p><?=$row['qty'] ?></p>
 						</div>
 						<div class="col col_total">
-							<p>$700.00</p>
+							<p><?=$row['qty']*$row['price']?></p>
 						</div>
 					</div>
-					<div class="row">
+                    <?php $i++;endwhile;?>
+					<!-- <div class="row">
 						<div class="col col_no">
 							<p>02</p>
 						</div>
@@ -145,7 +158,7 @@
 						<div class="col col_total">
 							<p>$700.00</p>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="paymethod_grandtotal_wrap">

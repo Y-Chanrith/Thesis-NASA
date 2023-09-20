@@ -36,13 +36,13 @@ include '../include/header.php';
                                     <div class="col-md-4">
                                         <select name="payment" required class="form-control p-2">
                                             <option value="">Select Payment</option>
-                                            <option value="cash" 
+                                            <option value="cash"
                                             <?= isset($_GET['payment']) == true ? ($_GET['payment']== 'cash'? 'selected':''):'' ?>
                                             >Cash</option>
-                                            <option value="bank transfer" 
+                                            <option value="bank transfer"
                                             <?= isset($_GET['payment']) == true ? ($_GET['payment']=='bank transfer'? 'selected':''):'' ?>
                                             >Bank Transfer</option>
-                                            <option value="Credit Card" 
+                                            <option value="Credit Card"
                                             <?= isset($_GET['payment']) == true ? ($_GET['payment']=='Credit Card'? 'selected':''):'' ?>
                                             >Credit Card</option>
                                         </select>
@@ -164,7 +164,7 @@ include '../include/header.php';
                                     <!-- <a href="#" class="edit"><i class="material-icons" data-toggle="tooltip">&#xE254;</i></a>
                                     <a href="#" class="delete"><i class="material-icons">&#xE872;</i></a> -->
                                     <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
-                                    <a href="sale_invoice.php"><i class="fas fa-print" style="color: #ff0000;"></i></a>
+                                    <a href="sale_invoice.php?id=<?=$row['id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a>
                                 </th>
                             </tr>
 
