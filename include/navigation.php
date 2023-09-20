@@ -118,7 +118,7 @@
 						<!-- <li><a href="#">layout 3</a></li> -->
 					</ul>
 				</li>
-				<i class="fas fa-hdd" style="color: #ffffff;"></i>
+				<!-- <i class="fas fa-hdd" style="color: #ffffff;"></i> -->
 			</ul>
 		</div>
 

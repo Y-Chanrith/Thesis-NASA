@@ -3,26 +3,15 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-// $sql = 'SELECT * FROM transaction';
-// $result = mysqli_query($con, $sql);
-
-
 include '../include/navigation.php';
-
 include '../include/header.php';
 ?>
-
-
 <!------main-content-start----------->
 
-<div class="container">
-  <div class="mt-5">
-  <!-- <a href="report.php" class="btn btn-danger btn-sm float-right"><i class="fas fa-chevron-circle-left" style="color: white; font-size: small;"> Back</i></a> -->
-    <h4>SALE Report</h4>
-    
-  </div>
-  
-  <form action="" method="post" class="">
+<div class="container mt-5">
+ 
+  <!-- ============ old form =============== -->
+  <!-- <form action="" method="post" class="">
   <div class="mb-3">
     <label class="form-label">From Date: </label>
     <input type="date" class="form-control" name="fromdate">
@@ -33,7 +22,30 @@ include '../include/header.php';
   <input class="btn btn-primary" type="submit" value="Submit">
   </div>
  <br>
-  </form>
+  </form> -->
+  <!-- =========== end old form ============ -->
+  <div class="row">
+    <div class="col-sm-5">
+      <h2 class="ml-lg-2">SALE REPORT</h2>
+    </div>
+    <div class="col-sm-7">
+      <form action="" method="POST">
+        <div class="row">
+          <div class="col-md-4">
+            <input type="date" required name="fromdate"  class="form-control">
+          </div>
+          <div class="col-md-4">
+            <input type="date" required name="todate"  class="form-control">
+          </div>
+          <div class="col-md-4">
+            <a href="sale_report.php" class="btn btn-success">Reset</a>
+            <button type="submit" class="btn btn-primary">Filter</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
   <table class="table table-bordered">
                     <tr style="background-color: #DAF5FF">
                         <th scope="col">No</th>

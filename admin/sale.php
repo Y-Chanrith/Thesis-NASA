@@ -24,14 +24,35 @@ include '../include/header.php';
 
                 <div class="table-title rounded">
                     <div class="row">
-                        <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
-                            <h2 class="ml-lg-2">Manage Sales</h2>
+                        <div class="col-sm-5">
+                            <h2 class="ml-lg-2">Sales List</h2>
                         </div>
-                        <!-- <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
-                            <a class="btn btn-success" href="insert_pro.php" >
-                                <i class="material-icons">&#xE147;</i>
-                                <span>Add New Sale</span>
-                            </a>
+                        <!-- <div class="col-sm-7">
+                            <form action="" method="GET">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="date" required name="date" value="<?= isset($_GET['date']) == true ? $_GET['date']:'' ?>" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select name="payment" required class="form-control p-2">
+                                            <option value="">Select Payment</option>
+                                            <option value="cash" 
+                                            <?= isset($_GET['payment']) == true ? ($_GET['payment']== 'cash'? 'selected':''):'' ?>
+                                            >Cash</option>
+                                            <option value="bank transfer" 
+                                            <?= isset($_GET['payment']) == true ? ($_GET['payment']=='bank transfer'? 'selected':''):'' ?>
+                                            >Bank Transfer</option>
+                                            <option value="Credit Card" 
+                                            <?= isset($_GET['payment']) == true ? ($_GET['payment']=='Credit Card'? 'selected':''):'' ?>
+                                            >Credit Card</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="sale.php" class="btn btn-success">Reset</a>
+                                        <button type="submit" class="btn btn-primary">Filter</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div> -->
                     </div>
                 </div>
@@ -93,6 +114,27 @@ include '../include/header.php';
                             $page=$page-1;
                             $offset=$page*10;
                         }
+
+                        // filter sale list
+                        // if(isset($_GET['date']) && $_GET['date'] != '' && isset($_GET['payment']) && $_GET['payment'] != '' ){
+                        //     $date = $_GET['date'];
+                        //     $payment = $_GET['payment'];
+                        //     $sql = "SELECT * FROM transaction WHERE created_at='$date' AND payment_method='$payment' ORDER BY id limit 10 offset ".$offset;
+                        //     $result = mysqli_query($con, $sql);
+                        //     $counter=count($result->fetch_all());
+
+                        //     $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        //     $result = mysqli_query($con, $sql);
+                        // }else{
+                        //     $sql = "SELECT * FROM transaction ";
+                        //     $result = mysqli_query($con, $sql);
+                        //     $counter=count($result->fetch_all());
+
+                        //     $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        //     $result = mysqli_query($con, $sql);
+                        // }
+                        // end filter sale ===========
+                         // old code ===============
                         $sql = "SELECT * FROM transaction ";
                         $result = mysqli_query($con, $sql);
                         $counter=count($result->fetch_all());
@@ -122,7 +164,7 @@ include '../include/header.php';
                                     <!-- <a href="#" class="edit"><i class="material-icons" data-toggle="tooltip">&#xE254;</i></a>
                                     <a href="#" class="delete"><i class="material-icons">&#xE872;</i></a> -->
                                     <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
-                                    <a href=""><i class="fas fa-print" style="color: #ff0000;"></i></a>
+                                    <a href="sale_invoice.php"><i class="fas fa-print" style="color: #ff0000;"></i></a>
                                 </th>
                             </tr>
 
