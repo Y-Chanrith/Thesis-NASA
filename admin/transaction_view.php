@@ -124,7 +124,7 @@ include '../include/header.php';
         </div>
       </div>
     </div>
-    <a href="#" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-print" style="color: white; font-size: small;"> Print</i></a>
+    <a href="sale_invoice.php?id=<?=$_GET['transac_id']?>&customer_id=<?=$_GET['customer_id'] ?>" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-print" style="color: white; font-size: small;"> Print</i></a>
     <a href="sale.php" class="btn btn-danger btn-sm float-right"><i class="fas fa-chevron-circle-left" style="color: white; font-size: small;"> Back</i></a>
     <br><br>
 

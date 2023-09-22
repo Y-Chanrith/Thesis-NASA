@@ -1,4 +1,5 @@
 <?php
+// session_start();
 //include '../check-login.php';
 include '../connection.php';
 ?>
@@ -17,14 +18,16 @@ include '../connection.php';
 
 <body style="background-color: #F6F6F6;">
   <?php include "../include/header_pos.php";
+  // include "../include/navigation.php";
+  // include "../include/header.php";
   //$product_ids = array();
   $sql = "select * from category";
   $cat = mysqli_query($con, $sql);
   ?>
-  <div class="container-fluid pt-4">
+  <div class="container-fluid pt-4 vh-100">
     <div class="row">
-      <div class="col-lg-8">
-        <div class="card mb-0">
+      <div class="col-md-8">
+        <div class="card mb-0" style="border-radius: 0px;">
           <div class="card-header py-2">
             <h4 class="m-1 text-lg text-primary">Product category</h4>
           </div>
@@ -43,9 +46,8 @@ include '../connection.php';
             </ul>
             <div class="tab-content">
               <div class="">
-                <!-- <h1>Seyma</h1>   -->
                 <div class="row" id="product-container">
-                <!-- <div class='col-sm-4 col-md-2 border border-primary rounded shadow p-3 m-3'>" +
+                  <!-- <div class='col-sm-4 col-md-2 border border-primary rounded shadow p-3 m-3'>" +
                       <div class='products'> +
                         <center> +
                             <h6 class='text-info'> + datas[i].pro_name + </h6> +
@@ -69,176 +71,154 @@ include '../connection.php';
         </div>
       </div>
       <?php
-        if($_POST){
-          //var_dump($_POST);
-        }
+      if ($_POST) {
+        //var_dump($_POST);
+      }
       ?>
       <form action="transaction.php" method="POST">
-      <div class="card mb-4 col-md-4" style="margin-right:12px; position: absolute; right:0; top:95px;
-         padding:0 10px ; ">
-        <?php
-        //DROPDOWN FOR CUSTOMER
-        $sql = "SELECT cus_id, firstname, lastname FROM customer order by firstname asc";
-        $res = mysqli_query($con, $sql) or die("Error SQL: $sql");
+        <div class="card mb-4 col-md-4" style="margin-right:12px; position: absolute; right:0; top:96px;
+         padding:0 10px ; border-radius: 0px; ">
+          <?php
+          //DROPDOWN FOR CUSTOMER
+          $sql = "SELECT cus_id, firstname, lastname FROM customer order by firstname asc";
+          $res = mysqli_query($con, $sql) or die("Error SQL: $sql");
 
-        $opt = "<select class='form-control'  style='border-radius: 0px;' name='customer' required>
+          $opt = "<select class='form-control'  style='border-radius: 0px;' name='customer' required>
         <option value='' disabled selected hidden>Select Customer</option>";
-        while ($row = mysqli_fetch_assoc($res)) {
-          $opt .= "<option value='" . $row['cus_id'] . "'>" . $row['firstname'] . ' ' . $row['lastname'] . "</option>";
-        }
-        $opt .= "</select>";
-        // END OF DROP DOWN
-        ?>
+          while ($row = mysqli_fetch_assoc($res)) {
+            $opt .= "<option value='" . $row['cus_id'] . "'>" . $row['firstname'] . ' ' . $row['lastname'] . "</option>";
+          }
+          $opt .= "</select>";
+          // END OF DROP DOWN
+          ?>
 
-        <div class="card-header py-2 mb-2" style="background-color: white;">
-          <h5 class="m-1 text-primary">Point of Sale</h5>
-        </div>
-        <?php
+          <div class="card-header py-2 mb-2" style="background-color: white;">
+            <h5 class="m-1 text-primary">Point of Sale</h5>
+          </div>
+          <?php
           echo "Today's date is : ";
           date_default_timezone_set("Asia/Bangkok");
           $today = date("Y-m-d H:i a");
           echo $today;
-        ?>
-        <div class="form-group row text-left mb-3 mt-2">
-          <div class="col-sm-12 text-primary btn-group">
-            <?php echo $opt; ?>
-            <a href="#" data-toggle="modal" data-target="#poscustomerModal" type="button" class="btn btn-primary bg-gradient-primary" style="border-radius: 0px;"><i class="fas fa-fw fa-plus"></i></a>
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="card-body col-md-9">
-            <div class="table-responsive">
-
-              <!-- trial form lang   -->
-                <!-- <input type="hidden" name="employee" value="<?php //echo $_SESSION['FIRST_NAME']; ?>">
-                <input type="hidden" name="role" value="<?php //echo $_SESSION['JOB_TITLE']; ?>"> -->
-
-                <table class="table table-hover" >
-                  <tbody id="table">
-                    <thead class="">
-                      <th width="40%">Product Name</th>
-                      <th width="10%">Quantity</th>
-                      <th width="20%">Price</th>
-                      <th width="20%">Total</th>
-                      <th width="10%">Action</th>
-                    </thead>
-
-                  </tbody>
-
-                  <!-- <tr>
-                    <td>RGB Keyboard</td>
-                    <td>2</td>
-                    <td>$ 18</td>
-                    <td>$ 27</td>
-                    <td><a href="#delete"><i class="fas fa-trash" style="color: #f00000;"></i></a></td>
-                  </tr> -->
-                </table>
-
-            </div>
-          </div>
-
-          <!-- test -->
-          <input type="hidden" name="date" value="<?php echo $today; ?>">
-
-          <div class="form-group row mb-0">
-            <div class="col-sm-5 text-left text-primary py-2">
-              <h6>
-                Subtotal
-              </h6>
-            </div>
-            <div class="col-sm-7">
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div>
-                <input type="text" class="form-control text-right " id="subtotal" name="subtotal" readonly name="subtotal">
-              </div>
-            </div>
-
-          </div>
-          <div class="form-group row mb-0">
-
-            <div class="col-sm-5 text-left text-primary py-2">
-              <h6>
-                Quantity
-              </h6>
-            </div>
-
-            <div class="col-sm-7">
-              <div class="input-group mb-0">
-                <!-- <div class="input-group-prepend">
-                  <span class="input-group-text">Pcs</span>
-                </div> -->
-                <input type="text" name='total_qty'class="form-control text-right "id="total_qty" value="" readonly name="item">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Items</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="form-group row text-left mb-0">
-
-            <div class="col-sm-5 text-primary">
-              <h6 class="font-weight-bold py-2">
-                Grand Total
-              </h6>
-            </div>
-
-            <div class="col-sm-7">
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div>
-                <input type="text" class="form-control text-right " name="grand_total" id="grand_total" readonly name="total">
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group row mb-0">
-
-            <div class="col-sm-5 text-left text-primary py-2">
-              <h6>
-               Payment Method
-              </h6>
-            </div>
-
-            <div class="col-sm-7">
-              <div class="input-group mb-0">
-                <!-- <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div> -->
-                <select name="payment_method" required class="form-control">
-                <option value="">Select Payment</option>
-                  <option value="cash">Cash</option>
-                  <option value="bank transfer">Bank Transfer</option>
-                  <option value="Credit Card">Credit Card</option>
-                </select>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="form-group row mb-2">
-            <div class="input-group mb-2">
-              <input type="submit" class="btn btn-primary btn-md float-right rounded p-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
-            </div>
-          </div>
-          <?php // endif;
           ?>
-          <!-- closr -->
+          <div class="form-group row text-left mb-3 mt-2">
+            <div class="col-sm-12 text-primary btn-group">
+              <?php echo $opt; ?>
+              <a href="#addCustomerModal" class="btn btn-primary" data-toggle="modal">
+                <i class="fas fa-plus"></i>
+              </a>
+              <!----add-modal start--------->
+              <?php include 'include/add_customer_modal.php'; ?>
+              <!----edit-modal end--------->
 
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="card-body col-md-12">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead class="">
+                    <th width="40%">Item</th>
+                    <th width="10%">QTY</th>
+                    <th width="20%">Price</th>
+                    <th width="20%">Total</th>
+                    <th width="10%">Action</th>
+                  </thead>
+                  <tbody id="table">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <input type="hidden" name="date" value="<?php echo $today; ?>">
+            <div class="form-group row mb-0">
+              <div class="col-sm-5 text-left text-primary py-2">
+                <h6>
+                  Subtotal
+                </h6>
+              </div>
+              <div class="col-sm-7">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input type="text" class="form-control text-right " id="subtotal" name="subtotal" readonly name="subtotal">
+                </div>
+              </div>
+            </div>
+            <div class="form-group row mb-0">
+              <div class="col-sm-5 text-left text-primary py-2">
+                <h6>
+                  Quantity
+                </h6>
+              </div>
+
+              <div class="col-sm-7">
+                <div class="input-group mb-0">
+                  <!-- <div class="input-group-prepend"><span class="input-group-text">Pcs</span></div> -->
+                  <input type="text" name='total_qty' class="form-control text-right " id="total_qty" value="" readonly name="item">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Items</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row text-left mb-0">
+              <div class="col-sm-5 text-primary">
+                <h6 class="font-weight-bold py-2">
+                  Grand Total
+                </h6>
+              </div>
+              <div class="col-sm-7">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input type="text" class="form-control text-right " name="grand_total" id="grand_total" readonly name="total">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row mb-0">
+              <div class="col-sm-5 text-left text-primary py-2">
+                <h6>
+                  Payment Method
+                </h6>
+              </div>
+
+              <div class="col-sm-7">
+                <div class="input-group mb-0">
+                  <!-- <div class="input-group-prepend"><span class="input-group-text">$</span></div> -->
+                  <select name="payment_method" required class="form-control">
+                    <option value="">Select Payment</option>
+                    <option value="cash">Cash</option>
+                    <option value="bank transfer">Bank Transfer</option>
+                    <option value="Credit Card">Credit Card</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row mb-2">
+              <div class="input-group mb-2">
+                <input type="submit" class="btn btn-primary btn-md float-right rounded p-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
+              </div>
+            </div>
+            <?php // endif; 
+            ?>
+            <!-- closr -->
+          </div>
         </div>
-      </div>
       </form>
     </div>
   </div>
+
+  <?php include "../include/footer_pos.php"; ?>
   <script src="plugin/jquery/jquery.js"></script>
   <script src="../js/javascript.js"></script>
   <script>
-    // alert('hello');
     $(document).ready(function() {
       // $('.btn_add').on('click', function() {
       //   // alert("hello");
@@ -251,8 +231,6 @@ include '../connection.php';
       //   table.append(row);
       //   console.log(qty);
       // });
-
-
     });
   </script>
   <script>
@@ -276,18 +254,18 @@ include '../connection.php';
                 $('#product-container').append(
 
                   "<div class='col-sm-4 col-md-2 border border-primary rounded shadow p-3 m-3'>" +
-                      "<div class='products'>" +
-                        "<center>" +
-                            "<h6 class='text-info'>" + datas[i].pro_name + "</h6>" +
-                            "<img src='../image/" + datas[i].image + "'style='width: 50%; '>" +
-                        "</center>" +
-                        "<h6>Price: $ " + datas[i].price + "</h6>" +
-                        "<input type='text' name='quantity' class='form-control qty' value='1' />" +
-                        "<input type='hidden' name='id' class='form-control id' value='"+datas[i].id+"' />" +
-                        "<input type='hidden' name='name' class='p_name' value='" + datas[i].pro_name + "' />" +
-                        "<input type='hidden' name='price' class='price' value='" + datas[i].price + "' />" +
-                        "<input type='submit' name='addpos' style='margin-top:5px;float: right;' class='btn btn-primary btn_add' value='Add' />" +
-                      "</div>" +
+                  "<div class='products'>" +
+                  "<center>" +
+                  "<h6 class='text-info'>" + datas[i].pro_name + "</h6>" +
+                  "<img src='../image/" + datas[i].image + "'style='width: 50%; '>" +
+                  "</center>" +
+                  "<h6>Price: $ " + datas[i].price + "</h6>" +
+                  "<input type='text' name='quantity' class='form-control qty' value='1' />" +
+                  "<input type='hidden' name='id' class='form-control id' value='" + datas[i].id + "' />" +
+                  "<input type='hidden' name='name' class='p_name' value='" + datas[i].pro_name + "' />" +
+                  "<input type='hidden' name='price' class='price' value='" + datas[i].price + "' />" +
+                  "<input type='submit' name='addpos' style='margin-top:5px;float: right;' class='btn btn-primary btn_add' value='Add' />" +
+                  "</div>" +
                   "</div>");
               }
             }
@@ -295,69 +273,93 @@ include '../connection.php';
           }
         });
       });
-      $('#product-container').delegate('.btn_add','click', function() {
+      $('#product-container').delegate('.btn_add', 'click', function() {
         // alert("hello");
-            var product = $(this).closest('.products');
-            let qty = product.find('.qty').val();
-            let price = product.find('.price').val();
-            let name = product.find('.p_name').val();
-            let id=product.find('.id').val();
+        var product = $(this).closest('.products');
+        let qty = product.find('.qty').val();
+        let price = product.find('.price').val();
+        let name = product.find('.p_name').val();
+        let id = product.find('.id').val();
 
-          $.ajax({
-            url:'check_stock.php',
-            type:'GET',
-            data:{
-                id:id,
-                qty:qty
-            },
-            success:function(data){
-               if(data=='success'){
-                let table = $('#table');
-                let row = "<tr><td><input type='hidden' name='id[]'value='"+id+"'>" + name + "</td><td><input type='hidden' class='qty'name='qty[]'value='"+qty+"'>" + qty +
-                "</td><td><input type='hidden' name='price[]'value='"+price+"'>$ " + price + "</td><td><input class='total_price'type='hidden' name='total_price[]'value='"+(qty*price).toFixed(2)
-                +"'>$ " + (qty * price).toFixed(2) + "</td><td><a href='#delete'><i class='fas fa-trash delete' style='color: #f00000';></'i></a></td>";
-                table.append(row);
-            //  console.log( $('#table').find('tr').find('.total_price'));
-                let tr=$('#table').find('tr').find('.total_price');
-                let qty_element=$('#table').find('tr').find('.qty');
-                let total_qty=0;
-                qty_element.each(function (index,element){
-                    total_qty+=Number($(element).val());
-                });
-                let total=0;
-                tr.each(function (index,element){
-                    total+=Number($(element).val());
-                });
-                //console.log(total);
-                $('#subtotal').val(total.toFixed(2));
-                $('#total_qty').val(total_qty);
-                $('#grand_total').val(total.toFixed(2));
-               }else{
-                alert(data);
-               }
+        $.ajax({
+          url: 'check_stock.php',
+          type: 'GET',
+          data: {
+            id: id,
+            qty: qty
+          },
+          success: function(data) {
+            if (data == 'success') {
+              let table = $('#table');
+              let row = "<tr><td><input type='hidden' name='id[]'value='" + id + "'>" + name + "</td><td><input type='hidden' class='qty'name='qty[]'value='" + qty + "'>" + qty +
+                "</td><td><input type='hidden' name='price[]'value='" + price + "'>$ " + price + "</td><td><input class='total_price'type='hidden' name='total_price[]'value='" + (qty * price).toFixed(2) +
+                "'>$ " + (qty * price).toFixed(2) + "</td><td style='float:right;'><a href='#delete'><i class='fas fa-trash delete' style='color: #f00000';></'i></a></td>";
+              table.append(row);
+              //  console.log( $('#table').find('tr').find('.total_price'));
+              let tr = $('#table').find('tr').find('.total_price');
+              let qty_element = $('#table').find('tr').find('.qty');
+              let total_qty = 0;
+              qty_element.each(function(index, element) {
+                total_qty += Number($(element).val());
+              });
+              let total = 0;
+              tr.each(function(index, element) {
+                total += Number($(element).val());
+              });
+              //console.log(total);
+              $('#subtotal').val(total.toFixed(2));
+              $('#total_qty').val(total_qty);
+              $('#grand_total').val(total.toFixed(2));
+            } else {
+              alert(data);
             }
-          });
+          }
+        });
       });
-      $('#table').delegate('.delete','click',function(e){
-            e.preventDefault();
-            $(this).closest('tr').remove();
-            let tr=$('#table').find('tr').find('.total_price');
-          let qty_element=$('#table').find('tr').find('.qty');
-          let total_qty=0;
-          qty_element.each(function (index,element){
-            total_qty+=Number($(element).val());
-          });
-          let total=0;
-          tr.each(function (index,element){
-            total+=Number($(element).val());
-          });
-          //console.log(total);
-          $('#subtotal').val(total.toFixed(2));
-          $('#total_qty').val(total_qty);
-          $('#grand_total').val(total.toFixed(2));
+      $('#table').delegate('.delete', 'click', function(e) {
+        e.preventDefault();
+        $(this).closest('tr').remove();
+        let tr = $('#table').find('tr').find('.total_price');
+        let qty_element = $('#table').find('tr').find('.qty');
+        let total_qty = 0;
+        qty_element.each(function(index, element) {
+          total_qty += Number($(element).val());
+        });
+        let total = 0;
+        tr.each(function(index, element) {
+          total += Number($(element).val());
+        });
+        //console.log(total);
+        $('#subtotal').val(total.toFixed(2));
+        $('#total_qty').val(total_qty);
+        $('#grand_total').val(total.toFixed(2));
       });
     });
   </script>
 
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery-3.3.1.slim.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-3.3.1.min.js"></script>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".xp-menubar").on('click', function() {
+        $("#sidebar").toggleClass('active');
+        $("#content").toggleClass('active');
+      });
+
+      $('.xp-menubar,.body-overlay').on('click', function() {
+        $("#sidebar,.body-overlay").toggleClass('show-nav');
+      });
+
+    });
+  </script>
+
+
 </body>
+
 </html>

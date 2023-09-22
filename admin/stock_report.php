@@ -32,16 +32,23 @@ include '../include/header.php';
   <!-- =========== end form ============== -->
   <!-- ============ new form ============== -->
   <div class="row">
-    <div class="col-sm-5">
+  <div class="col-sm-6">
       <h2 class="ml-lg-2">STOCK REPORT</h2>
     </div>
-    <div class="col-sm-7">
+  </div>
+  <div class="row">
+    <!-- <div class="col-sm-2">
+      <h2 class="ml-lg-2">STOCK REPORT</h2>
+    </div> -->
+    <div class="col-sm-8">
       <form action="" method="POST">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-2">From Date:</div>
+          <div class="col-md-3">
             <input type="date" required name="fromdate"  class="form-control">
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2">To Date:</div>
+          <div class="col-md-3">
             <input type="date" required name="todate"  class="form-control">
           </div>
           <div class="col-md-4">

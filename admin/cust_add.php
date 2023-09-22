@@ -43,22 +43,22 @@ include '../include/header.php';
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="input">First Name</label>
-					<input type="text" class="form-control" name="firstname" placeholder="">
+					<input type="text" class="form-control" name="firstname" placeholder="" required>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="input">Last Name</label>
-					<input type="text" class="form-control" name="lastname" placeholder="">
+					<input type="text" class="form-control" name="lastname" placeholder="" required>
 				</div>
 			</div>
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="input">Phone</label>
-					<input type="text" class="form-control" name="phone" placeholder="">
+					<input type="text" class="form-control" name="phone" placeholder="" required>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="input">Address</label>
-					<input type="text" class="form-control" name="address" placeholder="">
+					<input type="text" class="form-control" name="address" placeholder="" required>
 				</div>
 			</div>
 
