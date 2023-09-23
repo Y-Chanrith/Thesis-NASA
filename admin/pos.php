@@ -108,7 +108,7 @@ include '../connection.php';
                 <i class="fas fa-plus"></i>
               </a>
               <!----add-modal start--------->
-              <?php include 'include/add_customer_modal.php'; ?>
+              <?php //include 'include/add_customer_modal.php'; ?>
               <!----edit-modal end--------->
 
             </div>
@@ -215,6 +215,44 @@ include '../connection.php';
     </div>
   </div>
 
+<!-- ===========modal=========== -->
+<div class="modal fade" tabindex="-1" id="addCustomerModal" role="dialog">
+    <div class="modal-dialog" role="document">
+    <form method="post" action="add_customer_modal.php" id="customer_form"class="myform form-group" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Customer</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" name="firstname" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="lastname" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" class="form-control" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" class="form-control" name="address" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
+          <button type="submit" class="btn btn-primary">Add Customer</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+
+<!-- ===========modal=========== -->
+
   <?php include "../include/footer_pos.php"; ?>
   <script src="plugin/jquery/jquery.js"></script>
   <script src="../js/javascript.js"></script>
@@ -235,6 +273,21 @@ include '../connection.php';
   </script>
   <script>
     $(document).ready(function() {
+      $('#customer_form').on('submit',function(e){
+        e.preventDefault();
+        const form = document.getElementById('customer_form');
+        let formData = new FormData(form);  
+        $.ajax({
+          url: 'add_customer_modal.php',
+          type: 'GET',
+          data: $('#customer_form').serialize(),
+          data: formData.serialize(),
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(data) {}
+        });
+      });
       $('.cat_id').click(function(e) {
         e.preventDefault();
         let cat_id = $(this).attr('data-cat');

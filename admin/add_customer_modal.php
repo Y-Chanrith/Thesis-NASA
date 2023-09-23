@@ -1,7 +1,8 @@
 <?php
 // session_start();
 // include("../check-login.php");
-// include '../../connection.php';
+include '../connection.php';
+var_dump($_GET);
 if (isset($_POST['firstname'])) {
   $firstname = htmlspecialchars($_POST['firstname']);
   $lastname = $_POST['lastname'];
@@ -12,15 +13,15 @@ if (isset($_POST['firstname'])) {
   $result = mysqli_query($con, $sql);
 
   if ($result) {
-    header("Location: customer.php");
+    header("Location: pos.php");
   } else {
     echo "Error!";
   }
 }
 ?>
-<form method="post" action="" class="myform" class="form-group">
-  <div class="modal fade" tabindex="-1" id="addCustomerModal" role="dialog">
+  <!-- <div class="modal fade" tabindex="-1" id="addCustomerModal" role="dialog">
     <div class="modal-dialog" role="document">
+    <form method="post" action="" class="myform" class="form-group">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Add New Customer</h5>
@@ -45,10 +46,10 @@ if (isset($_POST['firstname'])) {
           </div>
         </div>
         <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
-          <input type="submit" name="add" class="btn btn-primary" value="Add Customer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> 
+          <button type="submit" class="btn btn-primary">Add Customer</button>
         </div>
       </div>
+      </form>
     </div>
-  </div>
-</form>
+  </div> -->

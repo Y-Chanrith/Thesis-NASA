@@ -11,6 +11,7 @@ include '../connection.php';
 </head>
 
 <body>
+	
 	<?php
 		$sql_query = "SELECT * FROM customer 
 		join transaction on customer.cus_id=transaction.cust_id
