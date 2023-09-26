@@ -3,7 +3,7 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-$sql = 'SELECT * FROM product join category on product.category_id=category.category_id';
+$sql = 'SELECT * FROM product inner join category on product.category_id=category.category_id order by pro_name DESC';
 $result = mysqli_query($con, $sql);
 
 

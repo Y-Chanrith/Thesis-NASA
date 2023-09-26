@@ -7,6 +7,9 @@ include '../connection.php';
 
 <head>
 	<title>Invoice Template Design</title>
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script> -->
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
@@ -19,6 +22,11 @@ include '../connection.php';
 		$result = mysqli_query($con, $sql_query);
 		$rows = mysqli_fetch_assoc($result);
 	?>
+	
+	<div class="container">
+	<a href="#" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-print" style="color: white; font-size: small;"> Print</i></a>
+    <a href="sale.php" class="btn btn-danger btn-sm float-right"><i class="fas fa-chevron-circle-left" style="color: white; font-size: small;"> Back</i></a>
+	</div>
 	<div class="wrapper">
 		<div class="invoice_wrapper">
 			<div class="header">

@@ -6,86 +6,78 @@ include '../connection.php';
 $sql = 'SELECT * FROM product';
 $result = mysqli_query($con, $sql);
 
-
 include '../include/navigation.php';
-
 include '../include/header.php';
 ?>
-
 
 <!------main-content-start----------->
 
 <div class="container mt-5">
-  <!-- ============ Old form ================= -->
-  <!-- <form action="" method="post" class="">
-    <div class="mb-3">
-      <label class="form-label">From Date: </label>
-      <input type="date" class="form-control" name="fromdate">
-      <label class="form-label">To Date: </label>
-      <input type="date" class="form-control" name="todate">
-    </div>
-    <div class="flex">
-      <input class="btn btn-primary" type="submit" value="Submit">
-    </div>
-    <br>
-  </form> -->
-  <!-- =========== end form ============== -->
   <!-- ============ new form ============== -->
   <div class="row">
-  <div class="col-sm-6">
+    <div class="col-sm-12 mb-2">
       <h2 class="ml-lg-2">STOCK REPORT</h2>
     </div>
   </div>
   <div class="row">
-    <!-- <div class="col-sm-2">
-      <h2 class="ml-lg-2">STOCK REPORT</h2>
-    </div> -->
-    <div class="col-sm-8">
+    <div class="col-md-12 p-3" style="background-color: aliceblue;">
       <form action="" method="POST">
         <div class="row">
-          <div class="col-md-2">From Date:</div>
-          <div class="col-md-3">
-            <input type="date" required name="fromdate"  class="form-control">
+          <div class="col-sm-2" style="float: right;">
+            From Date:
           </div>
-          <div class="col-md-2">To Date:</div>
-          <div class="col-md-3">
-            <input type="date" required name="todate"  class="form-control">
+          <div class="col-sm-3 pl-0">
+            <input type="date" required name="fromdate" class="form-control">
           </div>
-          <div class="col-md-4">
-            <a href="stock_report.php" class="btn btn-success">Reset</a>
-            <input type="submit" class="btn btn-primary" value="Filter">
+          <div class="col-sm-2">
+            To Date:
+          </div>
+          <div class="col-sm-3 pl-0">
+            <input type="date" required name="todate" class="form-control">
+          </div>
+          <div class="col-md-2 ">
+            <input type="submit" class="btn btn-primary float-right ml-2" value="Filter">
+            <a href="stock_report.php" class="btn btn-success float-right">Reset</a>
           </div>
         </div>
       </form>
     </div>
   </div>
   <!-- ============ end new form ============ -->
-
   <hr>
   <table class="table table-bordered">
-    <tr style="background-color: #DAF5FF">
+    <!-- <tr style="background-color: #DAF5FF">
       <th scope="col">No</th>
       <th scope="col">Product Name</th>
       <th scope="col">In Stock</th>
       <th scope="col">Price Per Unit</th>
       <th scope="col">Total Price</th>
       <th scope="col">Date Post</th>
-    </tr>
+    </tr> -->
 
-    <?php if (isset($_POST['fromdate'])) {
-      $dateFrom = $_POST['fromdate'];
-      $dateTo = $_POST['todate'];
-    ?>
-      <!-- ========Print report================= -->
-      <div class="input-group mb-3">
-        <form method="post" action="print_stock_report.php" class="form-control" style="border:none;">
-          <input type="hidden" name="fromdate" value="<?php echo $dateFrom; ?>">
-          <input type="hidden" name="todate" value="<?php echo $dateTo; ?>">
-          <div class="input-group-append">
-            <input type="submit" value="Print Report" class="btn btn-outline-primary">
-          </div>
-        </form>
-      </div>
+  <?php if (isset($_POST['fromdate'])) {
+    $dateFrom = $_POST['fromdate'];
+    $dateTo = $_POST['todate'];
+  ?>
+    <!-- ========Print report================= -->
+    <div class="input-group mb-3">
+      <form method="post" action="print_stock_report.php" class="form-control" style="border:none;">
+        <input type="hidden" name="fromdate" value="<?php echo $dateFrom; ?>">
+        <input type="hidden" name="todate" value="<?php echo $dateTo; ?>">
+        <div class="input-group-append">
+          <input type="submit" value="Print Report" class="btn btn-outline-primary">
+        </div>
+      </form>
+    </div>
+    <!-- <table class="table table-bordered"> -->
+      <tr style="background-color: #DAF5FF">
+        <th scope="col">No</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">In Stock</th>
+        <th scope="col">Price Per Unit</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Date Post</th>
+      </tr>
       <!-- =================================== -->
       <?php
 
@@ -98,15 +90,11 @@ include '../include/header.php';
       $result = mysqli_query($con, $report);
 
       while ($row = mysqli_fetch_assoc($result)) {
-
-
         if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
           $sum_qty += $row['stock'];
-
           $total = $row['stock'] * $row['price'];
           $sum_total_price += $total;
       ?>
-
           <tr>
             <td><?php echo $no; ?></td>
             <td><?php echo $row['pro_name']; ?></td>
@@ -115,7 +103,6 @@ include '../include/header.php';
             <td><?php echo number_format($total, 2); ?> ដុល្លា</td>
             <td width=20% style="font-size: 15px;"><?php echo $row['created_at']; ?></td>
           </tr>
-
       <?php
           $no++;
         } //close filter
@@ -133,12 +120,12 @@ include '../include/header.php';
       </tr>
 
     <?php
-    } // close if isset form post
+  } // close if isset form post
     ?>
-
-  </table>
-
+    </table>
 </div>
+<?php include '../include/footer.php'; ?>
+
 <!-------complete html----------->
 
 <!-- Optional JavaScript -->
@@ -147,7 +134,6 @@ include '../include/header.php';
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
-
 
 <script type="text/javascript">
   $(document).ready(function() {

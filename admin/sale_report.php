@@ -9,121 +9,119 @@ include '../include/header.php';
 <!------main-content-start----------->
 
 <div class="container mt-5">
- 
   <!-- ============ old form =============== -->
-  <!-- <form action="" method="post" class="">
-  <div class="mb-3">
-    <label class="form-label">From Date: </label>
-    <input type="date" class="form-control" name="fromdate">
-    <label class="form-label">To Date: </label>
-    <input type="date" class="form-control" name="todate">
-  </div>
-  <div class="flex">
-  <input class="btn btn-primary" type="submit" value="Submit">
-  </div>
- <br>
-  </form> -->
   <!-- =========== end old form ============ -->
   <div class="row">
-    <div class="col-sm-5">
+    <div class="col-sm-12 mb-3">
       <h2 class="ml-lg-2">SALE REPORT</h2>
     </div>
-    <div class="col-sm-7">
-      <form action="" method="POST">
+  </div>
+    <div class="col-sm-12 p-3" style="background-color: #E3E3E3;">
+    <form action="" method="POST">
         <div class="row">
-          <div class="col-md-4">
-            <input type="date" required name="fromdate"  class="form-control">
+          <div class="col-sm-2" style="float: right;">
+            From Date:
           </div>
-          <div class="col-md-4">
-            <input type="date" required name="todate"  class="form-control">
+          <div class="col-sm-3 pl-0">
+            <input type="date" required name="from_date" class="form-control">
           </div>
-          <div class="col-md-4">
-            <a href="sale_report.php" class="btn btn-success">Reset</a>
-            <button type="submit" class="btn btn-primary">Filter</button>
+          <div class="col-sm-2">
+            To Date:
+          </div>
+          <div class="col-sm-3 pl-0">
+            <input type="date" required name="to_date" class="form-control">
+          </div>
+          <div class="col-md-2 ">
+            <input type="submit" class="btn btn-primary float-right ml-2" value="Filter">
+            <a href="sale_report.php" class="btn btn-success float-right">Reset</a>
           </div>
         </div>
       </form>
     </div>
   </div>
-  <hr>
+  <div style="margin: 0px 70px; ">
+    <hr>
   <table class="table table-bordered">
-                    <tr style="background-color: #DAF5FF">
+                   <!--  <tr style="background-color: #DAF5FF">
                         <th scope="col">No</th>
                         <th scope="col">ឈ្មោះមុខទំនិញ</th>
                         <th scope="col">ចំនួនទំនិញ</th>
                         <th scope="col">តម្លៃក្នុងមួយឯកតា</th>
                         <th scope="col">តម្លៃសរុប</th>
                         <th scope="col">ថ្ងៃលក់ទំនិញ</th>
-                    </tr>
+                    </tr> -->
 
-                    <?php if (isset($_POST['fromdate'])) {
-                        $dateFrom = $_POST['fromdate'];
-                        $dateTo = $_POST['todate'];
-                    ?>
-                        <!-- ========Print report================= -->
-                        <div class="input-group mb-3">
-                            <form method="post" action="print_sale_report.php" class="form-control" style="border:none;">
-                              <div class="input-group-append">
-                                  <input type="submit" value="Print Report" class="btn btn-outline-primary rounded">
-                              </div>
-                                <div class="input-group" style="float: left;">
-                                  <h6​>របាយការណ៍ការលក់</h6>
-                                  <h6> ពីកាលបរិច្ឆេទ: <?php echo $dateFrom; ?></h6>
-                                  <h6> ដល់កាលបរិច្ឆេទ: <?php echo $dateTo; ?></h6>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- =================================== -->
-                        <?php
+  <?php if (isset($_POST['from_date'])) {
+    $dateFrom = $_POST['from_date'];
+    $dateTo = $_POST['to_date'];
+  ?>
+    <!-- ========Print report================= -->
+    <div class="input-group mb-3">
+      <form method="post" action="print_sale_report.php" class="form-control" style="border:none;">
+        <div class="input-group-append">
+          <input type="submit" value="Print Report" class="btn btn-outline-primary rounded">
+        </div>
+      </form>
+    </div>
+    <!-- <table class="table table-bordered"> -->
+      <tr style="background-color: #DAF5FF">
+        <th scope="col">No</th>
+        <th scope="col">ឈ្មោះមុខទំនិញ</th>
+        <th scope="col">ចំនួនទំនិញ</th>
+        <th scope="col">តម្លៃក្នុងមួយឯកតា</th>
+        <th scope="col">តម្លៃសរុប</th>
+        <th scope="col">ថ្ងៃលក់ទំនិញ</th>
+      </tr>
+      <!-- =================================== -->
+      <?php
 
-                        $no = 1;
-                        $sum_qty = 0;
-                        $sum_total_price = 0;
+      $no = 1;
+      $sum_qty = 0;
+      $sum_total_price = 0;
 
-                        
-
-                        $report = "SELECT * FROM transaction_detail 
+      $report = "SELECT * FROM transaction_detail 
                         join product on transaction_detail.product_id=product.id
                         join transaction on transaction_detail.transac_id=transaction.id";
-                        $result = mysqli_query($con, $report);
+      $result = mysqli_query($con, $report);
 
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
-                                $sum_qty += $row['qty'];
-                                $grandTotal = ($row['qty'] * $row['price']);
-                                $sum_total_price += $grandTotal;
-                        ?>
-                                <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $row['pro_name']; ?></td>
-                                    <td><?php echo $row['qty']; ?> Pcs</td>
-                                    <td><?php echo number_format($row['price'],2); ?> ដុល្លា</td>
-                                    <td width=20%><?php echo number_format($grandTotal,2); ?> ដុល្លា</td>
-                                    <td width=15% style="font-size: 15px;"><?php echo $row['created_at']; ?></td>
-                                </tr>
+      while ($row = mysqli_fetch_assoc($result)) {
+        if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
+          $sum_qty += $row['qty'];
+          $grandTotal = ($row['qty'] * $row['price']);
+          $sum_total_price += $grandTotal;
+      ?>
+          <tr>
+            <td><?php echo $no; ?></td>
+            <td><?php echo $row['pro_name']; ?></td>
+            <td><?php echo $row['qty']; ?> Pcs</td>
+            <td><?php echo number_format($row['price'], 2); ?> ដុល្លា</td>
+            <td width=20%><?php echo number_format($grandTotal, 2); ?> ដុល្លា</td>
+            <td width=15% style="font-size: 15px;"><?php echo $row['created_at']; ?></td>
+          </tr>
 
-                        <?php
-                                $no++;
-                            } //close filter
+      <?php
+          $no++;
+        } //close filter
 
-                        } //close while loop database
-                        //echo $sum;
-                        ?>
-                        <tr>
-                            <td colspan="5" align="right">Total Quantity</td>
-                            <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " ទំនិញ"; ?></td>
-                        </tr>
-                        <tr>
-                            <td colspan="5" align="right">Total Amount</td>
-                            <td style="font-size: 16px;" class="text text-primary"><?= number_format($sum_total_price,2) . " ដុល្លា"; ?></td>
-                        </tr>
+      } //close while loop database
+      //echo $sum;
+      ?>
+      <tr>
+        <td colspan="5" align="right">Total Quantity</td>
+        <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " ទំនិញ"; ?></td>
+      </tr>
+      <tr>
+        <td colspan="5" align="right">Total Amount</td>
+        <td style="font-size: 16px;" class="text text-primary"><?= number_format($sum_total_price, 2) . " ដុល្លា"; ?></td>
+      </tr>
 
-                    <?php
-                    } // close if isset form post
-                    ?>
+    <?php
+  } // close if isset form post
+    ?>
 
-                </table>
-  
+    </table>
+    </div>
+    <?php include '../include/footer.php'; ?>
 </div>
 <!-------complete html----------->
 
