@@ -3,7 +3,7 @@ session_start();
 include("../check-login.php");
 include("../connection.php");
 $dateFrom = $_POST['from_date'];
-$dateTo = $_POST['to_date'];
+$dateTo = $_POST['to_date'];     
 ?>
 <!DOCTYPE html>
 <html>
@@ -71,7 +71,7 @@ $dateTo = $_POST['to_date'];
                     $sum_qty += $row['qty'];
                     $grandTotal = ($row['qty'] * $row['price']);
                     $sum_total_price += $grandTotal;
-                    var_dump($row);
+                    // var_dump($row);
             ?>
 
                     <tr>

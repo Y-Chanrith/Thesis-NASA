@@ -60,6 +60,8 @@ include '../include/header.php';
       <form method="post" action="print_sale_report.php" class="form-control" style="border:none;">
         <div class="input-group-append">
           <input type="submit" value="Print Report" class="btn btn-outline-primary rounded">
+          <input type="hidden" name="from_date"value="<?=$dateFrom ?>">
+          <input type="hidden" name="to_date"value="<?=$dateTo ?>">
         </div>
       </form>
     </div>
