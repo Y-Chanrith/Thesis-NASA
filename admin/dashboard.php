@@ -165,7 +165,7 @@ include '../include/header.php';
 	<!-- Employee ROW -->
 	<div class="form-row">
 		<!-- Recent Students -->
-		<div class="container-fluid pt-2 px-4">
+		<!-- <div class="container-fluid pt-2 px-4">
 			<div class="bg-white text-center rounded p-4 shadow">
 				<div class="d-flex align-items-center justify-content-between mb-4">
 					<h6 class="mb-0">Recent Salse</h6>
@@ -234,7 +234,7 @@ include '../include/header.php';
 					</table>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Recent Student End -->
 
 	</div>

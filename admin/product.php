@@ -39,7 +39,7 @@ include '../include/header.php';
                 <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
-                                <div class="input-group" style="left: 333%;">
+                                <div class="input-group" style="left: 331%;">
                                     <input type="search" class="form-control" name="search" placeholder="Search">
                                     <div class="input-group-append">
                                         <button class="btn" type="submit" id="button-addon2">Go

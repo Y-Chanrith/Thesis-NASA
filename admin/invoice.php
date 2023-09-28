@@ -11,6 +11,7 @@ include '../connection.php';
   <title>Sale Invoice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="sicy="no-referrer" />
   <style type="text/css">
     body {
       background: #eee;
@@ -147,12 +148,9 @@ include '../connection.php';
 
   <div class="col-md-12">
     <div class="row">
-      <div class="col-md-6" style="float: right;">
-        <a href="#" onclick="reprint()" id="print" class="btn btn-primary btn-sm float-right ml-2"> Print</a>
-        <a href="sale.php" id="back" class="btn btn-danger btn-sm float-right"> Back</a>
-      </div>
-      <div class="col-md-6">
-        
+      <div class="col-md-12">
+        <a style="margin-left: 1010px;" href="sale.php" id="back" class="btn btn-danger btn-md float-right"> Back</a>
+        <a href="#" onclick="reprint()" id="print" class="btn btn-primary btn-md float-right ml-2"><i class="fas fa-print"></i> Print</a>
       </div>
     </div>
     <div class="row">
@@ -197,7 +195,8 @@ include '../connection.php';
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th width=40%>Description</th>
+                <!-- <th width=5%>No</th> -->
+                <th width=35%>Description</th>
                 <th width=20%>Price</th>
                 <th width=10%>Quantity</th>
                 <th width=30%>Amount</th>
@@ -205,6 +204,7 @@ include '../connection.php';
             </thead>
             <tbody>
               <?php
+              $no =1;
               $total_qty = 0;
               $total_amount = 0;
               $sql = "select * from transaction_detail
@@ -214,14 +214,18 @@ include '../connection.php';
               while ($row = mysqli_fetch_assoc($result)) :
                 $total_qty += $row['qty'];
                 $total_amount += ($row['qty'] * $row['price']);
+                
               ?>
                 <tr>
+                  <!-- <td class="col-md-9"><?= $no; ?></td> -->
                   <td class="col-md-9"><?= $row['pro_name'] ?></td>
                   <td class="col-md-3">$ <?= number_format($row['price'], 2) ?></td>
                   <td class="col-md-3"><?= $row['qty'] ?></td>
                   <td class="col-md-3">$ <?= number_format($row['qty'] * $row['price'], 2) ?></td>
                 </tr>
-              <?php endwhile; ?>
+              <?php 
+            $no++;
+            endwhile; ?>
               <tr>
                 <td class="text-right" colspan="3">
                   <p>
