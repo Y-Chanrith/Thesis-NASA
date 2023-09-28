@@ -65,7 +65,7 @@ include '../include/header.php';
                 <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
-                                <div class="input-group" style="left: 338%;">
+                                <div class="input-group" style="left: 331%;">
                                     <input type="search" class="form-control" name="search" placeholder="Search">
                                     <div class="input-group-append">
                                         <button class="btn" type="submit" id="button-addon2">Go
@@ -143,7 +143,7 @@ include '../include/header.php';
                         $counter=count($result->fetch_all());
 
 
-                        $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        $sql = "SELECT * FROM transaction ORDER BY created_at DESC limit 10 offset ".$offset;
                         //  inner join transaction_detail  on transaction.id=transaction_detail.transac_id
                         //  inner join customer on transaction.cust_id=customer.cus_id ;
                         $result = mysqli_query($con, $sql);

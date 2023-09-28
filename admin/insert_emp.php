@@ -25,13 +25,13 @@
 include '../include/navigation.php';
 include '../include/header.php';
 
-$sql = "SELECT DISTINCT role, id FROM role";
+$sql = "SELECT DISTINCT role, role_id FROM role";
 $result = mysqli_query($con, $sql) or die ("Bad SQL: $sql");
 
 $opt = "<select class='form-control' name='role'>
         <option disabled selected>Select Category</option>";
   while ($row = mysqli_fetch_assoc($result)) {
-    $opt .= "<option value='".$row['id']."'>".$row['role']."</option>";
+    $opt .= "<option value='".$row['role_id']."'>".$row['role']."</option>";
   }
 
 $opt .= "</select>";

@@ -314,6 +314,7 @@ include '../connection.php';
                   "<img src='../image/" + datas[i].image + "'style='width: 50%; '>" +
                   "</center>" +
                   "<h6>Price: $ " + datas[i].price + "</h6>" +
+                  "<p>In Stock: " + datas[i].stock + "</p>" +
                   "<input type='text' name='quantity' class='form-control qty' value='1' />" +
                   "<input type='hidden' name='id' class='form-control id' value='" + datas[i].id + "' />" +
                   "<input type='hidden' name='name' class='p_name' value='" + datas[i].pro_name + "' />" +

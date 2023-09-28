@@ -35,7 +35,7 @@ include '../include/header.php';
                 <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
-                                <div class="input-group" style="left: 333%;">
+                                <div class="input-group" style="left: 331%;">
                                     <input type="search" class="form-control" name="search" placeholder="Search">
                                     <div class="input-group-append">
                                         <button class="btn" type="submit" id="button-addon2">Go
@@ -99,7 +99,7 @@ include '../include/header.php';
                     </tbody>
                 </table>
 
-                <div class="clearfix">
+                <!-- <div class="clearfix">
                     <div class="hint-text">showing <b>5</b> out of <b>10</b></div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Previous</a></li>
@@ -110,7 +110,7 @@ include '../include/header.php';
                         <li class="page-item "><a href="#" class="page-link">5</a></li>
                         <li class="page-item "><a href="#" class="page-link">Next</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
