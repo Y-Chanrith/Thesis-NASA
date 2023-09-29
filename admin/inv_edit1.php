@@ -17,12 +17,12 @@
 	session_start();
 	include("../check-login.php");
 	include("../connection.php");
-	$zz = $_POST['idd'];
-	$a = $_POST['qty'];
-	$dis = $_POST['dis'];
+	$idd = $_POST['idd'];
+	$qty = $_POST['qty'];
+	$date = $_POST['date'];
 
-	$query = 'UPDATE product set STOCK="' . $a . '", Date_in_stock="' . $dis . '" WHERE
-					ID ="' . $zz . '"';
+	$query = 'UPDATE product set STOCK="' . $qty . '", updated_at="' . $date . '" WHERE
+					ID ="' . $idd . '"';
 	$result = mysqli_query($con, $query) or die(mysqli_error($con));
 	if ($result) {
 	?>

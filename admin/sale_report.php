@@ -59,7 +59,8 @@ include '../include/header.php';
     <div class="input-group mb-3">
       <form method="post" action="print_sale_report.php" class="form-control" style="border:none;">
         <div class="input-group-append">
-          <input type="submit" value="Print Report" class="btn btn-outline-primary rounded">
+          <!-- <input type="submit" value="Print Report" class="btn btn-outline-primary rounded"> -->
+          <button type="submit" class="btn btn-secondary rounded"><i class="fas fa-print"></i> Print Report</button>
           <input type="hidden" name="from_date"value="<?=$dateFrom ?>">
           <input type="hidden" name="to_date"value="<?=$dateTo ?>">
         </div>

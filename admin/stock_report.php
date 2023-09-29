@@ -65,12 +65,14 @@ include '../include/header.php';
         <input type="hidden" name="fromdate" value="<?php echo $dateFrom; ?>">
         <input type="hidden" name="todate" value="<?php echo $dateTo; ?>">
         <div class="input-group-append">
-          <input type="submit" value="Print Report" class="btn btn-outline-primary">
+          <!-- <input type="submit" value="Print Report" class="btn btn-outline-primary"> -->
+          <button type="submit" class="btn btn-secondary rounded"><i class="fas fa-print"></i> Print Report</button>
+
         </div>
       </form>
     </div>
     <!-- <table class="table table-bordered"> -->
-      <tr style="background-color: #DAF5FF">
+      <tr style="background-color: lightgray">
         <th scope="col">No</th>
         <th scope="col">Product Name</th>
         <th scope="col">In Stock</th>

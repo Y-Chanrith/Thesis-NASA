@@ -3,7 +3,7 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-$sql = 'SELECT s.*, l.province FROM supplier s join location l on s.location_id=l.location_id';
+$sql = 'SELECT s.*, l.province FROM supplier as s join location as l on s.location_id=l.location_id order by s.supplier_id DESC';
 $result = mysqli_query($con, $sql);
 
 include '../include/navigation.php';

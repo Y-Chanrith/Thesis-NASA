@@ -27,7 +27,7 @@ include '../include/header.php';
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>#</th>
+                <th>ProID</th>
                 <th>Name</th>
                 <th>Quantity</th>
                 <th>Category</th>
@@ -39,7 +39,7 @@ include '../include/header.php';
             <tbody>
 
               <?php
-              $query = 'SELECT ID, image, PRO_NAME, STOCK, c.C_NAME, s.COMPANY_NAME, DATE_IN_STOCK FROM product p join category c on p.CATEGORY_ID=c.CATEGORY_ID JOIN supplier s ON p.SUPPLIER_ID=s.SUPPLIER_ID where id =' . $_GET['id'];
+              $query = 'SELECT ID, image, PRO_NAME, STOCK, c.C_NAME, s.COMPANY_NAME, p.created_at FROM product p join category c on p.CATEGORY_ID=c.CATEGORY_ID JOIN supplier s ON p.SUPPLIER_ID=s.SUPPLIER_ID where id =' . $_GET['id'];
               $result = mysqli_query($con, $query) or die(mysqli_error($con));
               while ($row = mysqli_fetch_assoc($result)) {
                 echo '<tr>';
@@ -48,9 +48,9 @@ include '../include/header.php';
                 echo '<td>' . $row['STOCK'] . '</td>';
                 echo '<td>' . $row['C_NAME'] . '</td>';
                 echo '<td>' . $row['COMPANY_NAME'] . '</td>';
-                echo '<td>' . $row['DATE_IN_STOCK'] . '</td>';
+                echo '<td>' . $row['created_at'] . '</td>';
                 echo '<td align="right">
-                      <a type="button" class="btn btn-warning bg-gradient-warning" href="update_inv.php?action=edit & id='.$row['ID']. '"><i class="fas fa-fw fa-edit"></i> Edit</a>
+                      <a type="button" class="btn btn-sm btn-warning bg-gradient-warning" href="update_inv.php?action=edit & id='.$row['ID']. '"><i class="fas fa-fw fa-edit"></i> Edit</a>
                           </div></td>';
                 echo '</tr> ';
               }

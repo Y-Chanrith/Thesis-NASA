@@ -3,8 +3,8 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-$sql = 'SELECT id, pro_name, stock, c_name, date_in_stock FROM product p
-join category c on p.CATEGORY_ID=c.CATEGORY_ID GROUP BY id';
+$sql = 'SELECT id, pro_name, stock, c_name, created_at FROM product p
+join category c on p.CATEGORY_ID=c.CATEGORY_ID GROUP BY id ORDER BY pro_name ASC';
 $result = mysqli_query($con, $sql);
 
 
@@ -83,7 +83,7 @@ include '../include/header.php';
                                 <td><?php echo $row['pro_name']; ?></td>
                                 <td><?php echo $row['stock']; ?></td>
                                 <td><?php echo $row['c_name']; ?></td>
-                                <td><?php echo $row['date_in_stock']; ?></td>
+                                <td><?php echo $row['created_at']; ?></td>
                                 <th>
                                     <a href="inv_searchfrm.php?id=<?php echo $row['id']; ?>" class="edit" style="color: #005eff;">
                                         <!-- <i class="material-icons" data-toggle="tooltip">&#xE254;</i> -->
