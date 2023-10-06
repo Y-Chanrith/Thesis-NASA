@@ -42,8 +42,7 @@ include '../include/header.php';
                                 <div class="input-group" style="left: 331%;">
                                     <input type="search" class="form-control" name="search" placeholder="Search">
                                     <div class="input-group-append">
-                                        <button class="btn" type="submit" id="button-addon2">Go
-                                        </button>
+                                        <button class="btn" type="submit" id="button-addon2">Go</button>
                                     </div>
                                 </div>
                             </form>
@@ -73,13 +72,11 @@ include '../include/header.php';
                                 $sql = "SELECT * FROM product join category on product.category_id=category.category_id ";
                                 $searchkey = "";
                             }
-
                             $result = mysqli_query($con, $sql);
                             if(!$result){
                             die("Error Get Data");
                             }
                             // =================== end of search code ===================
-
                             ?>
                         <?php
                         

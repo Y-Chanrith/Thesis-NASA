@@ -29,7 +29,7 @@ include '../include/header.php';
                         </div>
 
                         <!-- ============ filter ================ -->
-                        <!-- <div class="col-sm-7">
+                        <div class="col-sm-7">
                             <form action="" method="GET">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -55,7 +55,7 @@ include '../include/header.php';
                                     </div>
                                 </div>
                             </form>
-                        </div> -->
+                        </div>
                         <!-- ============ end filter ================= -->
                     </div>
                 </div>
@@ -74,6 +74,12 @@ include '../include/header.php';
                                 </div>
                             </form>
                         </div>
+                        <!-- <div>
+                        <form method="post" action="">
+                        <input type="text" name="search" placeholder="Search for a product">
+                        <input type="submit" value="Search">
+                    </form>
+                        </div> -->
                     </div>
                     <thead>
                         <tr>
@@ -92,21 +98,31 @@ include '../include/header.php';
                         <!-- ============ search php code ============== -->
                         <?php
 
-                            if(isset($_POST['search'])){
-                                $searchkey = $_POST['search'];
-                                $sql = "SELECT * FROM transaction WHERE firstname LIKE '%$searchkey%'";
-                            }else{
-                                $sql = "SELECT * FROM customer";
-                                $searchkey = "";
-                            }
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                $search = $_POST["search"];
 
-                            $result = mysqli_query($con, $sql);
-                            if(!$result){
-                            die("Error Get Data");
+                                // Perform the search query
+                                $sql = "SELECT * FROM customer inner join transaction on customer.cus_id=transaction.cust_id WHERE firstname LIKE '%$search%'";
+                                $result = mysqli_query($con, $sql); // $connection is your database connection
+
+                                // Check for errors
+                                if (!$result) {
+                                    die("Query failed: " . mysqli_error($con));
+                                }
+
+                                // Display the search results
+                                // while ($row = mysqli_fetch_assoc($result)) {
+                                //     echo "Product Name: " . $row["firstname"] . "<br>";
+                                //     echo "Product Description: " . $row["lastname"] . "<br>";
+                                //     // Add more fields as needed
+                                // }
+
+                                // // Close the database connection
+                                // mysqli_close($con);
                             }
                             // =================== end of search code ===================
+                        ?>
 
-                            ?>
                         <?php
                         $page=!isset($_GET['page'])||$_GET['page'] ==1 ? 1:$_GET['page'];
 
@@ -122,18 +138,19 @@ include '../include/header.php';
                         // if(isset($_GET['date']) && $_GET['date'] != '' && isset($_GET['payment']) && $_GET['payment'] != '' ){
                         //     $date = $_GET['date'];
                         //     $payment = $_GET['payment'];
-                        //     $sql = "SELECT * FROM transaction WHERE created_at='$date' AND payment_method='$payment' ORDER BY id limit 10 offset ".$offset;
+                        //     $sql = "SELECT * FROM transaction WHERE created_at='$date' AND payment_method='$payment' ";
                         //     $result = mysqli_query($con, $sql);
                         //     $counter=count($result->fetch_all());
+                        //     // var_dump($counter); 
 
-                        //     $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        //     $sql = "SELECT * FROM transaction ";
                         //     $result = mysqli_query($con, $sql);
                         // }else{
                         //     $sql = "SELECT * FROM transaction ";
                         //     $result = mysqli_query($con, $sql);
                         //     $counter=count($result->fetch_all());
 
-                        //     $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        //     $sql = "SELECT * FROM transaction";
                         //     $result = mysqli_query($con, $sql);
                         // }
                         // end filter sale ===========
@@ -143,12 +160,11 @@ include '../include/header.php';
                         $counter=count($result->fetch_all());
 
 
-                        $sql = "SELECT * FROM transaction ORDER BY created_at DESC limit 10 offset ".$offset;
+                        $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
                         //  inner join transaction_detail  on transaction.id=transaction_detail.transac_id
                         //  inner join customer on transaction.cust_id=customer.cus_id ;
                         $result = mysqli_query($con, $sql);
                         $count = 1;
-                        // var_dump($result->fetch_all());
                         while ($row = mysqli_fetch_assoc($result)) {
                             $customer_sql="select firstname,lastname,cus_id from customer where cus_id=".$row['cust_id'];
                             $cus_re = mysqli_query($con, $customer_sql);
@@ -157,7 +173,7 @@ include '../include/header.php';
                         ?>
                             <tr>
                                 <td><?php echo$count; ?></td>
-                                <td><?php echo $row['payment_method']; ?></td>
+                                <td style="color: darkblue;"><?php echo $row['payment_method']; ?></td>
                                 <td><?php echo $customer['firstname']; ?> <?php echo $customer['lastname']; ?></td>
                                 <td><?php echo $row['quantity']; ?> Pcs</td>
                                 <td>$ <?php echo $row['grandtotal']; ?></td>
@@ -167,9 +183,7 @@ include '../include/header.php';
                                     <!-- <a href="#" class="edit"><i class="material-icons" data-toggle="tooltip">&#xE254;</i></a>
                                     <a href="#" class="delete"><i class="material-icons">&#xE872;</i></a> -->
                                     <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
-                                    <!-- <a href="sale_invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a> -->
                                     <a href="invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a>
-                                    <!-- <a href="sale_invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a> -->
                                 </th>
                             </tr>
 

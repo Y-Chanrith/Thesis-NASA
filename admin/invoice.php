@@ -37,8 +37,8 @@ include '../connection.php';
 
     .receipt-main {
       background: #ffffff none repeat scroll 0 0;
-      border-bottom: 12px solid #333333;
-      border-top: 12px solid #9f181c;
+      /* border-bottom: 12px solid #333333; */
+      /* border-top: 12px solid #9f181c; */
       margin-top: 50px;
       margin-bottom: 50px;
       padding: 40px 30px !important;
@@ -61,7 +61,7 @@ include '../connection.php';
     }
 
     .receipt-main::after {
-      background: #414143 none repeat scroll 0 0;
+      /* background: #414143 none repeat scroll 0 0; */
       content: "";
       height: 5px;
       left: 0;
@@ -71,7 +71,7 @@ include '../connection.php';
     }
 
     .receipt-main thead {
-      background: #414143 none repeat scroll 0 0;
+      background: #a2a2a3 none repeat scroll 0 0;
     }
 
     .receipt-main thead th {

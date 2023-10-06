@@ -10,7 +10,13 @@ if ($_GET['customer_id']) {
   $customer = $cus_re->fetch_assoc();
 }
 
-
+if ($_GET['transac_id']) {
+  $query = 'SELECT * from transaction_detail 
+  inner join product on transaction_detail.product_id=product.id
+  where transaction_detail.transac_id=' . $_GET['transac_id'];
+  $result = mysqli_query($con, $query);
+  $transac = $result->fetch_assoc();
+}
 ?>
 
 <?php
@@ -52,8 +58,7 @@ include '../include/header.php';
           <div class="col-sm-4 py-1"></div>
           <div class="col-sm-4 py-1">
             <h6>
-              Transaction #<?php //$row['transac_id'] 
-                            ?>
+              Transaction #<?= $transac['transac_id'] ?>
             </h6>
             <h6 class="font-weight-bold">
               Encoder: <?php  ?>
