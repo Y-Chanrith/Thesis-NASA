@@ -68,7 +68,7 @@
                       <span class="material-icons">person_outline</span>
                       Profile
                     </a></li>
-                  <li><a href="#">
+                  <li><a href="../admin/setting.php?action=edit&id='<?php echo $user; ?>'">
                       <span class="material-icons">settings</span>
                       Settings
                     </a></li>

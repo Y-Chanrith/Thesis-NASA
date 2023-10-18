@@ -5,16 +5,12 @@ include '../connection.php';
 
 // $sql = "SELECT * FROM transaction";
 
-
 // var_dump(mysqli_fetch_assoc($result));
-
 
 include '../include/navigation.php';
 
 include '../include/header.php';
 ?>
-
-
 <!------main-content-start----------->
 
 <div class="main-content">
@@ -74,12 +70,7 @@ include '../include/header.php';
                                 </div>
                             </form>
                         </div>
-                        <!-- <div>
-                        <form method="post" action="">
-                        <input type="text" name="search" placeholder="Search for a product">
-                        <input type="submit" value="Search">
-                    </form>
-                        </div> -->
+                        </div>
                     </div>
                     <thead>
                         <tr>
@@ -88,7 +79,7 @@ include '../include/header.php';
                             <th>Customer</th>
                             <th># of Items</th>
                             <th>Total amount</th>
-                            <th>Date Post</th>
+                            <th>Date of Sell</th>
                             <!-- <th>Due</th> -->
                             <th>Actions</th>
                         </tr>
@@ -135,32 +126,19 @@ include '../include/header.php';
                         }
 
                         // filter sale list
-                        // if(isset($_GET['date']) && $_GET['date'] != '' && isset($_GET['payment']) && $_GET['payment'] != '' ){
-                        //     $date = $_GET['date'];
-                        //     $payment = $_GET['payment'];
-                        //     $sql = "SELECT * FROM transaction WHERE created_at='$date' AND payment_method='$payment' ";
-                        //     $result = mysqli_query($con, $sql);
-                        //     $counter=count($result->fetch_all());
-                        //     // var_dump($counter); 
-
-                        //     $sql = "SELECT * FROM transaction ";
-                        //     $result = mysqli_query($con, $sql);
-                        // }else{
-                        //     $sql = "SELECT * FROM transaction ";
-                        //     $result = mysqli_query($con, $sql);
-                        //     $counter=count($result->fetch_all());
-
-                        //     $sql = "SELECT * FROM transaction";
-                        //     $result = mysqli_query($con, $sql);
-                        // }
                         // end filter sale ===========
                          // old code ===============
                         $sql = "SELECT * FROM transaction ";
                         $result = mysqli_query($con, $sql);
                         $counter=count($result->fetch_all());
 
+                        if(isset($_GET['date']) && isset($_GET['payment'])){
+                        $sql = "SELECT * FROM transaction where created_at='". $_GET['date']."' and payment_method='".$_GET['payment']."' limit 10 offset ".$offset;
 
-                        $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        }else{
+
+                            $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        }
                         //  inner join transaction_detail  on transaction.id=transaction_detail.transac_id
                         //  inner join customer on transaction.cust_id=customer.cus_id ;
                         $result = mysqli_query($con, $sql);
@@ -204,9 +182,7 @@ include '../include/header.php';
                         ?>
                         <li class="page-item <?php  echo (!isset($_GET['page'] ))|| $_GET['page']==$i+1?'active': '';?> " ><a href="sale.php?page=<?=$i+1 ?>" class="page-link"><?=$i+1 ?></a></li>
                         <!-- <li class="page-item "><a href="sale.php?page=2" class="page-link">2</a></li>
-                        <li class="page-item "><a href="sale.php?page=3" class="page-link">3</a></li>
-                        <li class="page-item "><a href="sale.php?page=4" class="page-link">4</a></li>
-                        <li class="page-item "><a href="sale.php?page=5" class="page-link">5</a></li> -->
+                        <li class="page-item "><a href="sale.php?page=3" class="page-link">3</a></li> -->
                         <!-- <li class="page-item "><a href="sale.php?page=5" class="page-link">Next</a></li> -->
                         <?php endfor; ?>
                     </ul>

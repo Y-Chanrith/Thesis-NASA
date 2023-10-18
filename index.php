@@ -103,7 +103,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
         </script>
         <!-- =========== -->
       <?php
-        header("refresh:2,url=admin/dashboard.php");
+        header("refresh:2,url=admin/pos.php");
       } 
       else if (empty($username)) {
         header("Location: index.php?error=Username is required");
