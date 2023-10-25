@@ -58,16 +58,23 @@ include '../include/header.php';
     <!-- ========Print report================= -->
     <div class="input-group mb-3">
       <form method="post" action="print_sale_report.php" class="form-control" style="border:none;">
-        <div class="input-group-append">
+        <div class="input-group-append" style="float: right;">
           <!-- <input type="submit" value="Print Report" class="btn btn-outline-primary rounded"> -->
-          <button type="submit" class="btn btn-secondary rounded"><i class="fas fa-print"></i> Print Report</button>
+          <button type="submit" class="btn btn-secondary rounded"><i class="fas fa-print"></i> Print</button>
+          <div  class="btn btn-primary rounded ml-2" id="pdf"><i class="fas fa-file-pdf"></i> PDF</div>
           <input type="hidden" name="from_date"value="<?=$dateFrom ?>">
           <input type="hidden" name="to_date"value="<?=$dateTo ?>">
         </div>
       </form>
     </div>
-    <!-- <table class="table table-bordered"> -->
-      <tr style="background-color: #DAF5FF">
+    <table class="table table-striped" id="print">
+        <tr style="background-color: #FFFFFF; font-family: Khmer OS Siemreap;" >
+          <th colspan="3">
+          ទិន្នន័យចាប់ពី: <?php echo $dateFrom; ?> ដល់: <?php echo $dateTo; ?>
+          </th>
+          <th colspan="3">របាយការណ៍ការលក់ផលិតផល</th>
+        </tr>
+      <tr style="background-color: #CEE2FF; font-family: Khmer OS Siemreap;">
         <th scope="col">No</th>
         <th scope="col">ឈ្មោះមុខទំនិញ</th>
         <th scope="col">ចំនួនទំនិញ</th>
@@ -111,18 +118,17 @@ include '../include/header.php';
       ?>
       <tr>
         <td colspan="5" align="right">Total Quantity</td>
-        <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " ទំនិញ"; ?></td>
+        <td style="font-size: 16px; font-family: Khmer OS Siemreap;" class="text text-info"><?php echo $sum_qty . " ទំនិញ"; ?></td>
       </tr>
       <tr>
         <td colspan="5" align="right">Total Amount</td>
-        <td style="font-size: 16px;" class="text text-primary"><?= number_format($sum_total_price, 2) . " ដុល្លា"; ?></td>
+        <td style="font-size: 16px; font-family: Khmer OS Siemreap;" class="text text-primary"><?= number_format($sum_total_price, 2) . " ដុល្លា"; ?></td>
       </tr>
-
     <?php
   } // close if isset form post
     ?>
-
     </table>
+    <hr>
     </div>
     <?php include '../include/footer.php'; ?>
 </div>
@@ -134,6 +140,32 @@ include '../include/header.php';
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
+
+<script src="../htmlToPdf/html2pdf.js"></script>
+<script src="../htmlToPdf/html2pdf.min.js"></script>
+<script src="../htmlToPdf/html2pdf.bundle.min.js"></script>
+<script>
+	$('#pdf').click(function(){
+		var element = document.getElementById('print');
+    var opt = {
+      margin:       [15, 10, 10, 10],
+      filename:     'sale report.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { 
+        dpi: 192,
+        scale: 4,
+        letterRendering: true,
+        useCORS: true,
+      },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+    };
+
+		html2pdf(element, opt);
+    
+
+	});
+	
+</script>
 
 
 <script type="text/javascript">

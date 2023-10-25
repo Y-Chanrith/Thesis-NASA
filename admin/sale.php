@@ -45,9 +45,9 @@ include '../include/header.php';
                                             >Credit Card</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
-                                        <a href="sale.php" class="btn btn-success">Reset</a>
+                                    <div class="col-md-4 mt-1">
                                         <button type="submit" class="btn btn-primary">Filter</button>
+                                        <a href="sale.php" class="btn btn-secondary">Reset</a>
                                     </div>
                                 </div>
                             </form>
