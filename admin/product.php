@@ -12,7 +12,6 @@ include '../include/navigation.php';
 include '../include/header.php';
 ?>
 
-
 <!------main-content-start----------->
 
 <div class="main-content">
@@ -35,7 +34,7 @@ include '../include/header.php';
                 </div>
                 <div>
                 </div>
-                <table class="table table-striped table-hover mt-2 ">
+                <table class="table table-striped table-hover mt-2 " style="overflow: auto; height:300px;">
                 <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
@@ -50,7 +49,7 @@ include '../include/header.php';
                     </div>
                     <thead>
                         <tr>
-                            <th width="10%">Image</th>
+                            <th width="10%">Image</th>  
                             <th width="25%">Product Name</th>
                             <th>Brand</th>
                             <th>Category</th>

@@ -184,7 +184,7 @@ include '../connection.php';
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
               <div class="receipt-left">
-                <h4>INVOICE #<?= $rows['id'] ?></h4>
+                <h4>INVOICE #<?=  $_GET['id']; ?></h4>
                 <h5>Date: <?= $rows['created_at'] ?></h5>
               </div>
             </div>

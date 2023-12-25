@@ -32,7 +32,7 @@ include '../include/header.php';
                 </div>
                 <table class="table table-striped table-hover mt-2 ">
                 <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
-                        <div class="xp-searchbar">
+                        <!-- <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
                                 <div class="input-group" style="left: 333%;">
                                     <input type="search" class="form-control" name="search" placeholder="Search">
@@ -42,7 +42,7 @@ include '../include/header.php';
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                     <thead>
                         <tr>

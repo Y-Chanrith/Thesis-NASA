@@ -58,7 +58,7 @@ include '../include/header.php';
                 <div>
                 </div>
                 <table class="table table-striped table-hover mt-2 ">
-                <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
+                <!-- <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
                                 <div class="input-group" style="left: 331%;">
@@ -70,7 +70,8 @@ include '../include/header.php';
                                 </div>
                             </form>
                         </div>
-                        </div>
+                        </div> -->
+                        <br>
                     </div>
                     <thead>
                         <tr>
@@ -158,8 +159,6 @@ include '../include/header.php';
                                 <td><?php echo $row['created_at']; ?></td>
                                 <!-- <td><?php //echo $row['due_amount']; ?></td> -->
                                 <th>
-                                    <!-- <a href="#" class="edit"><i class="material-icons" data-toggle="tooltip">&#xE254;</i></a>
-                                    <a href="#" class="delete"><i class="material-icons">&#xE872;</i></a> -->
                                     <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
                                     <a href="invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a>
                                 </th>

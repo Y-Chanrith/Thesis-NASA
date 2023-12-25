@@ -17,7 +17,7 @@ include '../include/header.php';
             while($row = mysqli_fetch_assoc($result)) : 
         ?>
 		<!-- Recent Students -->
-		<div class="container-sm mt-0">
+		<div class="container-sm mt-0" >
 			<div class="bg-white rounded pl-5 pr-5 pt-4 pb-4 shadow m-3">
 				<div class="d-flex align-items-center justify-content-between mb-4">
 					<h4 class="mb-0">Shop Information</h4>
@@ -59,11 +59,10 @@ include '../include/header.php';
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-12 mb-0">
-                    <h6 class="mb-2 text-center text-bold">NASA SHOP in Google Map</h6>
-                        <iframe class="shadow" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3881.878316881852!2d103.8524893747417!3d13.357841586994109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311017e85da9aad7%3A0xbf5d02c5c25ae603!2sNasa%20Computer%20Technology!5e0!3m2!1sen!2skh!4v1698173211085!5m2!1sen!2skh"
-                         width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                    <div class="form-group col-md-12 mb-0 ">
+                    <h6 class="mb-3 text-center text-bold ">NASA SHOP in Google Map</h6>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3881.878316881851!2d103.85248937464405!3d13.357841586994148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311017e85da9aad7%3A0xbf5d02c5c25ae603!2sNasa%20Computer%20Technology!5e0!3m2!1sen!2skh!4v1699017531502!5m2!1sen!2skh"
+                         width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 			</div>

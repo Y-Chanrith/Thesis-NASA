@@ -42,43 +42,43 @@
 				</h3>
 			</div>
 			<ul class="list-unstyled component m-0">
-				<li class="active">
+				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/dashboard.php"?"active":""?>">
 					<a href="../admin/dashboard.php"><i class="fa-solid fa-gauge" style="font-size: 20px; "></i>
 						Dashboard </a>
 				</li>
 
-				<li class="">
+				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/product.php"?"active":""?>">
 					<a href="../admin/product.php">
 						<i class="fa-solid fa-shop" style="font-size: 20px; "></i>Products
 					</a>
 				</li>
 
 
-				<li class="dropdown">
+				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/customer.php"?"active":""?> dropdown">
 					<a href="../admin/customer.php">
 						<i class="fas fa-user-check" style="font-size: 20px; "></i>Customers
 					</a>
 				</li>
 
-				<li class="dropdown">
+				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/inventory.php"?"active":""?> dropdown">
 					<a href="../admin/inventory.php">
 						<i class="fa-solid fa-warehouse" style="font-size: 20px; "></i>Inventory
 					</a>
 				</li>
 
-				<li class="dropdown">
+				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/supplier.php"?"active":""?> dropdown">
 					<a href="../admin/supplier.php">
 						<i class="fa-solid fa-truck-field" style="font-size: 20px; "></i>Supplier
 					</a>
 				</li>
 
-				<li class="dropdown">
+				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/employee.php"?"active":""?> dropdown">
 					<a href="../admin/employee.php">
 						<i class="fa-solid fa-users-gear" style="font-size: 20px;"></i>Employee
 					</a>
 				</li>
 
-				<li class="">
+				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/sale.php"?"active":""?>">
 					<a href="../admin/sale.php" class="">
 						<i class="fa-solid fa-cart-arrow-down" style="font-size: 20px;"></i>Sales
 					</a>
@@ -96,10 +96,10 @@
 						<i class="fa-solid fa-chart-line" style="font-size: 20px;"></i>Reports
 					</a>
 					<ul class="collapse list-unstyled menu pl-4" id="homeSubmenu1">
-						<li><a href="../admin/stock_report.php">
+						<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/stock_report.php"?"active":""?>"><a href="../admin/stock_report.php">
 								<i class="far fa-file-alt" style="color: #ffffff; font-size: 20px;"></i>Stock Report</a>
 						</li>
-						<li><a href="../admin/sale_report.php">
+						<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/sale_report.php"?"active":""?>"><a href="../admin/sale_report.php">
 								<i class="fas fa-file-alt" style="color: #ffffff; font-size: 20px;"></i>Sale Report</a>
 								<!-- <i class="fas fa-file-alt"></i> -->
 						</li>
@@ -112,11 +112,11 @@
 						<i class="fa-solid fa-gear" style="font-size: 20px;"></i>Setting
 					</a>
 					<ul class="collapse list-unstyled menu pl-4" id="homeSubmenu2">
-						<li><a href="../admin/user.php">
+						<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/user.php"?"active":""?>"><a href="../admin/user.php">
 						<i class="fas fa-users" style="color: #ffffff; font-size: 20px;"></i>USER ACCOUNT</a></li>
-						<li><a href="../admin/backup_data.php">
+						<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/backup_data.php"?"active":""?>"><a href="../admin/backup_data.php">
 								<i class="fas fa-hdd" style="color: #ffffff; font-size: 20px;"></i>BACKUP DATA</a></li>
-						<li><a href="../admin/store_data_shop.php">
+						<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/store_data_shop.php"?"active":""?>"><a href="../admin/store_data_shop.php">
 								<i class="fas fa-info-circle" style="color: #ffffff; font-size: 20px;"></i>NASA INFOMATION</a></li>
 								<!-- <i class="fas fa-info-circle" style="color: #ffffff;"></i> -->
 						<!-- <li><a href="#">layout 3</a></li> -->
