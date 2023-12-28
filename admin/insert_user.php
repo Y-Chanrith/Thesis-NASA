@@ -2,19 +2,17 @@
 	session_start();
 	include("../check-login.php");
 	include("../connection.php");
-	if(isset($_POST['emp_name'])){
-		$emp_name = htmlspecialchars($_POST['emp_name']);
-		$gender = $_POST['gender'];
-		$phone = $_POST['phone'];
-		$address = $_POST['address'];
-		$role = $_POST["role"];
+	if(isset($_POST['user_name'])){
+		$user_name = htmlspecialchars($_POST['user_name']);
+		$password = $_POST['password'];
+        $role = $_POST['role'];
 
-		$sql = "INSERT INTO employee(employee_name,gender,phone,address,role) 
-		VALUES('$emp_name', '$gender', '$phone', '$address','$role')";
+		$sql = "INSERT INTO users(username,password,role_id) 
+		VALUES('$user_name', '$password', '$role    ')";
 		$result = mysqli_query($con, $sql);
 		
 		if($result){
-			header("Location: employee.php");
+			header("Location: user.php");
 		}else{
 			echo "Error!";
 		}
@@ -29,7 +27,7 @@ $sql = "SELECT DISTINCT role, role_id FROM role";
 $result = mysqli_query($con, $sql) or die ("Bad SQL: $sql");
 
 $opt = "<select class='form-control' name='role'>
-        <option disabled selected>Select Category</option>";
+        <option disabled selected>Select role</option>";
   while ($row = mysqli_fetch_assoc($result)) {
     $opt .= "<option value='".$row['role_id']."'>".$row['role']."</option>";
   }
@@ -51,39 +49,32 @@ $opt .= "</select>";
 					<h6><span class="text-danger">NASA</span> <span class="text-primary">Computer</span></h6>
 				</div>
 			</div>
-			<h3 class="text-center text-primary mb-3">Insert Employee Page</h3>
+			<h3 class="text-center text-primary mb-3">Insert User</h3>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="input">Employee Name</label>
-					<input type="text" class="form-control" name="emp_name" placeholder="">
+					<label for="input">Username</label>
+					<input type="text" class="form-control" name="user_name" placeholder="">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="input">Gender</label>
-					<input type="text" class="form-control" name="gender" placeholder="">
+					<label for="input">password</label>
+					<input type="text" class="form-control" name="password" placeholder="">
 				</div>
 			</div>
 
 			<div class="form-row">
-				<div class="form-group col-md-4">
-					<label for="input">Phone</label>
-					<input type="text" class="form-control" name="phone" placeholder="">
-				</div>
-				<div class="form-group col-md-4">
-					<label for="input">Address</label>
-					<input type="text" class="form-control" name="address" placeholder="">
-				</div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-6">
 					<label for="input">Role</label>
-					<input type="text" class="form-control" name="role" placeholder="">
+					<!-- <input type="text" class="form-control" name="role" placeholder=""> -->
+                    <?php echo $opt; ?>
 				</div>
 			</div>
 
 			<div class="form-row">
 				<div class="form-group col-md-12 text-right mt-3">
 				<button  class="btn btn-danger btn-md">
-					<a href="employee.php" style="color: #F8F8F6;">Cancel</a>
+					<a href="user.php" style="color: #F8F8F6;">Cancel</a>
 				</button>
-					<button type="submit" class="btn btn-primary btn-md">Add Employee</button>
+					<button type="submit" class="btn btn-primary btn-md">Add User</button>
 				</div>
 
 		</div>

@@ -24,9 +24,11 @@
                 <div class="p-3">
                     <a href="dashboard.php" class="p-3" style="text-decoration: none; font-family: Arial Black;">
                         <img src="../image/Nsc.jpg" style="width:40px; border-radius:50%; border: 1px solid #BABABA ;" />
-                        <span class="p-3"><span class="text text-danger">NASA</span> COMPUTER</span>
+                        <span class="p-3">
+                            <span class="text text-danger">NASA</span> COMPUTER
+                        </span>
                     </a>
-                    <a href="dashboard.php" class="btn btn-md btn-outline-primary" >BACK DASHBOARD</a>
+                    <a href="sale.php" class="btn btn-md btn-outline-primary" >BACK SALE</a>
 
                     <a class="nav-link" href="#" data-toggle="dropdown" style="float: right;">
                         <span class="pr-2 text text-secondary"><?php echo $_SESSION['username']; ?> | </span>

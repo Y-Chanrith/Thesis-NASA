@@ -10,7 +10,13 @@ if ($_GET['customer_id']) {
   $customer = $cus_re->fetch_assoc();
 }
 
-
+if ($_GET['transac_id']) {
+  $query = 'SELECT * from transaction_detail 
+  inner join product on transaction_detail.product_id=product.id
+  where transaction_detail.transac_id=' . $_GET['transac_id'];
+  $result = mysqli_query($con, $query);
+  $transac = $result->fetch_assoc();
+}
 ?>
 
 <?php
@@ -52,8 +58,7 @@ include '../include/header.php';
           <div class="col-sm-4 py-1"></div>
           <div class="col-sm-4 py-1">
             <h6>
-              Transaction #<?php //$row['transac_id'] 
-                            ?>
+              Transaction #<?= $transac['transac_id'] ?>
             </h6>
             <h6 class="font-weight-bold">
               Encoder: <?php  ?>
@@ -90,8 +95,8 @@ include '../include/header.php';
               <tr>
                 <td><?= $row['pro_name'] ?></td>
                 <td><?= $row['qty'] ?> Pcs</td>
-                <td>$ <?= $row['price'] ?></td>
-                <td>$ <?= $row['price'] * $row['qty'] ?></td>
+                <td>$ <?= number_format($row['price'],2) ?></td>
+                <td>$ <?= number_format($row['price'] * $row['qty'],2) ?></td>
               </tr>
             <?php endwhile; ?>
           </tbody>
@@ -107,7 +112,7 @@ include '../include/header.php';
             <table width="100%">
               <tr>
                 <td class="font-weight-bold">Subtotal</td>
-                <td class="text-right">$ <?= $subtotal  ?></td>
+                <td class="text-right">$ <?= number_format($subtotal,2)  ?></td>
               </tr>
               <tr>
                 <td class="font-weight-bold">Qty</td>
@@ -115,7 +120,7 @@ include '../include/header.php';
               </tr>
               <tr>
                 <td class="font-weight-bold">Total</td>
-                <td class="text-right"><b>$ <?= $subtotal  ?></b></td>
+                <td class="text-right"><b>$ <?= number_format($subtotal,2)  ?></b></td>
               </tr>
             </table>
             <hr>
@@ -124,7 +129,7 @@ include '../include/header.php';
         </div>
       </div>
     </div>
-    <a href="sale_invoice.php?id=<?=$_GET['transac_id']?>&customer_id=<?=$_GET['customer_id'] ?>" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-print" style="color: white; font-size: small;"> Print</i></a>
+    <a href="invoice.php?id=<?=$_GET['transac_id']?>&customer_id=<?=$_GET['customer_id'] ?>" class="btn btn-primary btn-sm float-right ml-2"><i class="fas fa-print" style="color: white; font-size: small;"> Print</i></a>
     <a href="sale.php" class="btn btn-danger btn-sm float-right"><i class="fas fa-chevron-circle-left" style="color: white; font-size: small;"> Back</i></a>
     <br><br>
 

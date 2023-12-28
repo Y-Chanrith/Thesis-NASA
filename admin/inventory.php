@@ -3,8 +3,8 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-$sql = 'SELECT id, pro_name, stock, c_name, date_in_stock FROM product p
-join category c on p.CATEGORY_ID=c.CATEGORY_ID GROUP BY id';
+$sql = 'SELECT id, pro_name, stock, c_name, created_at FROM product p
+join category c on p.CATEGORY_ID=c.CATEGORY_ID GROUP BY id ORDER BY pro_name ASC';
 $result = mysqli_query($con, $sql);
 
 
@@ -34,7 +34,7 @@ include '../include/header.php';
                     <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
-                                <div class="input-group" style="left: 333%;">
+                                <div class="input-group" style="left: 331%;">
                                     <input type="search" class="form-control" placeholder="Search" name="search">
                                     <div class="input-group-append">
                                         <button class="btn" type="submit" id="button-addon2">Go
@@ -83,9 +83,9 @@ include '../include/header.php';
                                 <td><?php echo $row['pro_name']; ?></td>
                                 <td><?php echo $row['stock']; ?></td>
                                 <td><?php echo $row['c_name']; ?></td>
-                                <td><?php echo $row['date_in_stock']; ?></td>
+                                <td><?php echo $row['created_at']; ?></td>
                                 <th>
-                                    <a href="inv_searchfrm.php?id=<?php echo $row['id']; ?>" class="edit btn btn-sm btn-outline-success" style="color: #005eff;">
+                                    <a href="inv_searchfrm.php?id=<?php echo $row['id']; ?>" class="edit" style="color: #005eff;">
                                         <!-- <i class="material-icons" data-toggle="tooltip">&#xE254;</i> -->
                                         <i class="fas fa-eye" style="color: #005eff;"></i>
                                     </a>
@@ -100,7 +100,7 @@ include '../include/header.php';
                     </tbody>
                 </table>
 
-                <div class="clearfix">
+                <!-- <div class="clearfix">
                     <div class="hint-text">showing <b>5</b> out of <b>10</b></div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Previous</a></li>
@@ -111,7 +111,7 @@ include '../include/header.php';
                         <li class="page-item "><a href="#" class="page-link">5</a></li>
                         <li class="page-item "><a href="#" class="page-link">Next</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

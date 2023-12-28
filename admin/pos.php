@@ -202,8 +202,9 @@ include '../connection.php';
             </div>
 
             <div class="form-group row mb-2">
-              <div class="input-group mb-2">
-                <input type="submit" class="btn btn-primary btn-md float-right rounded p-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
+              <div class=" mb-3 mt-3">
+                <a href="pos.php" style="float: center;" class="btn btn-danger btn-md rounded p-2 text-white">Reset</a>
+                <input type="submit" class="btn btn-primary btn-md rounded p-2 mr-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
               </div>
             </div>
             <?php // endif;
@@ -297,6 +298,21 @@ include '../connection.php';
           }
         });
       });
+      // $('#customer_form').on('submit',function(e){
+      //   e.preventDefault();
+      //   const form = document.getElementById('customer_form');
+      //   let formData = new FormData(form);
+      //   $.ajax({
+      //     url: 'add_customer_modal.php',
+      //     type: 'GET',
+      //     data: $('#customer_form').serialize(),
+      //     data: formData.serialize(),
+      //     cache: false,
+      //     contentType: false,
+      //     processData: false,
+      //     success: function(data) {}
+      //   });
+      // });
       $('.cat_id').click(function(e) {
         e.preventDefault();
         let cat_id = $(this).attr('data-cat');
@@ -322,6 +338,7 @@ include '../connection.php';
                   "<img src='../image/" + datas[i].image + "'style='width: 50%; '>" +
                   "</center>" +
                   "<h6>Price: $ " + datas[i].price + "</h6>" +
+                  "<p>In Stock: " + datas[i].stock + "</p>" +
                   "<input type='text' name='quantity' class='form-control qty' value='1' />" +
                   "<input type='hidden' name='id' class='form-control id' value='" + datas[i].id + "' />" +
                   "<input type='hidden' name='name' class='p_name' value='" + datas[i].pro_name + "' />" +

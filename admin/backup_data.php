@@ -17,17 +17,28 @@ include '../include/header.php';
             <div class="jumbotron bg bg-white">
                 <div class="form-row">
                     <div class="form-row">
-                        <div class="form-group col-md-6 text-right mt-3">
-                            <!-- <h3>Click button below to backup your database</h3> -->
-                            <span><button class="btn btn-primary btn-md p-5" onclick="alert('Your Database backuped!')" >
-                                <a href="backup.php" style="color: #F8F8F6;">Backup Data</a>
-                            </button></span>
+                    <div class="form-group col-md-9 mt-3">
+                            <span>
+                                Please click the button to Backup data: 
+                            </span>
                         </div>
-                        <div class="form-group col-md-6 text-right mt-3">
-                            <button class="btn btn-info btn-md p-5" >
-                                <a href="restore_database.php" style="color: #F8F8F6;">Restore Data</a>
+                        <div class="form-group col-md-3 mt-3">
+                            <span>
+                                <button class="btn btn-primary btn-sm p-2" onclick="alert('Your Database backuped!')" >
+                                    <a href="backup.php" style="color: #F8F8F6;"><i class="fas fa-download"></i> BACKUP DATA</a>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- <div class="form-group col-md-8 mt-3">
+                            <span>
+                                Please click the button to Restore data: 
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4 mt-3">
+                            <button class="btn btn-info btn-sm p-2" >
+                                <a href="restore_database.php" style="color: #F8F8F6;"><i class="fas fa-upload"></i> RESTORE DATA</a>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
         </form>
 </div>

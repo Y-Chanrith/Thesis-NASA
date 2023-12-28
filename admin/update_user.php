@@ -6,9 +6,21 @@ include("../connection.php");
 
 include '../include/navigation.php';
 include '../include/header.php';
-$edit_id = $_GET['cus_id'];
 
-$query = "SELECT * FROM customer WHERE cus_id = '$edit_id' ";
+$sql = "SELECT DISTINCT role, role_id FROM role";
+$result = mysqli_query($con, $sql) or die ("Bad SQL: $sql");
+
+$opt = "<select class='form-control' name='role'>
+        <option disabled selected>Select role</option>";
+  while ($row = mysqli_fetch_assoc($result)) {
+    $opt .= "<option value='".$row['role_id']."'>".$row['role']."</option>";
+  }
+
+$opt .= "</select>";
+
+$edit_id = $_GET['id'];
+
+$query = "SELECT * FROM users join role on users.role_id=role.role_id WHERE id = '$edit_id' ";
 $result = mysqli_query($con, $query) or die(mysqli_error($con));
 while ($row = mysqli_fetch_assoc($result)) {
 ?>
@@ -26,35 +38,32 @@ while ($row = mysqli_fetch_assoc($result)) {
 					<h6><span class="text-danger">NASA</span> <span class="text-primary">Computer</span></h6>
 				</div>
 			</div>
-			<h3 class="text-center text-primary mb-3">Update Customer </h3>
+			<h3 class="text-center text-primary mb-3">Update Users</h3>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="input">First Name</label>
-					<input type="text" class="form-control" name="firstname" placeholder="" value="<?php echo $row['firstname']; ?>">
+					<label for="input">Username</label>
+					<input type="text" class="form-control" name="user_name" placeholder="" value="<?php echo $row['username']; ?>">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="input">Last Name</label>
-					<input type="text" class="form-control" name="lastname" placeholder="" value="<?php echo $row['lastname']; ?>">
+					<label for="input">Password</label>
+					<input type="text" class="form-control" name="password" placeholder="" value="<?php echo $row['password']; ?>">
 				</div>
 			</div>
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="input">Phone</label>
-					<input type="text" class="form-control" name="phone" placeholder="" value="<?php echo $row['phone']; ?>">
-				</div>
-				<div class="form-group col-md-6">
-					<label for="input">Address</label>
-					<input type="text" class="form-control" name="address" placeholder="" value="<?php echo $row['address']; ?>">
+					<label for="input">Role</label>
+					<!-- <input type="text" class="form-control" name="phone" placeholder="" value="<?php echo $row['phone']; ?>"> -->
+                    <?php echo $opt; ?>
 				</div>
 			</div>
 
 			<div class="form-row">
 				<div class="form-group col-md-12 text-right mt-3">
 				<button  class="btn btn-danger btn-md">
-					<a href="customer.php" style="color: #F8F8F6;">Cancel</a>
+					<a href="user.php" style="color: #F8F8F6;">Cancel</a>
 				</button>
-					<button type="submit" class="btn btn-primary btn-md">Update Customer</button>
+					<button type="submit" class="btn btn-primary btn-md">Update User</button>
 				</div>
 
 		</div>
@@ -100,17 +109,15 @@ while ($row = mysqli_fetch_assoc($result)) {
 	</html>
 
 	<?php
-	if (isset($_POST["firstname"])) {
-		$fname = $_POST["firstname"];
-		$lname = $_POST["lastname"];
-		$phone = $_POST["phone"];
-		$address = $_POST["address"];
+	if (isset($_POST["user_name"])) {
+		$user_name = $_POST["user_name"];
+		$password = $_POST["password"];
+		$role = $_POST["role"];
 
-
-		$update = "UPDATE customer SET firstname='$fname',lastname='$lname',phone='$phone',address='$address' WHERE cus_id = $edit_id";
+		$update = "UPDATE users SET username='$user_name',password='$password',role_id='$role' WHERE id = $edit_id";
 		$execute = mysqli_query($con, $update);
 		if ($execute) {
-			header("Location: customer.php");
+			header("Location: user.php");
 		} else {
 			echo 'Update failed!!!';
 		}

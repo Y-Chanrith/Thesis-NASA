@@ -5,16 +5,12 @@ include '../connection.php';
 
 // $sql = "SELECT * FROM transaction";
 
-
 // var_dump(mysqli_fetch_assoc($result));
-
 
 include '../include/navigation.php';
 
 include '../include/header.php';
 ?>
-
-
 <!------main-content-start----------->
 
 <div class="main-content">
@@ -27,7 +23,9 @@ include '../include/header.php';
                         <div class="col-sm-5">
                             <h2 class="ml-lg-2">Sales List</h2>
                         </div>
-                        <!-- <div class="col-sm-7">
+
+                        <!-- ============ filter ================ -->
+                        <div class="col-sm-7">
                             <form action="" method="GET">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -47,22 +45,23 @@ include '../include/header.php';
                                             >Credit Card</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
-                                        <a href="sale.php" class="btn btn-success">Reset</a>
+                                    <div class="col-md-4 mt-1">
                                         <button type="submit" class="btn btn-primary">Filter</button>
+                                        <a href="sale.php" class="btn btn-secondary">Reset</a>
                                     </div>
                                 </div>
                             </form>
-                        </div> -->
+                        </div>
+                        <!-- ============ end filter ================= -->
                     </div>
                 </div>
                 <div>
                 </div>
                 <table class="table table-striped table-hover mt-2 ">
-                <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
+                <!-- <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
-                                <div class="input-group" style="left: 338%;">
+                                <div class="input-group" style="left: 331%;">
                                     <input type="search" class="form-control" name="search" placeholder="Search">
                                     <div class="input-group-append">
                                         <button class="btn" type="submit" id="button-addon2">Go
@@ -71,6 +70,8 @@ include '../include/header.php';
                                 </div>
                             </form>
                         </div>
+                        </div> -->
+                        <br>
                     </div>
                     <thead>
                         <tr>
@@ -79,7 +80,7 @@ include '../include/header.php';
                             <th>Customer</th>
                             <th># of Items</th>
                             <th>Total amount</th>
-                            <th>Date Post</th>
+                            <th>Date of Sell</th>
                             <!-- <th>Due</th> -->
                             <th>Actions</th>
                         </tr>
@@ -89,21 +90,31 @@ include '../include/header.php';
                         <!-- ============ search php code ============== -->
                         <?php
 
-                            if(isset($_POST['search'])){
-                                $searchkey = $_POST['search'];
-                                $sql = "SELECT * FROM customer WHERE firstname LIKE '%$searchkey%'";
-                            }else{
-                                $sql = "SELECT * FROM customer";
-                                $searchkey = "";
-                            }
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                $search = $_POST["search"];
 
-                            $result = mysqli_query($con, $sql);
-                            if(!$result){
-                            die("Error Get Data");
+                                // Perform the search query
+                                $sql = "SELECT * FROM customer inner join transaction on customer.cus_id=transaction.cust_id WHERE firstname LIKE '%$search%'";
+                                $result = mysqli_query($con, $sql); // $connection is your database connection
+
+                                // Check for errors
+                                if (!$result) {
+                                    die("Query failed: " . mysqli_error($con));
+                                }
+
+                                // Display the search results
+                                // while ($row = mysqli_fetch_assoc($result)) {
+                                //     echo "Product Name: " . $row["firstname"] . "<br>";
+                                //     echo "Product Description: " . $row["lastname"] . "<br>";
+                                //     // Add more fields as needed
+                                // }
+
+                                // // Close the database connection
+                                // mysqli_close($con);
                             }
                             // =================== end of search code ===================
+                        ?>
 
-                            ?>
                         <?php
                         $page=!isset($_GET['page'])||$_GET['page'] ==1 ? 1:$_GET['page'];
 
@@ -116,36 +127,23 @@ include '../include/header.php';
                         }
 
                         // filter sale list
-                        // if(isset($_GET['date']) && $_GET['date'] != '' && isset($_GET['payment']) && $_GET['payment'] != '' ){
-                        //     $date = $_GET['date'];
-                        //     $payment = $_GET['payment'];
-                        //     $sql = "SELECT * FROM transaction WHERE created_at='$date' AND payment_method='$payment' ORDER BY id limit 10 offset ".$offset;
-                        //     $result = mysqli_query($con, $sql);
-                        //     $counter=count($result->fetch_all());
-
-                        //     $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
-                        //     $result = mysqli_query($con, $sql);
-                        // }else{
-                        //     $sql = "SELECT * FROM transaction ";
-                        //     $result = mysqli_query($con, $sql);
-                        //     $counter=count($result->fetch_all());
-
-                        //     $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
-                        //     $result = mysqli_query($con, $sql);
-                        // }
                         // end filter sale ===========
                          // old code ===============
                         $sql = "SELECT * FROM transaction ";
                         $result = mysqli_query($con, $sql);
                         $counter=count($result->fetch_all());
 
+                        if(isset($_GET['date']) && isset($_GET['payment'])){
+                        $sql = "SELECT * FROM transaction where created_at='". $_GET['date']."' and payment_method='".$_GET['payment']."' limit 10 offset ".$offset;
 
-                        $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        }else{
+
+                            $sql = "SELECT * FROM transaction limit 10 offset ".$offset;
+                        }
                         //  inner join transaction_detail  on transaction.id=transaction_detail.transac_id
                         //  inner join customer on transaction.cust_id=customer.cus_id ;
                         $result = mysqli_query($con, $sql);
                         $count = 1;
-                        // var_dump($result->fetch_all());
                         while ($row = mysqli_fetch_assoc($result)) {
                             $customer_sql="select firstname,lastname,cus_id from customer where cus_id=".$row['cust_id'];
                             $cus_re = mysqli_query($con, $customer_sql);
@@ -154,17 +152,15 @@ include '../include/header.php';
                         ?>
                             <tr>
                                 <td><?php echo$count; ?></td>
-                                <td><?php echo $row['payment_method']; ?></td>
+                                <td style="color: darkblue;"><?php echo $row['payment_method']; ?></td>
                                 <td><?php echo $customer['firstname']; ?> <?php echo $customer['lastname']; ?></td>
                                 <td><?php echo $row['quantity']; ?> Pcs</td>
                                 <td>$ <?php echo $row['grandtotal']; ?></td>
                                 <td><?php echo $row['created_at']; ?></td>
                                 <!-- <td><?php //echo $row['due_amount']; ?></td> -->
                                 <th>
-                                    <!-- <a href="#" class="edit"><i class="material-icons" data-toggle="tooltip">&#xE254;</i></a>
-                                    <a href="#" class="delete"><i class="material-icons">&#xE872;</i></a> -->
                                     <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
-                                    <a href="sale_invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a>
+                                    <a href="invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a>
                                 </th>
                             </tr>
 
@@ -185,9 +181,7 @@ include '../include/header.php';
                         ?>
                         <li class="page-item <?php  echo (!isset($_GET['page'] ))|| $_GET['page']==$i+1?'active': '';?> " ><a href="sale.php?page=<?=$i+1 ?>" class="page-link"><?=$i+1 ?></a></li>
                         <!-- <li class="page-item "><a href="sale.php?page=2" class="page-link">2</a></li>
-                        <li class="page-item "><a href="sale.php?page=3" class="page-link">3</a></li>
-                        <li class="page-item "><a href="sale.php?page=4" class="page-link">4</a></li>
-                        <li class="page-item "><a href="sale.php?page=5" class="page-link">5</a></li> -->
+                        <li class="page-item "><a href="sale.php?page=3" class="page-link">3</a></li> -->
                         <!-- <li class="page-item "><a href="sale.php?page=5" class="page-link">Next</a></li> -->
                         <?php endfor; ?>
                     </ul>

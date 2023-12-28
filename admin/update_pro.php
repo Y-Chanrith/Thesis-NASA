@@ -52,6 +52,9 @@ while ($row = mysqli_fetch_assoc($result)) {
 					</div>
 					<div class="form-group col-md-4">
 						<label for="input">Product Category</label>
+						<a href="#addCategoryModal" class="btn btn-sm btn-outline-secondary float-right" data-toggle="modal">
+						<i class="fas fa-plus"></i>
+					</a>
 						<?php
 						echo $opt;
 						?>
@@ -112,11 +115,35 @@ while ($row = mysqli_fetch_assoc($result)) {
 	</div>
 
 	<!------main-content-end----------->
+	
+	</div>
+	<!-- ===========modal=========== -->
+<div class="modal fade" tabindex="-1" id="addCategoryModal" role="dialog">
+    <div class="modal-dialog" role="document">
+    <form method="post" action="add_category_modal.php" id="customer_form"class="myform form-group" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Category Name</label>
+            <input type="text" class="form-control" name="category" placeholder="Insert Category" required>
+          </div>
+        <div class="modal-footer bg-white">
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
+          <button type="submit" class="btn btn-primary">Add Category</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+<!-- ===========modal=========== -->
+	</div>
 	<?php
-	// include '../include/footer.php';
+	 include '../include/footer.php';
 	?>
-	</div>
-	</div>
 	<!-------complete html----------->
 
 	<!-- Optional JavaScript -->

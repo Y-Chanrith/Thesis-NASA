@@ -3,7 +3,7 @@ session_start();
 include("../check-login.php");
 include '../connection.php';
 
-$sql = "SELECT * FROM customer ORDER BY cus_id DESC";
+$sql = "SELECT * FROM customer ORDER BY firstname ASC";
 $result = mysqli_query($con, $sql);
 
 
@@ -37,7 +37,7 @@ include '../include/header.php';
                     <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2 mb-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
-                                <div class="input-group" style="left: 333%;">
+                                <div class="input-group" style="left: 331%;">
                                     <input type="search" class="form-control" placeholder="Search" name="search">
                                     <div class="input-group-append">
                                         <button class="btn" type="submit" id="button-addon2">Go</button>
@@ -104,7 +104,7 @@ include '../include/header.php';
                     </tbody>
                 </table>
 
-                <div class="clearfix">
+                <!-- <div class="clearfix">
                     <div class="hint-text">showing <b>5</b> out of <b>10</b></div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Previous</a></li>
@@ -113,7 +113,7 @@ include '../include/header.php';
                         <li class="page-item "><a href="#" class="page-link">3</a></li>
                         <li class="page-item "><a href="#" class="page-link">Next</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

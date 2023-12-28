@@ -9,8 +9,9 @@ $dateTo = $_POST['todate'];
 <html>
 
 <head>
-    <title>Dashboard</title>
+    <title>Stock Report</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <style type="text/css">
         a {
@@ -22,17 +23,24 @@ $dateTo = $_POST['todate'];
             #print {
                 display: none;
             }
+            #back{
+                display: none;
+            }
         }
+        
     </style>
 </head>
 
 <body>
     <div class="container">
         <center>
-            <img src="../image/Nsc.jpg" width="150">
-            <h3>NASA Computer</h3>
+            <img src="../image/Nsc.jpg" width="120">
+            <h4>NASA Computer</h4>
+            <hr>
         </center>
-        <div><button onclick="reprint()" id="print" class="btn btn-info" style="float: right;">Print</button></div>
+        <div><button onclick="reprint()" id="print" class="btn btn-info" style="float: right;"><i class="fas fa-print"> Print</i></button>
+        <a href="stock_report.php" id="back" class="btn btn-secondary mr-2" style="float: right; margin-left:5px;"><i class="fas fa-chevron-circle-left"> Back</i></a>
+    </div>
         <h5>Prepared on: <?php echo date('l-F-Y'); ?></h5>
 
         <div>
@@ -65,12 +73,12 @@ $dateTo = $_POST['todate'];
             ?>
 
                     <tr>
-                        <td><?php echo $no; ?></td>
-                        <td><?php echo $row['pro_name']; ?></td>
-                        <td><?php echo $row['stock']; ?> Pcs</td>
-                        <td><?php echo number_format($row['price'], 2); ?> ដុល្លា</td>
-                        <td><?php echo number_format($total, 2); ?> ដុល្លា</td>
-                        <td width=20% style="font-size: 15px;"><?php echo $row['created_at']; ?></td>
+                        <td><?= $no; ?></td>
+                        <td><?= $row['pro_name']; ?></td>
+                        <td><?= $row['stock']; ?> Pcs</td>
+                        <td><?= number_format($row['price'], 2); ?> ដុល្លា</td>
+                        <td><?= number_format($total, 2); ?> ដុល្លា</td>
+                        <td width=20% style="font-size: 15px;"><?= $row['created_at']; ?></td>
                     </tr>
 
             <?php
