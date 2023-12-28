@@ -83,7 +83,7 @@ include '../connection.php';
           $sql = "SELECT cus_id, firstname, lastname FROM customer order by firstname asc";
           $res = mysqli_query($con, $sql) or die("Error SQL: $sql");
 
-          $opt = "<select class='form-control'  style='border-radius: 0px;' name='customer' required>
+          $opt = "<select class='form-control'  style='border-radius: 0px;' name='customer'id='customer' required>
         <option value='' disabled selected hidden>Select Customer</option>";
           while ($row = mysqli_fetch_assoc($res)) {
             $opt .= "<option value='" . $row['cus_id'] . "'>" . $row['firstname'] . ' ' . $row['lastname'] . "</option>";
@@ -206,7 +206,7 @@ include '../connection.php';
                 <input type="submit" class="btn btn-primary btn-md float-right rounded p-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
               </div>
             </div>
-            <?php // endif; 
+            <?php // endif;
             ?>
             <!-- closr -->
           </div>
@@ -227,19 +227,19 @@ include '../connection.php';
         <div class="modal-body">
           <div class="form-group">
             <label>First Name</label>
-            <input type="text" class="form-control" name="firstname" required>
+            <input type="text" class="form-control" name="firstname"id="firstname" required>
           </div>
           <div class="form-group">
             <label>Last Name</label>
-            <input type="text" class="form-control" name="lastname" required>
+            <input type="text" class="form-control" name="lastname" id="lastname"required>
           </div>
           <div class="form-group">
             <label>Phone Number</label>
-            <input type="text" class="form-control" name="phone" required>
+            <input type="text" class="form-control" name="phone"id="phone" required>
           </div>
           <div class="form-group">
             <label>Address</label>
-            <input type="text" class="form-control" name="address" required>
+            <input type="text" class="form-control" name="address" id="address"required>
           </div>
         </div>
         <div class="modal-footer">
@@ -275,17 +275,26 @@ include '../connection.php';
     $(document).ready(function() {
       $('#customer_form').on('submit',function(e){
         e.preventDefault();
-        const form = document.getElementById('customer_form');
-        let formData = new FormData(form);  
+        let address=$('#address').val();
+        let lastname=$('#lastname').val();
+        let firstname=$('#firstname').val();
+        let phone=$('#phone').val();
+        // const form = document.getElementById('customer_form');
+        // let formData = new FormData(form);
         $.ajax({
           url: 'add_customer_modal.php',
           type: 'GET',
-          data: $('#customer_form').serialize(),
-          data: formData.serialize(),
-          cache: false,
-          contentType: false,
-          processData: false,
-          success: function(data) {}
+          data: {
+                phone:phone,
+                address:address,
+                firstname:firstname,
+                lastname:lastname
+          },
+          success: function(data) {
+            // alert(data);
+           $('.modal').trigger('click');
+           $('#customer').prepend("<option value='"+)
+          }
         });
       });
       $('.cat_id').click(function(e) {
