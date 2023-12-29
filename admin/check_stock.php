@@ -8,9 +8,19 @@ if($_GET['id']){
     $product=$result->fetch_assoc();
     $stock=$product['stock'];
     if($stock-$qty<0){
-        echo 'Out of stock';
+        $result=[
+            'status'=>'fail',
+            'message'=>'Out of stock'
+        ];
+
+        echo json_encode($result);
     }else{
-        echo 'success';
+        $result=[
+            'status'=>'success',
+            'id'=>$_GET['id'],
+            'stock'=>$stock
+        ];
+        echo json_encode($result);
     }
 }
 ?>

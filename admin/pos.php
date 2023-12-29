@@ -83,7 +83,7 @@ include '../connection.php';
           $sql = "SELECT cus_id, firstname, lastname FROM customer order by firstname asc";
           $res = mysqli_query($con, $sql) or die("Error SQL: $sql");
 
-          $opt = "<select class='form-control'  style='border-radius: 0px;' name='customer'id='customer' required>
+          $opt = "<select class='form-control'  style='border-radius: 0px;' name='customer' required>
         <option value='' disabled selected hidden>Select Customer</option>";
           while ($row = mysqli_fetch_assoc($res)) {
             $opt .= "<option value='" . $row['cus_id'] . "'>" . $row['firstname'] . ' ' . $row['lastname'] . "</option>";
@@ -228,19 +228,19 @@ include '../connection.php';
         <div class="modal-body">
           <div class="form-group">
             <label>First Name</label>
-            <input type="text" class="form-control" name="firstname"id="firstname" required>
+            <input type="text" class="form-control" name="firstname" required>
           </div>
           <div class="form-group">
             <label>Last Name</label>
-            <input type="text" class="form-control" name="lastname" id="lastname"required>
+            <input type="text" class="form-control" name="lastname" required>
           </div>
           <div class="form-group">
             <label>Phone Number</label>
-            <input type="text" class="form-control" name="phone"id="phone" required>
+            <input type="text" class="form-control" name="phone" required>
           </div>
           <div class="form-group">
             <label>Address</label>
-            <input type="text" class="form-control" name="address" id="address"required>
+            <input type="text" class="form-control" name="address" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -255,10 +255,13 @@ include '../connection.php';
 <!-- ===========modal=========== -->
 
   <?php include "../include/footer_pos.php"; ?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <script src="plugin/jquery/jquery.js"></script>
   <script src="../js/javascript.js"></script>
+
   <script>
     $(document).ready(function() {
+
       // $('.btn_add').on('click', function() {
       //   // alert("hello");
       //   var product = $(this).closest('.products');
@@ -274,30 +277,6 @@ include '../connection.php';
   </script>
   <script>
     $(document).ready(function() {
-      $('#customer_form').on('submit',function(e){
-        e.preventDefault();
-        let address=$('#address').val();
-        let lastname=$('#lastname').val();
-        let firstname=$('#firstname').val();
-        let phone=$('#phone').val();
-        // const form = document.getElementById('customer_form');
-        // let formData = new FormData(form);
-        $.ajax({
-          url: 'add_customer_modal.php',
-          type: 'GET',
-          data: {
-                phone:phone,
-                address:address,
-                firstname:firstname,
-                lastname:lastname
-          },
-          success: function(data) {
-            // alert(data);
-           $('.modal').trigger('click');
-           $('#customer').prepend("<option value='"+)
-          }
-        });
-      });
       // $('#customer_form').on('submit',function(e){
       //   e.preventDefault();
       //   const form = document.getElementById('customer_form');
@@ -352,7 +331,45 @@ include '../connection.php';
           }
         });
       });
-      $('#product-container').delegate('.btn_add', 'click', function() {
+      $(document).on('click','.btn_add',  function() {
+
+        function setCookieObject(cookieName, cookieObject, expirationDays) {
+            var jsonString = JSON.stringify(cookieObject);
+            var d = new Date();
+            d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+            var expires = 'expires=' + d.toUTCString();
+            document.cookie = cookieName + '=' + jsonString + ';' + expires + ';path=/';
+        }
+
+        // Function to get the value of a cookie by name and parse it as an object
+        function getCookieObject(cookieName) {
+            var name = cookieName + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookieArray = decodedCookie.split(';');
+
+            for (var i = 0; i < cookieArray.length; i++) {
+                var cookie = cookieArray[i].trim();
+                if (cookie.indexOf(name) == 0) {
+                var jsonString = cookie.substring(name.length, cookie.length);
+                return JSON.parse(jsonString);
+                }
+            }
+        return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        }
+
+        function deleteAllCookies(cookieName) {
+            // Replace these values with the actual names you used for your cookies
+            // var cookieNames = ['cookie1', 'cookie2', 'cookie3'];
+            // Iterate through the cookie names and delete each cookie
+                cookieNames.forEach(function(cookieName) {
+                    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                });
+            }
+
         // alert("hello");
         var product = $(this).closest('.products');
         let qty = product.find('.qty').val();
@@ -367,35 +384,72 @@ include '../connection.php';
             id: id,
             qty: qty
           },
-          success: function(data) {
-            if (data == 'success') {
-              let table = $('#table');
-              let row = "<tr><td><input type='hidden' name='id[]'value='" + id + "'>" + name + "</td><td><input type='hidden' class='qty'name='qty[]'value='" + qty + "'>" + qty +
-                "</td><td><input type='hidden' name='price[]'value='" + price + "'>$ " + price + "</td><td><input class='total_price'type='hidden' name='total_price[]'value='" + (qty * price).toFixed(2) +
-                "'>$ " + (qty * price).toFixed(2) + "</td><td style='float:right;'><a href='#delete'><i class='fas fa-trash delete' style='color: #f00000';></'i></a></td>";
-              table.append(row);
-              //  console.log( $('#table').find('tr').find('.total_price'));
-              let tr = $('#table').find('tr').find('.total_price');
-              let qty_element = $('#table').find('tr').find('.qty');
-              let total_qty = 0;
-              qty_element.each(function(index, element) {
-                total_qty += Number($(element).val());
-              });
-              let total = 0;
-              tr.each(function(index, element) {
-                total += Number($(element).val());
-              });
-              //console.log(total);
-              $('#subtotal').val(total.toFixed(2));
-              $('#total_qty').val(total_qty);
-              $('#grand_total').val(total.toFixed(2));
+          success: function(result) {
+              var result=JSON.parse(result);
+            //   console.log(result);
+            if (result.status == 'success') {
+                if(getCookieObject('product'+id) == undefined){
+                    setCookieObject('product'+id,result,7)
+
+                    let table = $('#table');
+                    let row = "<tr><td><input type='hidden' name='id[]'value='" + id + "'>" + name + "</td><td><span>"+ qty +"</span><input id='product"+id+"'"+"type='hidden' class='qty'name='qty[]'value='" + qty + "'>"+
+                        "</td><td><input type='hidden'id='price"+id+"'"+" name='price[]'value='" + price + "'><span>" + price + "</span></td><td><input class='total_price'id='total_price"+id+"'type='hidden' name='total_price[]'value='" + (qty * price).toFixed(2) +
+                        "'><span>" + (qty * price).toFixed(2) + "</span></td><td style='float:right;'><a href='#delete'><i class='fas fa-trash delete' id='"+id+"'style='color: #f00000';></'i></a></td>";
+                    table.append(row);
+                    //  console.log( $('#table').find('tr').find('.total_price'));
+                    let tr = $('#table').find('tr').find('.total_price');
+                    let qty_element = $('#table').find('tr').find('.qty');
+                    let total_qty = 0;
+                    qty_element.each(function(index, element) {
+                        total_qty += Number($(element).val());
+                    });
+                    let total = 0;
+                    tr.each(function(index, element) {
+                        total += Number($(element).val());
+                    });
+                    $('#subtotal').val(total.toFixed(2));
+                    $('#total_qty').val(total_qty);
+                    $('#grand_total').val(total.toFixed(2));
+
+                }else{
+                    var product=getCookieObject('product'+id);
+                    var product_add_qty=$('#product'+product.id).val();
+                    if(Number(product_add_qty)+Number(qty) <= Number(product.stock)){
+                        $('#product'+product.id).val(Number(product_add_qty)+Number(qty));
+                        $('#product'+product.id).closest('td').find('span').text(Number(product_add_qty)+Number(qty));
+                        $('#total_price'+product.id).closest('td').find('input').val(((Number(product_add_qty)+Number(qty))*price).toFixed(2));
+                        $('#total_price'+product.id).closest('td').find('span').text("$"+((Number(product_add_qty)+Number(qty))*price).toFixed(2));
+
+                        let tr = $('#table').find('tr').find('.total_price');
+                        let qty_element = $('#table').find('tr').find('.qty');
+                        let total_qty = 0;
+                        qty_element.each(function(index, element) {
+                            total_qty += Number($(element).val());
+                        });
+                        let total = 0;
+                        tr.each(function(index, element) {
+                            total += Number($(element).val());
+                        });
+                        console.log(total);
+                        $('#subtotal').val(total.toFixed(2));
+                        $('#total_qty').val(total_qty);
+                        $('#grand_total').val(total.toFixed(2));
+                    }else{
+                        alert('Product out of stock!');
+                    }
+
+                    // deleteCookie('product'+id)
+
+                }
+
             } else {
-              alert(data);
+              alert(result.message);
             }
           }
         });
       });
-      $('#table').delegate('.delete', 'click', function(e) {
+
+      $('#table').on('click','.delete', function(e) {
         e.preventDefault();
         $(this).closest('tr').remove();
         let tr = $('#table').find('tr').find('.total_price');
@@ -412,6 +466,10 @@ include '../connection.php';
         $('#subtotal').val(total.toFixed(2));
         $('#total_qty').val(total_qty);
         $('#grand_total').val(total.toFixed(2));
+        var id=$(this).attr('id');
+        console.log(id);
+        deleteCookie('product'+id);
+
       });
     });
   </script>
