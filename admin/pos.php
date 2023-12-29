@@ -331,9 +331,7 @@ include '../connection.php';
           }
         });
       });
-      $(document).on('click','.btn_add',  function() {
-
-        function setCookieObject(cookieName, cookieObject, expirationDays) {
+      function setCookieObject(cookieName, cookieObject, expirationDays) {
             var jsonString = JSON.stringify(cookieObject);
             var d = new Date();
             d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
@@ -361,14 +359,19 @@ include '../connection.php';
             document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         }
 
-        function deleteAllCookies(cookieName) {
+        function deleteAllCookies(cookieNames) {
             // Replace these values with the actual names you used for your cookies
             // var cookieNames = ['cookie1', 'cookie2', 'cookie3'];
             // Iterate through the cookie names and delete each cookie
                 cookieNames.forEach(function(cookieName) {
                     document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                 });
+
             }
+
+      $(document).on('click','.btn_add',  function() {
+
+
 
         // alert("hello");
         var product = $(this).closest('.products');
@@ -467,8 +470,9 @@ include '../connection.php';
         $('#total_qty').val(total_qty);
         $('#grand_total').val(total.toFixed(2));
         var id=$(this).attr('id');
-        console.log(id);
-        deleteCookie('product'+id);
+
+        console.log(getCookieObject('product'+id));
+        deleteAllCookies(['product'+id]);
 
       });
     });
