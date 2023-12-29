@@ -118,9 +118,9 @@ include '../include/header.php';
 </div>
 
 <!------main-content-end----------->
-    <?php
-    include '../include/footer.php';
-    ?>
+    <div>
+        <?php include '../include/footer.php';?>
+    </div>
 </div>
 </div>
 <!-------complete html----------->

@@ -7,7 +7,8 @@ session_start();
     define('DB_PASS', '');
     define('DB_NAME', 'nasa_computer_shop');
 
-    define('DIR', 'C:/xampp/htdocs/Thesis/admin/backupDB/');
+    // define('DIR', 'C:/xampp/htdocs/Thesis/admin/backupDB/');
+    define('DIR', 'D:\DB_backUp/');
 
     date_default_timezone_set("Asia/Bangkok");
     $date = date('Y-m-d_H-i-s');

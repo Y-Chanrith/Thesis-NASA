@@ -160,7 +160,10 @@ include '../include/header.php';
                                 <!-- <td><?php //echo $row['due_amount']; ?></td> -->
                                 <th>
                                     <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
-                                    <a href="invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a>
+                                    <!-- <a href="invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a> -->
+                                    <a href="delete_sale.php?id=<?php echo $row['id'];?>" class="delete">
+                                    <i class="fas fa-trash" style="color: #d10000;" onclick="return confirm('Are you sure want to delete this sale?');"></i>
+                                    </a>
                                 </th>
                             </tr>
 
