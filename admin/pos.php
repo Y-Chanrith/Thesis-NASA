@@ -143,7 +143,7 @@ include '../connection.php';
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input type="text" class="form-control text-right " id="subtotal" name="subtotal" readonly name="subtotal">
+                  <input type="text" class="form-control text-right " id="subtotal" name="subtotal" readonly >
                 </div>
               </div>
             </div>
@@ -181,6 +181,22 @@ include '../connection.php';
               </div>
             </div>
 
+            <div class="form-group row text-left mb-0">
+              <div class="col-sm-5 text-primary">
+                <h6 class="font-weight-bold py-2">
+                  Discount
+                </h6>
+              </div>
+              <div class="col-sm-7">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input type="text" class="form-control text-right " name="discount" id="discount" >
+                </div>
+              </div>
+            </div>
+
             <div class="form-group row mb-0">
               <div class="col-sm-5 text-left text-primary py-2">
                 <h6>
@@ -204,7 +220,7 @@ include '../connection.php';
             <div class="form-group row mb-2">
               <div class=" mb-3 mt-3">
                 <a href="pos.php" style="float: center;" class="btn btn-danger btn-md rounded p-2 text-white">Reset</a>
-                <input type="submit" class="btn btn-primary btn-md rounded p-2 mr-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
+                <input type="submit" id="submit"class="btn btn-primary btn-md rounded p-2 mr-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
               </div>
             </div>
             <?php // endif;
@@ -245,7 +261,7 @@ include '../connection.php';
         </div>
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
-          <button type="submit" class="btn btn-primary">Add Customer</button>
+          <button type="submit" class="btn btn-primary" >Add Customer</button>
         </div>
       </div>
       </form>
@@ -260,6 +276,7 @@ include '../connection.php';
   <script src="../js/javascript.js"></script>
 
   <script>
+
     $(document).ready(function() {
 
       // $('.btn_add').on('click', function() {
@@ -276,22 +293,61 @@ include '../connection.php';
     });
   </script>
   <script>
+    function setCookieObject(cookieName, cookieObject, expirationDays) {
+            var jsonString = JSON.stringify(cookieObject);
+            var d = new Date();
+            d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+            var expires = 'expires=' + d.toUTCString();
+            document.cookie = cookieName + '=' + jsonString + ';' + expires + ';path=/';
+        }
+
+        // Function to get the value of a cookie by name and parse it as an object
+        function getCookieObject(cookieName) {
+            var name = cookieName + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookieArray = decodedCookie.split(';');
+
+            for (var i = 0; i < cookieArray.length; i++) {
+                var cookie = cookieArray[i].trim();
+                if (cookie.indexOf(name) == 0) {
+                var jsonString = cookie.substring(name.length, cookie.length);
+                return JSON.parse(jsonString);
+                }
+            }
+        return null;
+        }
+
+        function deleteCookie(cookieName) {
+            document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        }
+
+        function deleteAllCookies(cookieNames) {
+                cookieNames.forEach(function(cookieName) {
+                    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                });
+
+         }
+
+         document.addEventListener("DOMContentLoaded", function() {
+
+
+            deleteAllCookies(id);
+
+        });
     $(document).ready(function() {
-      // $('#customer_form').on('submit',function(e){
-      //   e.preventDefault();
-      //   const form = document.getElementById('customer_form');
-      //   let formData = new FormData(form);
-      //   $.ajax({
-      //     url: 'add_customer_modal.php',
-      //     type: 'GET',
-      //     data: $('#customer_form').serialize(),
-      //     data: formData.serialize(),
-      //     cache: false,
-      //     contentType: false,
-      //     processData: false,
-      //     success: function(data) {}
-      //   });
-      // });
+
+        //caculate discount
+      $('#discount').on('keyup',function(){
+            var grand_total=$('#grand_total');
+            var sub_total=$('#subtotal');
+            var discount=Number($(this).val());
+            var discount_amount=Number(sub_total.val())*Number(discount)/100;
+            var grand=Number(sub_total.val())-discount_amount;
+            grand_total.val(grand.toFixed(2));
+
+
+      });
+
       $('.cat_id').click(function(e) {
         e.preventDefault();
         let cat_id = $(this).attr('data-cat');
@@ -331,49 +387,10 @@ include '../connection.php';
           }
         });
       });
-      function setCookieObject(cookieName, cookieObject, expirationDays) {
-            var jsonString = JSON.stringify(cookieObject);
-            var d = new Date();
-            d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
-            var expires = 'expires=' + d.toUTCString();
-            document.cookie = cookieName + '=' + jsonString + ';' + expires + ';path=/';
-        }
 
-        // Function to get the value of a cookie by name and parse it as an object
-        function getCookieObject(cookieName) {
-            var name = cookieName + "=";
-            var decodedCookie = decodeURIComponent(document.cookie);
-            var cookieArray = decodedCookie.split(';');
-
-            for (var i = 0; i < cookieArray.length; i++) {
-                var cookie = cookieArray[i].trim();
-                if (cookie.indexOf(name) == 0) {
-                var jsonString = cookie.substring(name.length, cookie.length);
-                return JSON.parse(jsonString);
-                }
-            }
-        return null;
-        }
-
-        function deleteCookie(cookieName) {
-            document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        }
-
-        function deleteAllCookies(cookieNames) {
-            // Replace these values with the actual names you used for your cookies
-            // var cookieNames = ['cookie1', 'cookie2', 'cookie3'];
-            // Iterate through the cookie names and delete each cookie
-                cookieNames.forEach(function(cookieName) {
-                    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                });
-
-            }
 
       $(document).on('click','.btn_add',  function() {
 
-
-
-        // alert("hello");
         var product = $(this).closest('.products');
         let qty = product.find('.qty').val();
         let price = product.find('.price').val();
@@ -388,6 +405,16 @@ include '../connection.php';
             qty: qty
           },
           success: function(result) {
+            var allCookies = document.cookie;
+            var cookieArray = allCookies.split(';');
+            var c = cookieArray.filter(element => element.startsWith(' product'));
+
+            const productNames = c.map(element => {
+            const match = element.match(/^(\w+)=/);
+            return match ? match[1] : null;
+            });
+
+            console.log(productNames);
               var result=JSON.parse(result);
             //   console.log(result);
             if (result.status == 'success') {
@@ -395,7 +422,7 @@ include '../connection.php';
                     setCookieObject('product'+id,result,7)
 
                     let table = $('#table');
-                    let row = "<tr><td><input type='hidden' name='id[]'value='" + id + "'>" + name + "</td><td><span>"+ qty +"</span><input id='product"+id+"'"+"type='hidden' class='qty'name='qty[]'value='" + qty + "'>"+
+                    let row = "<tr id='"+id+"'><td><input type='hidden' name='id[]'value='" + id + "'>" + name + "</td><td><span>"+ qty +"</span><input id='product"+id+"'"+"type='hidden' class='qty'name='qty[]'value='" + qty + "'>"+
                         "</td><td><input type='hidden'id='price"+id+"'"+" name='price[]'value='" + price + "'><span>" + price + "</span></td><td><input class='total_price'id='total_price"+id+"'type='hidden' name='total_price[]'value='" + (qty * price).toFixed(2) +
                         "'><span>" + (qty * price).toFixed(2) + "</span></td><td style='float:right;'><a href='#delete'><i class='fas fa-trash delete' id='"+id+"'style='color: #f00000';></'i></a></td>";
                     table.append(row);
@@ -472,9 +499,21 @@ include '../connection.php';
         var id=$(this).attr('id');
 
         console.log(getCookieObject('product'+id));
-        deleteAllCookies(['product'+id]);
+
 
       });
+
+      $('#submit').on('click',function(){
+            let tr = $('#table').find('tr');
+            var id=[];
+            tr.each(function(index, element) {
+                id.push('product'+$(element).attr('id'));
+            });
+
+            deleteAllCookies(id);
+
+      });
+
     });
   </script>
 

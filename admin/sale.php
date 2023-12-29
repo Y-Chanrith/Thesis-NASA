@@ -159,7 +159,7 @@ include '../include/header.php';
                                 <td><?php echo $row['created_at']; ?></td>
                                 <!-- <td><?php //echo $row['due_amount']; ?></td> -->
                                 <th>
-                                    <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
+                                    <a href="transaction_view.php?transac_id=<?=$row['id'] ?>&customer_id=<?=$customer['cus_id'] ?>&discount=<?=$row['discount'] ?? 0 ?>" class=""><i class="fas fa-eye" style="color: #149935;"></i></a>
                                     <a href="invoice.php?id=<?=$row['id']?>&customer_id=<?=$row['cust_id'] ?>"><i class="fas fa-print" style="color: #ff0000;"></i></a>
                                 </th>
                             </tr>

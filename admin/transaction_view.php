@@ -11,7 +11,7 @@ if ($_GET['customer_id']) {
 }
 
 if ($_GET['transac_id']) {
-  $query = 'SELECT * from transaction_detail 
+  $query = 'SELECT * from transaction_detail
   inner join product on transaction_detail.product_id=product.id
   where transaction_detail.transac_id=' . $_GET['transac_id'];
   $result = mysqli_query($con, $query);
@@ -80,7 +80,7 @@ include '../include/header.php';
           <tbody>
             <?php
             if ($_GET['transac_id']) {
-              $query = 'SELECT * from transaction_detail 
+              $query = 'SELECT * from transaction_detail
             inner join product on transaction_detail.product_id=product.id
             where transaction_detail.transac_id=' . $_GET['transac_id'];
               $result = mysqli_query($con, $query);
@@ -117,6 +117,18 @@ include '../include/header.php';
               <tr>
                 <td class="font-weight-bold">Qty</td>
                 <td class="text-right"><?= $qty ?> Pcs</td>
+              </tr>
+              <tr>
+                <?php
+                    $discount=0;
+                    if($_GET['discount']!=0){
+                        $discount_amount=$_GET['discount']*$subtotal/100;
+                        $discount=$subtotal-$discount_amount;
+                        $subtotal=$discount;
+                    }
+                ?>
+                <td class="font-weight-bold">Discount</td>
+                <td class="text-right"><?= $_GET['discount'] ?>%</td>
               </tr>
               <tr>
                 <td class="font-weight-bold">Total</td>
