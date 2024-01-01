@@ -302,38 +302,46 @@ include '../connection.php';
         }
 
         // Function to get the value of a cookie by name and parse it as an object
-        function getCookieObject(cookieName) {
-            var name = cookieName + "=";
-            var decodedCookie = decodeURIComponent(document.cookie);
-            var cookieArray = decodedCookie.split(';');
+    function getCookieObject(cookieName) {
+        var name = cookieName + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var cookieArray = decodedCookie.split(';');
 
-            for (var i = 0; i < cookieArray.length; i++) {
-                var cookie = cookieArray[i].trim();
-                if (cookie.indexOf(name) == 0) {
-                var jsonString = cookie.substring(name.length, cookie.length);
-                return JSON.parse(jsonString);
-                }
+        for (var i = 0; i < cookieArray.length; i++) {
+            var cookie = cookieArray[i].trim();
+            if (cookie.indexOf(name) == 0) {
+            var jsonString = cookie.substring(name.length, cookie.length);
+            return JSON.parse(jsonString);
             }
-        return null;
         }
+    return null;
+    }
 
-        function deleteCookie(cookieName) {
-            document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        }
+    function deleteCookie(cookieName) {
+        document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    }
 
-        function deleteAllCookies(cookieNames) {
-                cookieNames.forEach(function(cookieName) {
-                    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                });
+    function deleteAllCookies(cookieNames) {
+            cookieNames.forEach(function(cookieName) {
+                document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            });
 
-         }
+      }
 
-         document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("DOMContentLoaded", function() {
 
-
-            deleteAllCookies(id);
-
+        var allCookies = document.cookie;
+        var cookieArray = allCookies.split(';');
+        var c = cookieArray.filter(element => element.startsWith(' product'));
+        const cleanedArray = c.map(element => element.trim());
+        const productNames = cleanedArray.map(element => {
+        const match = element.match(/^(\w+)=/);
+          return match ? match[1] : null;
         });
+
+        deleteAllCookies(productNames);
+
+    });
     $(document).ready(function() {
 
         //caculate discount
@@ -405,16 +413,8 @@ include '../connection.php';
             qty: qty
           },
           success: function(result) {
-            var allCookies = document.cookie;
-            var cookieArray = allCookies.split(';');
-            var c = cookieArray.filter(element => element.startsWith(' product'));
 
-            const productNames = c.map(element => {
-            const match = element.match(/^(\w+)=/);
-            return match ? match[1] : null;
-            });
-
-            console.log(productNames);
+            // console.log(productNames);
               var result=JSON.parse(result);
             //   console.log(result);
             if (result.status == 'success') {
@@ -497,8 +497,8 @@ include '../connection.php';
         $('#total_qty').val(total_qty);
         $('#grand_total').val(total.toFixed(2));
         var id=$(this).attr('id');
-
-        console.log(getCookieObject('product'+id));
+        deleteCookie('product'+id);
+        // console.log(getCookieObject('product'+id));
 
 
       });
