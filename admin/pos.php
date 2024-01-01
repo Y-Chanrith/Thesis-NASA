@@ -140,10 +140,10 @@ include '../connection.php';
               </div>
               <div class="col-sm-7">
                 <div class="input-group mb-2">
+                  <input type="text" class="form-control text-right " id="subtotal" name="subtotal" readonly >
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input type="text" class="form-control text-right " id="subtotal" name="subtotal" readonly >
                 </div>
               </div>
             </div>
@@ -173,10 +173,10 @@ include '../connection.php';
               </div>
               <div class="col-sm-7">
                 <div class="input-group mb-2">
+                  <input type="text" class="form-control text-right " name="grand_total" id="grand_total" readonly name="total">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input type="text" class="form-control text-right " name="grand_total" id="grand_total" readonly name="total">
                 </div>
               </div>
             </div>
@@ -189,10 +189,10 @@ include '../connection.php';
               </div>
               <div class="col-sm-7">
                 <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
-                  </div>
                   <input type="text" class="form-control text-right " name="discount" id="discount" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">%</span>
+                  </div>
                 </div>
               </div>
             </div>
