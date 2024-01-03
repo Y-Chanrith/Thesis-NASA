@@ -276,23 +276,6 @@ include '../connection.php';
   <script src="../js/javascript.js"></script>
 
   <script>
-
-    $(document).ready(function() {
-
-      // $('.btn_add').on('click', function() {
-      //   // alert("hello");
-      //   var product = $(this).closest('.products');
-      //   let qty = product.find('.qty').val();
-      //   let price = product.find('.price').val();
-      //   let name = product.find('.p_name').val();
-      //   let table = $('#table');
-      //   let row = "<tr ><td>" + name + "</td><td>" + qty + "</td><td>" + price + "</td><td>" + qty * price + "</td><td><span class='delete'><i class='fas fa-trash' style='color: #f00000';></'i></span></td>";
-      //   table.append(row);
-      //   console.log(qty);
-      // });
-    });
-  </script>
-  <script>
     function setCookieObject(cookieName, cookieObject, expirationDays) {
             var jsonString = JSON.stringify(cookieObject);
             var d = new Date();
@@ -395,8 +378,6 @@ include '../connection.php';
           }
         });
       });
-
-
       $(document).on('click','.btn_add',  function() {
 
         var product = $(this).closest('.products');
@@ -467,9 +448,6 @@ include '../connection.php';
                     }else{
                         alert('Product out of stock!');
                     }
-
-                    // deleteCookie('product'+id)
-
                 }
 
             } else {

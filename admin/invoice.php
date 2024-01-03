@@ -139,7 +139,7 @@ include '../connection.php';
 
 <body>
   <?php
-  $sql_query = "SELECT * FROM customer 
+  $sql_query = "SELECT * FROM customer
   join transaction on customer.cus_id=transaction.cust_id
   where cus_id=" . $_GET['customer_id'];
   $result = mysqli_query($con, $sql_query);
@@ -214,7 +214,7 @@ include '../connection.php';
               while ($row = mysqli_fetch_assoc($result)) :
                 $total_qty += $row['qty'];
                 $total_amount += ($row['qty'] * $row['price']);
-                
+
               ?>
                 <tr>
                   <!-- <td class="col-md-9"><?= $no; ?></td> -->
@@ -223,7 +223,7 @@ include '../connection.php';
                   <td class="col-md-3"><?= $row['qty'] ?></td>
                   <td class="col-md-3">$ <?= number_format($row['qty'] * $row['price'], 2) ?></td>
                 </tr>
-              <?php 
+              <?php
             $no++;
             endwhile; ?>
               <tr>
@@ -231,8 +231,12 @@ include '../connection.php';
                   <p>
                     <strong>Sub Total: </strong>
                   </p>
+
                   <p>
                     <strong>Total Quantity: </strong>
+                  </p>
+                  <p>
+                    <strong>Discount: </strong>
                   </p>
                 </td>
                 <td>
@@ -242,14 +246,26 @@ include '../connection.php';
                   <p>
                     <strong><?= $total_qty; ?> Item</strong>
                   </p>
+                  <p>
+                    <strong><?= $_GET['discount'] ?> %</strong>
+                  </p>
                 </td>
+                <?php
+                    $discount=0;
+                    if($_GET['discount']!=0){
+                        $discount_amount=$_GET['discount']*$total_amount/100;
+                        $discount=$total_amount-$discount_amount;
+                        $subtotal=$discount;
+                    }
+                ?>
               </tr>
+
               <tr>
                 <td class="text-right" colspan="3" width=30%>
                   <h4><strong>Grand Total: </strong></h4>
                 </td>
                 <td class="text-left text-danger">
-                  <h4><strong>$<?= number_format($total_amount, 2); ?></strong></h4>
+                  <h4><strong>$<?= number_format($subtotal, 2); ?></strong></h4>
                 </td>
               </tr>
             </tbody>
