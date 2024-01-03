@@ -53,11 +53,11 @@ $opt .= "</select>";
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="input">Username</label>
-					<input type="text" class="form-control" name="user_name" placeholder="">
+					<input type="text" class="form-control" name="user_name" placeholder="Input Username">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="input">password</label>
-					<input type="text" class="form-control" name="password" placeholder="">
+					<input type="password" class="form-control" name="password" placeholder="Input Password">
 				</div>
 			</div>
 
@@ -65,7 +65,7 @@ $opt .= "</select>";
 				<div class="form-group col-md-6">
 					<label for="input">Role</label>
 					<!-- <input type="text" class="form-control" name="role" placeholder=""> -->
-                    <?php echo $opt; ?>
+                    <p><?php echo $opt; ?></p>
 				</div>
 			</div>
 

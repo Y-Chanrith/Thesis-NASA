@@ -42,11 +42,11 @@ while ($row = mysqli_fetch_assoc($result)) {
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="input">Username</label>
-					<input type="text" class="form-control" name="user_name" placeholder="" value="<?php echo $row['username']; ?>">
+					<input type="text" class="form-control" name="user_name" placeholder="input Username" value="<?php echo $row['username']; ?>">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="input">Password</label>
-					<input type="text" class="form-control" name="password" placeholder="" value="<?php echo $row['password']; ?>">
+					<input type="password" class="form-control" name="password" placeholder="input password" value="<?php echo $row['password']; ?>">
 				</div>
 			</div>
 

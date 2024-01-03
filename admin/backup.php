@@ -7,8 +7,8 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'nasa_computer_shop');
 
-// Directory to store backup files
-define('DIR', 'C:\Thesis/');
+    // define('DIR', 'C:/xampp/htdocs/Thesis/admin/backupDB/');
+    define('DIR', 'D:\DB_backUp/');
 
 // Google Drive API settings
 $clientId ='701969510453-0i7ommn75s7jqqaoiq7khr446ucdbst0.apps.googleusercontent.com';
