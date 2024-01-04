@@ -53,6 +53,20 @@
 					</a>
 				</li>
 
+				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/inventory.php"?"active":""?> dropdown">
+					<a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+						<i class="fa-solid fa-warehouse" style="font-size: 20px; "></i>Inventory
+					</a>
+					<ul class="collapse list-unstyled menu pl-4" id="homeSubmenu3">
+						<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/stock.php"?"active":""?>"><a href="../admin/stock.php">
+								<i class="far fa-file-alt" style="color: #ffffff; font-size: 20px;"></i>Add Product Stock</a>
+						</li>
+						<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/inventory.php"?"active":""?>"><a href="../admin/inventory.php">
+								<i class="fas fa-file-alt" style="color: #ffffff; font-size: 20px;"></i>Current Product Stock</a>
+								<!-- <i class="fas fa-file-alt"></i> -->
+						</li>
+					</ul>
+				</li>
 
 				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/customer.php"?"active":""?> dropdown">
 					<a href="../admin/customer.php">
@@ -60,11 +74,7 @@
 					</a>
 				</li>
 
-				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/inventory.php"?"active":""?> dropdown">
-					<a href="../admin/inventory.php">
-						<i class="fa-solid fa-warehouse" style="font-size: 20px; "></i>Inventory
-					</a>
-				</li>
+				
 
 				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/supplier.php"?"active":""?> dropdown">
 					<a href="../admin/supplier.php">
@@ -83,14 +93,6 @@
 						<i class="fa-solid fa-cart-arrow-down" style="font-size: 20px;"></i>Sales
 					</a>
 				</li>
-
-				<!-- <li class="dropdown">
-					<a href="../admin/store_data_shop.php">
-						<i class="fas fa-window-maximize" style="font-size: 20px;"></i>NASA Info
-					</a>
-				</li> -->
-
-
 				<li class="dropdown">
 					<a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 						<i class="fa-solid fa-chart-line" style="font-size: 20px;"></i>Reports

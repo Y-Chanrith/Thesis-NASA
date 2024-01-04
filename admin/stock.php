@@ -36,12 +36,12 @@ include '../include/header.php';
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6 p-0 flex justify-content-lg-start justify-content-center">
-                            <h2 class="ml-lg-2">Manage Products</h2>
+                            <h2 class="ml-lg-2">Manage Stocks</h2>
                         </div>
                         <div class="col-sm-6 p-0 flex justify-content-lg-end justify-content-center">
-                            <a class="btn btn-success" href="insert_pro.php" >
+                            <a class="btn btn-success" href="insert_stock.php">
                                 <i class="material-icons">&#xE147;</i>
-                                <span>Add New Products</span>
+                                <span>Add Stock</span>
                             </a>
                         </div>
                     </div>
@@ -49,7 +49,7 @@ include '../include/header.php';
                 <div>
                 </div>
                 <table class="table table-striped table-hover mt-2 " style="overflow: auto; height:300px;">
-                <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
+                    <!-- <div class="col-md-5 col-lg-3 order-3 order-md-2 mt-2">
                         <div class="xp-searchbar">
                             <form method="post" action="" enctype="multipart/form-data">
                                 <div class="input-group" style="left: 331%;">
@@ -60,38 +60,21 @@ include '../include/header.php';
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> -->
                     <thead>
                         <tr>
                             <th width="10%">Image</th>
                             <th width="25%">Product Name</th>
                             <th>Brand</th>
                             <th>Category</th>
-                            <th>Stock</th>
                             <th>Price</th>
                             <th>Stock Added At</th>
+                            <th>Stock</th>
 
                         </tr>
                     </thead>
 
                     <tbody>
-                        <!-- ============ search php code ============== -->
-                        <?php
-
-                            // if(isset($_POST['search'])){
-                            //     $searchkey = $_POST['search'];
-                            //     $sql = "SELECT * FROM product join category on product.category_id=category.category_id WHERE pro_name LIKE '%$searchkey%'";
-                            // }else{
-                            //     $sql = "SELECT * FROM product join category on product.category_id=category.category_id ";
-                            //     $searchkey = "";
-                            // }
-                            // $result = mysqli_query($con, $sql);
-                            // if(!$result){
-                            // die("Error Get Data");
-                            // }
-                            // // =================== end of search code ===================
-                            // // var_dump($result);
-                            // ?>
                         <?php
 
                         $count = 1;
@@ -103,9 +86,9 @@ include '../include/header.php';
                                 <td><?php echo $row['pro_name']; ?></td>
                                 <td><?php echo $row['brand']; ?></td>
                                 <td><?php echo $row['c_name']; ?></td>
-                                <td><?php echo $row['stock_amount']; ?></td>
                                 <td><?php echo $row['stock_price']; ?></td>
                                 <td><?php echo $row['stock_added_at']; ?></td>
+                                <td><?php echo $row['stock_amount']; ?> Pcs</td>
 
                             </tr>
 
@@ -134,9 +117,9 @@ include '../include/header.php';
 </div>
 
 <!------main-content-end----------->
-    <?php
-    include '../include/footer.php';
-    ?>
+<?php
+include '../include/footer.php';
+?>
 
 </div>
 </div>
@@ -167,4 +150,3 @@ include '../include/header.php';
 </body>
 
 </html>
-

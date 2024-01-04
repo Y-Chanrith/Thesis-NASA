@@ -47,7 +47,7 @@ include '../include/header.php';
 			<div class="form-row">
 				<div class="form-group col-md-12 text-right mt-3">
 				<button  class="btn btn-danger btn-md">
-					<a href="product.php" style="color: #F8F8F6;">Cancel</a>
+					<a href="stock.php" style="color: #F8F8F6;">Cancel</a>
 				</button>
 					<button type="submit" class="btn btn-primary btn-md">Add Stock</button>
 				</div>
