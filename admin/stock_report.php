@@ -82,9 +82,7 @@ include '../include/header.php';
           <th scope="col">No</th>
           <th scope="col">Product Name</th>
           <th scope="col">In Stock</th>
-          <th scope="col">Price Per Unit</th>
-          <th scope="col">Total Price</th>
-          <th scope="col">Date Post</th>
+          <th scope="col">Created At</th>
         </tr>
         <!-- =================================== -->
         <?php
@@ -94,26 +92,36 @@ include '../include/header.php';
         $sum_total_price = 0;
 
 
-        $report = "SELECT * FROM product";
+        $report = "SELECT product.*,
+                    stock_history.created_at AS history_created_at,
+                    stock_history.qty
+                    FROM stock_history
+                    inner join
+                    product
+                    on
+                    stock_history.product_id=product.id
+                    where stock_history.created_at between '$dateFrom' and '$dateTo'
+
+        ";
         $result = mysqli_query($con, $report);
 
         while ($row = mysqli_fetch_assoc($result)) {
-          if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
-            $sum_qty += $row['stock'];
-            $total = $row['stock'] * $row['price'];
-            $sum_total_price += $total;
+            // print_r($row['pro_name']);
+        //   if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
+            // $sum_qty += $row['stock'];
+            // $total = $row['stock'] * $row['price'];
+            // $sum_total_price += $total;
         ?>
             <tr>
               <td><?php echo $no; ?></td>
               <td><?php echo $row['pro_name']; ?></td>
-              <td><?php echo $row['stock']; ?> Pcs</td>
-              <td><?php echo number_format($row['price'], 2); ?> ដុល្លា</td>
-              <td><?php echo number_format($total, 2); ?> ដុល្លា</td>
-              <td width=20% style="font-size: 15px;"><?php echo $row['created_at']; ?></td>
+              <td><?php echo $row['qty']; ?> Pcs</td>
+              <td><?php echo $row['history_created_at']; ?></td>
+
             </tr>
         <?php
             $no++;
-          } //close filter
+        //   } //close filter
 
         } //close while loop database
         //echo $sum;

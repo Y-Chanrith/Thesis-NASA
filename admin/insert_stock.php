@@ -14,12 +14,13 @@ include '../include/header.php';
 			<h3 class="text-center text-primary mb-3">Insert Stock Product</h3>
 			<div class="form-row">
 				<div class="form-group col-md-3">
-                <input type="hidden" name="current_stock">
+                <input type="hidden" id="stock"name="default_stock"value="">
                     <?php
                          $sql="select * from product";
                          // $product= mysqli_query($con, $sql);
                          $products = mysqli_query($con, $sql) or die(mysqli_error($con));
                     ?>
+
 					<label for="input">Product</label>
                     <select name="product_id" id="product"class="form-control">
                         <option value="">Select Product</option>
@@ -37,11 +38,11 @@ include '../include/header.php';
 				</div>
                 <div class="form-group col-md-3">
 					<label for="input">Current Stock</label>
-					<input type="text" class="form-control" name="current_stock" id="current_stock"value="" readonly>
+					<input type="text" class="form-control" name="current_stock" data-stock="" id="current_stock"value="" readonly>
 				</div>
 				<div class="form-group col-md-3">
 					<label for="input">Add Stock</label>
-                    <input type="text" class="form-control" id="qty"name="qty" placeholder="" required>
+                    <input type="number" min="0"class="form-control" id="qty"name="qty" placeholder="" required>
 				</div>
 			</div>
 			<div class="form-row">
@@ -104,12 +105,13 @@ include '../include/header.php';
         $('#product').on('change',function(){
             var current_stock=$(this).find('#option'+$(this).val()).attr('data-stock');
             // alert(current_stock);
+            $('#stock').val(current_stock);
             $('#current_stock').val(current_stock);
+            $('#current_stock').attr('data-stock',current_stock);
         })
 
         $('#qty').on('keyup',function(){
-            $('#current_stock').val(Number($('#current_stock').val())+Number( $(this).val()));
-
+            $('#current_stock').val(Number($('#current_stock').attr('data-stock'))+Number($(this).val()));
         });
 
 

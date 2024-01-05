@@ -4,6 +4,7 @@ include '../connection.php';
     if($_POST){
         $product_id=$_POST['product_id'];
         $current_stock=$_POST['current_stock']??0;
+        $default_stock=$_POST['default_stock']??0;
         $qty=$_POST['qty'];
         $price=$_POST['price'];
         date_default_timezone_set("Asia/Bangkok");
@@ -15,7 +16,9 @@ include '../connection.php';
         if ($result) {
             $sql = "UPDATE product set stock= '$current_stock' where id='$product_id'";
             $result = mysqli_query($con, $sql);
-            if($result){
+            $sql="INSERT INTO stock_history(qty,product_id,created_at,updated_at)values('$default_stock','$product_id','$created_at','$updated_at')";
+             $stock_history=mysqli_query($con,$sql);
+            if($result && $stock_history){
                 header("Location: stock.php");
             }
         } else {
