@@ -73,16 +73,16 @@ include '../include/header.php';
       </div>
       <table class="table table-striped" id="print">
         <tr style="font-family: Khmer OS Siemreap; background-color: #FFFFFF;">
-          <th colspan="3">
+          <th colspan="2">
             ទិន្នន័យចាប់ពី: <?php echo $dateFrom; ?> ដល់: <?php echo $dateTo; ?>
           </th>
           <th colspan="3">របាយការណ៍ស្តុករបស់ទំនិញ</th>
         </tr>
         <tr style="background-color: lightgray">
-          <th scope="col">No</th>
+          <th scope="col" style="width: 10%;">No</th>
           <th scope="col">Product Name</th>
           <th scope="col">In Stock</th>
-          <th scope="col">Created At</th>
+          <th scope="col" style="width: 15%;">Created At</th>
         </tr>
         <!-- =================================== -->
         <?php
@@ -108,12 +108,12 @@ include '../include/header.php';
         while ($row = mysqli_fetch_assoc($result)) {
             // print_r($row['pro_name']);
         //   if ($row['created_at'] >= $dateFrom and $row['created_at'] <= $dateTo) {
-            // $sum_qty += $row['stock'];
-            // $total = $row['stock'] * $row['price'];
+            $sum_qty += $row['qty'];
+            // $total = $row['qty'] * $row['price'];
             // $sum_total_price += $total;
         ?>
             <tr>
-              <td><?php echo $no; ?></td>
+              <td><?php echo "0" . $no; ?></td>
               <td><?php echo $row['pro_name']; ?></td>
               <td><?php echo $row['qty']; ?> Pcs</td>
               <td><?php echo $row['history_created_at']; ?></td>
@@ -127,12 +127,12 @@ include '../include/header.php';
         //echo $sum;
         ?>
         <tr>
-          <td colspan="5" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
+          <td colspan="3" align="right">Total Quantity From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
           <td style="font-size: 16px;" class="text text-info"><?php echo $sum_qty . " ទំនិញ"; ?></td>
         </tr>
         <tr>
-          <td colspan="5" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
-          <td style="font-size: 16px;" class="text text-primary"><?php echo number_format($sum_total_price, 2) . " ដុល្លា"; ?></td>
+          <!-- <td colspan="3" align="right">Total Amount From <?php echo  $dateFrom; ?> to <?php echo  $dateTo; ?></td>
+          <td style="font-size: 16px;" class="text text-primary"><?php echo number_format($sum_total_price, 2) . " ដុល្លា"; ?></td> -->
         </tr>
 
       <?php

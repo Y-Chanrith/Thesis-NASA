@@ -168,22 +168,6 @@ include '../connection.php';
             <div class="form-group row text-left mb-0">
               <div class="col-sm-5 text-primary">
                 <h6 class="font-weight-bold py-2">
-                  Grand Total
-                </h6>
-              </div>
-              <div class="col-sm-7">
-                <div class="input-group mb-2">
-                  <input type="text" class="form-control text-right " name="grand_total" id="grand_total" readonly name="total">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group row text-left mb-0">
-              <div class="col-sm-5 text-primary">
-                <h6 class="font-weight-bold py-2">
                   Discount
                 </h6>
               </div>
@@ -192,6 +176,22 @@ include '../connection.php';
                   <input type="text" class="form-control text-right " name="discount" id="discount" >
                   <div class="input-group-prepend">
                     <span class="input-group-text">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row text-left mb-0">
+              <div class="col-sm-5 text-primary">
+                <h6 class="font-weight-bold py-2">
+                  Grand Total
+                </h6>
+              </div>
+              <div class="col-sm-7">
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control text-right " name="grand_total" id="grand_total" readonly name="total">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
                   </div>
                 </div>
               </div>
@@ -219,8 +219,10 @@ include '../connection.php';
 
             <div class="form-group row mb-2">
               <div class=" mb-3 mt-3">
-                <a href="pos.php" style="float: center;" class="btn btn-danger btn-md rounded p-2 text-white">Reset</a>
-                <input type="submit" id="submit"class="btn btn-primary btn-md rounded p-2 mr-2 text-white" value="Process Check Out" onclick="alert('Added to Sale')">
+                <a href="pos.php" style="float: left;" class="btn btn-danger btn-md rounded p-2 text-white">RESET PROCESS</a>
+                <a href="#submitSale" style="float: right;" class="btn btn-primary p-2" data-toggle="modal">SUBMIT PAYMENT</a>
+                <!-- <input type="submit" id="submit" style="float: right;" 
+                class="btn btn-primary btn-md rounded p-2 mr-2 text-white" value="PROCESS CHECK OUT" onclick="alert('Added to Sale')"> -->
               </div>
             </div>
             <?php // endif;
@@ -267,6 +269,34 @@ include '../connection.php';
       </form>
     </div>
   </div>
+  <!-- submit modal -->
+  <div class="modal fade" tabindex="-1" id="submitSale" role="dialog">
+    <div class="modal-dialog" role="document">
+    <form method="post" action="" id="submit_form"class="myform form-group" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">SUMMARY</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group text-center">
+            <label>GRAND TOTAL</label>
+            <input type="text" class="form-control" name="grand_total" id="grand_total" name="total" readonly>
+          </div><br>
+          <div class="form-group">
+            <!-- <label>Last Name</label> -->
+            <input type="text" class="form-control" name="cash" placeholder="ENTER CASH" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
+          <button type="submit" class="btn btn-primary" >PROCEED THE PAYMENT</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  <!-- end submit modal -->
 
 <!-- ===========modal=========== -->
 
@@ -275,6 +305,8 @@ include '../connection.php';
   <script src="plugin/jquery/jquery.js"></script>
   <script src="../js/javascript.js"></script>
 
+
+  <!-- JavaScript and jQuery code -->
   <script>
     function setCookieObject(cookieName, cookieObject, expirationDays) {
             var jsonString = JSON.stringify(cookieObject);
@@ -517,7 +549,5 @@ include '../connection.php';
     });
   </script>
 
-
 </body>
-
 </html>
