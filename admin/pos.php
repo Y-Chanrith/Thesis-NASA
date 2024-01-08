@@ -75,7 +75,7 @@ include '../connection.php';
         //var_dump($_POST);
       }
       ?>
-      <form action="transaction.php" method="POST">
+      <form action="transaction.php" id="pos_submit"method="POST">
         <div class="card mb-4 col-md-4" style="margin-right:12px; position: absolute; right:0; top:96px;
          padding:0 10px ; border-radius: 0px; ">
           <?php
@@ -220,8 +220,8 @@ include '../connection.php';
             <div class="form-group row mb-2">
               <div class=" mb-3 mt-3">
                 <a href="pos.php" style="float: left;" class="btn btn-danger btn-md rounded p-2 text-white">RESET PROCESS</a>
-                <a href="#submitSale" style="float: right;" class="btn btn-primary p-2" data-toggle="modal">SUBMIT PAYMENT</a>
-                <!-- <input type="submit" id="submit" style="float: right;" 
+                <a href="#submitSale"id="submitsale"  style="float: right;" class="btn btn-primary p-2" data-toggle="modal">SUBMIT PAYMENT</a>
+                <!-- <input type="submit" id="submit" style="float: right;"
                 class="btn btn-primary btn-md rounded p-2 mr-2 text-white" value="PROCESS CHECK OUT" onclick="alert('Added to Sale')"> -->
               </div>
             </div>
@@ -230,73 +230,37 @@ include '../connection.php';
             <!-- closr -->
           </div>
         </div>
-      </form>
-    </div>
-  </div>
+         <!-- submit modal -->
+        <div class="modal fade" tabindex="-1" id="submitSale" role="dialog">
+            <div class="modal-dialog" role="document">
+            >
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">SUMMARY</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="form-group text-center">
+                    <label>GRAND TOTAL</label>
+                    <input type="text" class="form-control" id="modal_grand_total" readonly>
+                </div><br>
+                <div class="form-group">
+                    <!-- <label>Last Name</label> -->
+                    <input type="text" class="form-control" name="cash" placeholder="ENTER CASH" required>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
+                <button type="submit" id="submit"class="btn btn-primary" >PROCEED THE PAYMENT</button>
+                </div>
+            </div>
 
-<!-- ===========modal=========== -->
-<div class="modal fade" tabindex="-1" id="addCustomerModal" role="dialog">
-    <div class="modal-dialog" role="document">
-    <form method="post" action="add_customer_modal.php" id="customer_form"class="myform form-group" >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Add New Customer</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control" name="firstname" required>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" name="lastname" required>
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" class="form-control" name="phone" required>
-          </div>
-          <div class="form-group">
-            <label>Address</label>
-            <input type="text" class="form-control" name="address" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
-          <button type="submit" class="btn btn-primary" >Add Customer</button>
-        </div>
-      </div>
+        <!-- end submit modal -->
       </form>
     </div>
   </div>
-  <!-- submit modal -->
-  <div class="modal fade" tabindex="-1" id="submitSale" role="dialog">
-    <div class="modal-dialog" role="document">
-    <form method="post" action="" id="submit_form"class="myform form-group" >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">SUMMARY</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group text-center">
-            <label>GRAND TOTAL</label>
-            <input type="text" class="form-control" name="grand_total" id="grand_total" name="total" readonly>
-          </div><br>
-          <div class="form-group">
-            <!-- <label>Last Name</label> -->
-            <input type="text" class="form-control" name="cash" placeholder="ENTER CASH" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
-          <button type="submit" class="btn btn-primary" >PROCEED THE PAYMENT</button>
-        </div>
-      </div>
-      </form>
-    </div>
-  </div>
-  <!-- end submit modal -->
 
 <!-- ===========modal=========== -->
 
@@ -513,7 +477,12 @@ include '../connection.php';
 
       });
 
-      $('#submit').on('click',function(){
+      $('#submitsale').on('click',function(){
+        $('#modal_grand_total').val( $('#grand_total').val());
+      });
+
+      $('#submit').on('click',function(e){
+        // e.preventDefault();
             let tr = $('#table').find('tr');
             var id=[];
             tr.each(function(index, element) {
@@ -521,6 +490,8 @@ include '../connection.php';
             });
 
             deleteAllCookies(id);
+
+            $('#pos_submit').trigger('submit');
 
       });
 
