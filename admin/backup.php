@@ -91,67 +91,68 @@ function getAccessToken($clientId, $clientSecret, $refreshToken, $tokenEndpoint)
 
 
 
-function uploadFile($accessToken, $uploadEndpoint, $filePath) {
-    // Check if the file exists and can be opened
-    if (!file_exists($filePath) || !is_readable($filePath)) {
-        echo "Error: File does not exist or cannot be opened.\n";
-        return;
-    }
+// function uploadFile($accessToken, $uploadEndpoint, $filePath) {
+//     // Check if the file exists and can be opened
+//     if (!file_exists($filePath) || !is_readable($filePath)) {
+//         echo "Error: File does not exist or cannot be opened.\n";
+//         return;
+//     }
 
 
-    // Create cURL resource
-    $ch = curl_init($uploadEndpoint);
+//     // Create cURL resource
+//     $ch = curl_init($uploadEndpoint);
 
-    // Set cURL options
-    $headers = [
-        'Authorization: Bearer ' . $accessToken,
-        'Content-Type: application/json',
-    ];
+//     // Set cURL options
+//     $headers = [
+//         'Authorization: Bearer ' . $accessToken,
+//         'Content-Type: application/json',
+//     ];
 
-    // Metadata for the file being uploaded
-    $fileMetadata = [
-        'name' => 'backup.sql',  // Change the filename if needed
-    ];
+//     // Metadata for the file being uploaded
+//     $fileMetadata = [
+//         'name' => 'backup.sql',  // Change the filename if needed
+//         'mimeType' => 'application/sql',
+//     ];
 
-    // Convert metadata to JSON
-    $fileMetadataJson = json_encode($fileMetadata);
+//     // Convert metadata to JSON
+//     $fileMetadataJson = json_encode($fileMetadata);
 
-    // Add the Content-Length header
-    $headers[] = 'Content-Length: ' . strlen($fileMetadataJson);
-    // var_dump( $fileMetadataJson);
+//     // Add the Content-Length header
+//     $headers[] = 'Content-Length: ' . strlen($fileMetadataJson);
+//     // var_dump( $filePath);
 
-    // Set headers using CURLOPT_HTTPHEADER
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//     // Set headers using CURLOPT_HTTPHEADER
+//     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-    // Set cURL options
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $fileMetadataJson);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//     // Set cURL options
+//     curl_setopt($ch, CURLOPT_POST, 1);
+//     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//     curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+//     curl_setopt($ch, CURLOPT_POSTFIELDS, $fileMetadataJson);
+//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    // Read file content and set it as the POST field
-    $fileContent = file_get_contents($filePath);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $fileContent);
+//     // Read file content and set it as the POST field
+//     $fileContent = file_get_contents($filePath);
+//     curl_setopt($ch, CURLOPT_POSTFIELDS, $fileContent);
 
-    // Execute cURL and capture the result
-    $response = curl_exec($ch);
-    // var_dump($response);
-    // Check for cURL errors
-    if ($response === false) {
-        echo "cURL error: " . curl_error($ch) . "\n";
-    } else {
-        $data = json_decode($response, true);
-        if (isset($data['id'])) {
-            echo "File uploaded successfully. File ID: " . $data['id'] . "\n";
-        } else {
-            echo "Error uploading file.\n";
-        }
-    }
+//     // Execute cURL and capture the result
+//     $response = curl_exec($ch);
+//     // var_dump($response);
+//     // Check for cURL errors
+//     if ($response === false) {
+//         echo "cURL error: " . curl_error($ch) . "\n";
+//     } else {
+//         $data = json_decode($response, true);
+//         if (isset($data['id'])) {
+//             echo "File uploaded successfully. File ID: " . $data['id'] . "\n";
+//         } else {
+//             echo "Error uploading file.\n";
+//         }
+//     }
 
-    // Close cURL handle
-    curl_close($ch);
-}
+//     // Close cURL handle
+//     curl_close($ch);
+// }
 
 // function uploadFile($accessToken, $uploadEndpoint, $filePath) {
 //     // Check if the file exists and can be opened
@@ -213,6 +214,64 @@ function uploadFile($accessToken, $uploadEndpoint, $filePath) {
 //     curl_close($ch);
 // }
 
+function uploadFile($accessToken, $uploadEndpoint, $filePath) {
+    // Check if the file exists and can be opened
+    if (!file_exists($filePath) || !is_readable($filePath)) {
+        echo "Error: File does not exist or cannot be opened.\n";
+        return;
+    }
+
+    // Create cURL resource
+    $ch = curl_init($uploadEndpoint);
+
+    // Metadata for the file being uploaded
+    $fileMetadata = [
+        'name' => 'backup.sql',  // Change the filename if needed
+        'mimeType' => 'application/sql',
+    ];
+
+    // Convert metadata to JSON
+    // var_dump( $fileMetadataJson);
+    $fileMetadataJson = json_encode($fileMetadata);
+    $content=file_get_contents($filePath);
+
+    // Set cURL options
+    $headers = [
+        'Authorization: Bearer ' . $accessToken,
+        'Content-Type: application/sql',
+        'Content-Length: ' . strlen($content),
+    ];
+
+    // var_dump();
+    $content=file_get_contents($filePath);
+    // Set headers using CURLOPT_HTTPHEADER
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    // Set cURL options
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS,$content);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute cURL and capture the result
+    $response = curl_exec($ch);
+
+    // Check for cURL errors
+    if ($response === false) {
+        echo "cURL error: " . curl_error($ch) . "\n";
+    } else {
+        $data = json_decode($response, true);
+        if (isset($data['id'])) {
+            echo "File uploaded successfully. File ID: " . $data['id'] . "\n";
+        } else {
+            echo "Error uploading file.\n";
+        }
+    }
+
+    // Close cURL handle
+    curl_close($ch);
+}
 
 
 
