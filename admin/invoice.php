@@ -252,10 +252,13 @@ include '../connection.php';
                 </td>
                 <?php
                     $discount=0;
+                    $subtotal=0;
                     if($_GET['discount']!=0){
                         $discount_amount=$_GET['discount']*$total_amount/100;
                         $discount=$total_amount-$discount_amount;
                         $subtotal=$discount;
+                    }else{
+                        $subtotal=$total_amount;
                     }
                 ?>
               </tr>
