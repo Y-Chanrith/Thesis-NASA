@@ -251,7 +251,7 @@ include '../connection.php';
                 </div>
                 <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
-                <button type="submit" id="submit"class="btn btn-primary" >PROCEED THE PAYMENT</button>
+                <button type="submit" id="submit"class="btn btn-primary" onclick="alert('Submited product to Sale')">PROCEED THE PAYMENT</button>
                 </div>
             </div>
 

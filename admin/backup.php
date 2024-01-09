@@ -8,8 +8,8 @@ define('DB_PASS', '');
 define('DB_NAME', 'nasa_computer_shop');
 
 // define('DIR', 'C:/xampp/htdocs/Thesis/admin/backupDB/');
-    // define('DIR', 'D:\DB_backUp/');
-    define('DIR', 'C:\Thesis/');
+    define('DIR', 'D:\DB_backUp/');
+    // define('DIR', 'C:\Thesis/');
     // GOOGLE_DRIVE_CLIENT_ID=762089516501-u9jsj6ei768jbvepanrvp8f3ojk9pegp.apps.googleusercontent.com
     // GOOGLE_DRIVE_CLIENT_SECRET=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
     // GOOGLE_DRIVE_REFRESH_TOKEN=1//04ZOYSYlUnZ1DCgYIARAAGAQSNwF-L9IrQgJBcgffgbvRqhJD2deutkQBxCxGQAR0LoBqFXyuciYW7aXlAKt_5U5tB7SrfmZiO9k
