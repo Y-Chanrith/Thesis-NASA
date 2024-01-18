@@ -53,7 +53,7 @@
 					</a>
 				</li>
 
-				<li class="<?= $_SERVER["REQUEST_URI"]=="/Thesis/admin/inventory.php"?"active":""?> dropdown">
+				<li class="dropdown">
 					<a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 						<i class="fa-solid fa-warehouse" style="font-size: 20px; "></i>Inventory
 					</a>
